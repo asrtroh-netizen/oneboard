@@ -1,0 +1,21 @@
+#!/bin/sh
+# OpenWrt standalone launcher — UI + API + WS + agent
+APP_HOME="${ONEBORD_APP_ROOT:-/opt/onebord}"
+ENV_FILE="${ONEBORD_ENV:-/etc/onebord/onebord.env}"
+
+[ -f "$ENV_FILE" ] && . "$ENV_FILE"
+
+export ONEBORD_APP_ROOT="$APP_HOME"
+export ONEBORD_DIST_DIR="${ONEBORD_DIST_DIR:-$APP_HOME/dist}"
+export ONEBORD_RUNTIME="${ONEBORD_RUNTIME:-openwrt}"
+export ONEBORD_HOST="${ONEBORD_HOST:-0.0.0.0}"
+export ONEBORD_PORT="${ONEBORD_PORT:-18080}"
+
+NODE_BIN="${NODE_BIN:-node}"
+if ! command -v "$NODE_BIN" >/dev/null 2>&1; then
+  echo "[onebord] node not found. Install: opkg install node node-npm" >&2
+  exit 127
+fi
+
+cd "$APP_HOME" || exit 1
+exec "$NODE_BIN" "$APP_HOME/server/onebord-agent.js"

@@ -1,0 +1,96 @@
+/**
+ * OneBoard unified line icon registry — legacy Material names → Lucide components.
+ */
+import {
+  Activity,
+  ArrowLeftRight,
+  BarChart3,
+  ChevronDown,
+  ChevronRight,
+  CircleHelp,
+  ClipboardList,
+  CloudDownload,
+  Cpu,
+  Download,
+  Globe,
+  LayoutDashboard,
+  LayoutGrid,
+  Link,
+  LogIn,
+  LogOut,
+  Monitor,
+  Moon,
+  Network,
+  Pencil,
+  Plus,
+  Power,
+  Radio,
+  RefreshCw,
+  Router,
+  Scale,
+  ScrollText,
+  Settings,
+  Share2,
+  SlidersHorizontal,
+  Smartphone,
+  Sun,
+  Trash2,
+  WifiOff,
+  History,
+} from 'lucide-vue-next'
+
+/** @type {Record<string, import('vue').Component>} */
+export const ICON_REGISTRY = {
+  space_dashboard: LayoutDashboard,
+  smartphone: Smartphone,
+  dns: Globe,
+  hub: Share2,
+  rule: Scale,
+  cloud_download: CloudDownload,
+  lan: Network,
+  settings: Settings,
+  article: ScrollText,
+  help_outline: CircleHelp,
+  logout: LogOut,
+  expand_more: ChevronDown,
+  sync: RefreshCw,
+  refresh: RefreshCw,
+  delete: Trash2,
+  login: LogIn,
+  link: Link,
+  devices: Monitor,
+  monitor_heart: Activity,
+  wifi_off: WifiOff,
+  update: History,
+  chevron_right: ChevronRight,
+  cell_tower: Radio,
+  insights: BarChart3,
+  sim_card: Cpu,
+  power_settings_new: Power,
+  swap_horiz: ArrowLeftRight,
+  view_module: LayoutGrid,
+  system_update_alt: Download,
+  tune: SlidersHorizontal,
+  public: Globe,
+  memory_alt: Cpu,
+  add: Plus,
+  edit: Pencil,
+  dark_mode: Moon,
+  light_mode: Sun,
+  router: Router,
+  clipboard: ClipboardList,
+}
+
+const FALLBACK = ClipboardList
+
+export function resolveIcon(name = '') {
+  const key = String(name || '').trim()
+  return ICON_REGISTRY[key] || FALLBACK
+}
+
+export const ICON_SIZE_PX = {
+  xs: 16,
+  sm: 18,
+  md: 20,
+  lg: 24,
+}

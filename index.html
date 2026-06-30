@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <title>OneBoard 控制面板</title>
+    <style id="boot-critical">
+      html {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: transparent;
+      }
+
+      #app {
+        min-height: 100vh;
+      }
+
+      html[data-theme='dark'] {
+        background-color: #070812;
+        background-image:
+          radial-gradient(circle at 72% 16%, rgba(139, 92, 246, 0.07), transparent 42%),
+          radial-gradient(circle at 18% 12%, rgba(120, 100, 220, 0.045), transparent 52%),
+          linear-gradient(180deg, #0a0818 0%, #050610 100%);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      }
+
+      html[data-theme='light'] {
+        background-color: #e8edff;
+        background-image:
+          radial-gradient(ellipse 90% 70% at 12% 18%, rgba(196, 181, 253, 0.58) 0%, transparent 58%),
+          radial-gradient(ellipse 75% 60% at 88% 12%, rgba(147, 197, 253, 0.52) 0%, transparent 54%),
+          linear-gradient(155deg, #e8edff 0%, #edf8f3 32%, #f0ebff 58%, #fdf0e8 100%);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      }
+
+      .boot-shell {
+        box-sizing: border-box;
+        display: flex;
+        gap: 16px;
+        min-height: 100vh;
+        padding: 28px;
+      }
+
+      .boot-shell__aside {
+        flex: 0 0 196px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .boot-shell__main {
+        flex: 1;
+        min-width: 0;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      html[data-theme='light'] .boot-shell__aside,
+      html[data-theme='light'] .boot-shell__main {
+        background: rgba(255, 255, 255, 0.42);
+      }
+    </style>
+    <script src="/storage-migrate.js"></script>
+    <script>
+      (function () {
+        var keys = ['oneboard-theme-mode', 'onebord-theme-mode']
+        var mode = 'dark'
+        try {
+          for (var i = 0; i < keys.length; i += 1) {
+            var stored = localStorage.getItem(keys[i])
+            if (stored === 'light' || stored === 'dark' || stored === 'auto') {
+              mode = stored
+              break
+            }
+          }
+        } catch (e) {}
+        var theme = mode === 'auto'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : mode
+        document.documentElement.setAttribute('data-theme', theme)
+        document.documentElement.style.colorScheme = theme
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="boot-shell" aria-hidden="true">
+        <div class="boot-shell__aside"></div>
+        <div class="boot-shell__main"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

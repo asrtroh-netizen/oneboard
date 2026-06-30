@@ -1,0 +1,31 @@
+# OneBoard — production compose (pull pre-built multi-arch image; no local build)
+#
+# Device / NAS / ARM:
+#   docker compose pull
+#   docker compose up -d
+#
+# Override image:
+#   ONEBOARD_IMAGE=ghcr.io/<owner>/oneboard:1.1 docker compose pull
+
+services:
+  onebord:
+    image: ${ONEBOARD_IMAGE:-ghcr.io/oneboard/oneboard:1.1}
+    container_name: onebord
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      ONEBORD_RUNTIME: docker
+      ONEBORD_HOST: 0.0.0.0
+      ONEBORD_PORT: ${ONEBOARD_PORT:-8866}
+      # Optional — Mihomo / VoHive on the same host:
+      # ONEBORD_MIHOMO_UPSTREAM: http://127.0.0.1:9090
+      # ONEBORD_VOHIVE_UPSTREAM: http://127.0.0.1:7575
+      ONEBORD_PROC_ROOT: /host/proc
+      ONEBORD_DISK_PATH: /host/root
+    volumes:
+      - onebord-data:/app/.onebord
+      - /proc:/host/proc:ro
+      - /:/host/root:ro
+
+volumes:
+  onebord-data:

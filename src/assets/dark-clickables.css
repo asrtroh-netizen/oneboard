@@ -1,0 +1,223 @@
+/**
+ * 黑暗模式 · 可点击元素统一样式（图二：glass-frame pill 定稿）
+ * 与 VoHive「重连 VoWiFi / 重启模组」按钮视觉一致
+ */
+
+[data-theme='dark'] {
+  --dk-click-radius: 999px;
+  --dk-click-pad-y: 7px;
+  --dk-click-pad-x: 12px;
+  --dk-click-min-h: 34px;
+  --dk-click-font: 12px;
+  --dk-click-weight: 600;
+  --dk-click-color: rgba(255, 255, 255, 0.9);
+  --dk-click-border: rgba(255, 255, 255, 0.08);
+  --dk-click-bg-top: rgba(24, 26, 38, 0.41);
+  --dk-click-bg-bottom: rgba(13, 15, 24, 0.44);
+  --dk-click-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    0 6px 22px rgba(0, 0, 0, 0.34);
+  --dk-click-bg:
+    radial-gradient(circle at 86% 50%, rgba(255, 255, 255, 0.014) 0%, transparent 52%),
+    linear-gradient(168deg, rgba(255, 255, 255, 0.022) 0%, transparent 36%, rgba(0, 0, 0, 0.045) 100%),
+    linear-gradient(168deg, var(--dk-click-bg-top) 0%, var(--dk-click-bg-bottom) 100%);
+}
+
+[data-theme='dark'] :is(
+  .ob-action-btn,
+  .panel-btn,
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-danger,
+  .btn-sm,
+  .stream-btn--primary,
+  .runtime-action-btn,
+  .vohive-refresh-btn,
+  .section-toolbar__btn,
+  .sub-resource-card__action,
+  .logs-page .tab-btn,
+  .yaml-import__file-btn,
+  .device-scroll-btn,
+  .rule-sub-card .action-btn,
+  .action-btn,
+  .btn-icon
+):not(.cp-sidebar__link):not(.sidebar-nav-item):not(.theme-toggle) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: var(--dk-click-pad-y) var(--dk-click-pad-x) !important;
+  min-height: var(--dk-click-min-h);
+  border-radius: var(--dk-click-radius) !important;
+  font-size: var(--dk-click-font) !important;
+  font-weight: var(--dk-click-weight) !important;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--dk-click-color) !important;
+  border: 1px solid var(--dk-click-border) !important;
+  background: var(--dk-click-bg) !important;
+  box-shadow: var(--dk-click-shadow) !important;
+  backdrop-filter: blur(24px) saturate(128%) brightness(0.88) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(128%) brightness(0.88) !important;
+  cursor: pointer;
+  white-space: nowrap;
+  appearance: none;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease !important;
+  filter: none !important;
+}
+
+[data-theme='dark'] :is(
+  .ob-action-btn,
+  .panel-btn,
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-danger,
+  .btn-sm,
+  .stream-btn--primary,
+  .runtime-action-btn,
+  .vohive-refresh-btn,
+  .section-toolbar__btn,
+  .sub-resource-card__action,
+  .logs-page .tab-btn,
+  .yaml-import__file-btn,
+  .device-scroll-btn,
+  .rule-sub-card .action-btn,
+  .action-btn,
+  .btn-icon
+):not(.cp-sidebar__link):not(.sidebar-nav-item):not(.theme-toggle) :is(.m-icon, svg, .material-symbols-outlined) {
+  color: inherit !important;
+}
+
+[data-theme='dark'] :is(
+  .ob-action-btn,
+  .panel-btn,
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-danger,
+  .btn-sm,
+  .stream-btn--primary,
+  .runtime-action-btn,
+  .vohive-refresh-btn,
+  .section-toolbar__btn,
+  .sub-resource-card__action,
+  .logs-page .tab-btn,
+  .yaml-import__file-btn,
+  .device-scroll-btn,
+  .rule-sub-card .action-btn,
+  .action-btn,
+  .btn-icon
+):not(.cp-sidebar__link):not(.sidebar-nav-item):not(.theme-toggle):hover:not(:disabled):not(.runtime-action-btn--power) {
+  transform: translateY(-1px);
+  color: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  background:
+    radial-gradient(circle at 86% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 52%),
+    linear-gradient(168deg, rgba(255, 255, 255, 0.03) 0%, transparent 36%, rgba(0, 0, 0, 0.05) 100%),
+    linear-gradient(168deg, rgba(28, 30, 44, 0.46) 0%, rgba(15, 17, 28, 0.5) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+    0 10px 28px rgba(0, 0, 0, 0.38) !important;
+}
+
+[data-theme='dark'] :is(
+  .ob-action-btn,
+  .panel-btn,
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-danger,
+  .btn-sm,
+  .stream-btn--primary,
+  .runtime-action-btn,
+  .vohive-refresh-btn,
+  .section-toolbar__btn,
+  .sub-resource-card__action,
+  .logs-page .tab-btn,
+  .yaml-import__file-btn,
+  .device-scroll-btn,
+  .rule-sub-card .action-btn,
+  .action-btn,
+  .btn-icon
+):not(.cp-sidebar__link):not(.sidebar-nav-item):not(.theme-toggle):disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none !important;
+}
+
+/* 危险 / 警告 / 成功 · 仅改字色，壳体一致 */
+[data-theme='dark'] :is(.btn-danger, .action-btn.danger) {
+  color: #f87171 !important;
+}
+
+[data-theme='dark'] :is(.btn-danger, .action-btn.danger):hover:not(:disabled) {
+  color: #fca5a5 !important;
+  border-color: rgba(248, 113, 113, 0.24) !important;
+}
+
+[data-theme='dark'] :is(.action-btn.warn, .runtime-action-btn--power) {
+  color: #fde68a !important;
+}
+
+[data-theme='dark'] :is(.action-btn.warn, .runtime-action-btn--power):hover:not(:disabled) {
+  color: #fef3c7 !important;
+  border-color: rgba(251, 191, 36, 0.24) !important;
+}
+
+[data-theme='dark'] .action-btn.success {
+  color: #6ee7b7 !important;
+}
+
+[data-theme='dark'] .action-btn.success:hover:not(:disabled) {
+  color: #a7f3d0 !important;
+  border-color: rgba(52, 211, 153, 0.22) !important;
+}
+
+/* 日志 Tab · 选中态保留色点，壳体同 pill */
+[data-theme='dark'] .logs-page .tab-btn.active {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  background:
+    radial-gradient(circle at 86% 50%, rgba(255, 255, 255, 0.018) 0%, transparent 52%),
+    linear-gradient(168deg, rgba(32, 34, 48, 0.52) 0%, rgba(16, 18, 28, 0.56) 100%) !important;
+}
+
+[data-theme='dark'] .logs-page .tab-btn.active.green {
+  border-color: rgba(52, 211, 153, 0.22) !important;
+}
+
+[data-theme='dark'] .logs-page .tab-btn.active.red {
+  border-color: rgba(248, 113, 113, 0.22) !important;
+}
+
+/* 全宽面板按钮（仪表盘「重启服务」等） */
+[data-theme='dark'] .panel-btn {
+  width: 100%;
+}
+
+/* 小图标按钮 · 圆形 glass */
+[data-theme='dark'] .btn-icon {
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 !important;
+  border-radius: 999px !important;
+}
+
+[data-theme='dark'] .rule-sub-card .action-btn {
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0 !important;
+  border-radius: 999px !important;
+}

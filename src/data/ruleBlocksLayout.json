@@ -1,0 +1,2573 @@
+{
+  "source": "config.yaml",
+  "generatedAt": "2026-06-25T11:30:33.110Z",
+  "ruleCount": 246,
+  "blocks": [
+    {
+      "id": "network-opt",
+      "name": "网络优化",
+      "description": "QUIC / UDP / DNS",
+      "order": 1,
+      "rules": [
+        {
+          "id": "rule-0",
+          "index": 0,
+          "type": "AND",
+          "value": "((NETWORK,UDP),(DST-PORT,443))",
+          "outbound": "REJECT",
+          "modifiers": [],
+          "raw": "AND,((NETWORK,UDP),(DST-PORT,443)),REJECT",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "cn-direct",
+      "name": "国内直连",
+      "description": "抖音 / 小红书",
+      "order": 2,
+      "rules": [
+        {
+          "id": "rule-1",
+          "index": 1,
+          "type": "DOMAIN-SUFFIX",
+          "value": "douyin.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,douyin.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-2",
+          "index": 2,
+          "type": "DOMAIN-SUFFIX",
+          "value": "iesdouyin.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,iesdouyin.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-3",
+          "index": 3,
+          "type": "DOMAIN-SUFFIX",
+          "value": "snssdk.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,snssdk.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-4",
+          "index": 4,
+          "type": "DOMAIN-SUFFIX",
+          "value": "amemv.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,amemv.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-5",
+          "index": 5,
+          "type": "DOMAIN-SUFFIX",
+          "value": "byteimg.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,byteimg.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-6",
+          "index": 6,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ixigua.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ixigua.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-7",
+          "index": 7,
+          "type": "DOMAIN-SUFFIX",
+          "value": "xiaohongshu.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,xiaohongshu.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-8",
+          "index": 8,
+          "type": "DOMAIN-SUFFIX",
+          "value": "xhscdn.com",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,xhscdn.com,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-9",
+          "index": 9,
+          "type": "DOMAIN-SUFFIX",
+          "value": "xhscdn.net",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,xhscdn.net,DIRECT",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "apple",
+      "name": "Apple 服务",
+      "description": "Apple AI / News / 苹果服务",
+      "order": 3,
+      "rules": [
+        {
+          "id": "rule-10",
+          "index": 10,
+          "type": "RULE-SET",
+          "value": "AppleAI_No_Resolve",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleAI_No_Resolve,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-11",
+          "index": 11,
+          "type": "RULE-SET",
+          "value": "AppleAI_Domain",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleAI_Domain,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-12",
+          "index": 12,
+          "type": "RULE-SET",
+          "value": "AppleAI",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleAI,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-13",
+          "index": 13,
+          "type": "RULE-SET",
+          "value": "AppleNews_No_Resolve",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleNews_No_Resolve,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-14",
+          "index": 14,
+          "type": "RULE-SET",
+          "value": "AppleNews",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleNews,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-15",
+          "index": 15,
+          "type": "RULE-SET",
+          "value": "AppleNews_Domain",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleNews_Domain,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-16",
+          "index": 16,
+          "type": "RULE-SET",
+          "value": "AppleNews_IP",
+          "outbound": "🍎 Apple Pro",
+          "modifiers": [],
+          "raw": "RULE-SET,AppleNews_IP,🍎 Apple Pro",
+          "enabled": true
+        },
+        {
+          "id": "rule-213",
+          "index": 213,
+          "type": "RULE-SET",
+          "value": "Apple",
+          "outbound": "🍎 苹果服务",
+          "modifiers": [],
+          "raw": "RULE-SET,Apple,🍎 苹果服务",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "proxy-wifi",
+      "name": "代理规则",
+      "description": "HK-WIFI / US-WIFI / VoWiFi",
+      "order": 4,
+      "rules": [
+        {
+          "id": "rule-17",
+          "index": 17,
+          "type": "DOMAIN-SUFFIX",
+          "value": "csl.prod.ondemandconnectivity.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,csl.prod.ondemandconnectivity.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-18",
+          "index": 18,
+          "type": "DOMAIN-SUFFIX",
+          "value": "device.three.com.hk",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,device.three.com.hk,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-19",
+          "index": 19,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc000.mcc454.pub.3gppnetwork.org",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc000.mcc454.pub.3gppnetwork.org,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-20",
+          "index": 20,
+          "type": "DOMAIN-SUFFIX",
+          "value": "hhk.prod.ondemandconnectivity.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,hhk.prod.ondemandconnectivity.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-21",
+          "index": 21,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.geo.mnc000.mcc454.pub.3gppnetwork.org",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.geo.mnc000.mcc454.pub.3gppnetwork.org,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-22",
+          "index": 22,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc000.mcc454.pub.3gppnetwork.org",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc000.mcc454.pub.3gppnetwork.org,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-23",
+          "index": 23,
+          "type": "DOMAIN-SUFFIX",
+          "value": "wlan.three.com.hk",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,wlan.three.com.hk,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-24",
+          "index": 24,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc007.mcc454.pub.3gppnetwork.org",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc007.mcc454.pub.3gppnetwork.org,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-25",
+          "index": 25,
+          "type": "IP-CIDR",
+          "value": "120.88.224.0/24",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,120.88.224.0/24,📱 HK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-26",
+          "index": 26,
+          "type": "IP-CIDR",
+          "value": "120.88.240.0/24",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,120.88.240.0/24,📱 HK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-27",
+          "index": 27,
+          "type": "IP-CIDR",
+          "value": "124.217.186.0/24",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,124.217.186.0/24,📱 HK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-28",
+          "index": 28,
+          "type": "IP-CIDR",
+          "value": "203.145.92.0/24",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,203.145.92.0/24,📱 HK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-29",
+          "index": 29,
+          "type": "IP-CIDR",
+          "value": "4.209.41.0/24",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,4.209.41.0/24,📱 HK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-30",
+          "index": 30,
+          "type": "DOMAIN-SUFFIX",
+          "value": "hsbc.com.hk",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,hsbc.com.hk,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-31",
+          "index": 31,
+          "type": "DOMAIN-SUFFIX",
+          "value": "hangseng.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,hangseng.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-32",
+          "index": 32,
+          "type": "DOMAIN-SUFFIX",
+          "value": "bochk.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,bochk.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-33",
+          "index": 33,
+          "type": "DOMAIN-SUFFIX",
+          "value": "hkbea.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,hkbea.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-34",
+          "index": 34,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sc.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sc.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-35",
+          "index": 35,
+          "type": "DOMAIN-SUFFIX",
+          "value": "citibank.com.hk",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,citibank.com.hk,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-36",
+          "index": 36,
+          "type": "DOMAIN-SUFFIX",
+          "value": "dbs.com.hk",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,dbs.com.hk,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-37",
+          "index": 37,
+          "type": "DOMAIN-SUFFIX",
+          "value": "icbcasia.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,icbcasia.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-38",
+          "index": 38,
+          "type": "DOMAIN-SUFFIX",
+          "value": "asia.ccb.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,asia.ccb.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-39",
+          "index": 39,
+          "type": "DOMAIN-SUFFIX",
+          "value": "online.asia.ccb.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,online.asia.ccb.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-40",
+          "index": 40,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ocbc.com.hk",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ocbc.com.hk,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-41",
+          "index": 41,
+          "type": "DOMAIN-SUFFIX",
+          "value": "dahsing.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,dahsing.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-42",
+          "index": 42,
+          "type": "DOMAIN-SUFFIX",
+          "value": "bank.za.group",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,bank.za.group,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-43",
+          "index": 43,
+          "type": "DOMAIN-SUFFIX",
+          "value": "za.group",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,za.group,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-44",
+          "index": 44,
+          "type": "DOMAIN-SUFFIX",
+          "value": "welab.bank",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,welab.bank,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-45",
+          "index": 45,
+          "type": "DOMAIN-SUFFIX",
+          "value": "fusionbank.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,fusionbank.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-46",
+          "index": 46,
+          "type": "DOMAIN-SUFFIX",
+          "value": "mox.com",
+          "outbound": "📱 HK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,mox.com,📱 HK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-47",
+          "index": 47,
+          "type": "DOMAIN-SUFFIX",
+          "value": "entsrv-uk.vodafone.com",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,entsrv-uk.vodafone.com,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-48",
+          "index": 48,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc001.mcc230.pub.3gppnetwork.org",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc001.mcc230.pub.3gppnetwork.org,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-49",
+          "index": 49,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc010.mcc234.pub.3gppnetwork.org",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc010.mcc234.pub.3gppnetwork.org,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-50",
+          "index": 50,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc015.mcc234.pub.3gppnetwork.org",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc015.mcc234.pub.3gppnetwork.org,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-51",
+          "index": 51,
+          "type": "DOMAIN-SUFFIX",
+          "value": "giffgaff.com",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,giffgaff.com,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-52",
+          "index": 52,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.geo.mnc015.mcc234.pub.3gppnetwork.org",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.geo.mnc015.mcc234.pub.3gppnetwork.org,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-53",
+          "index": 53,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc015.mcc234.pub.3gppnetwork.org",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc015.mcc234.pub.3gppnetwork.org,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-54",
+          "index": 54,
+          "type": "DOMAIN-SUFFIX",
+          "value": "voxi.co.uk",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,voxi.co.uk,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-55",
+          "index": 55,
+          "type": "DOMAIN-SUFFIX",
+          "value": "vuk-gto.prod.ondemandconnectivity.com",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,vuk-gto.prod.ondemandconnectivity.com,📱 UK-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-56",
+          "index": 56,
+          "type": "IP-CIDR",
+          "value": "148.252.160.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,148.252.160.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-57",
+          "index": 57,
+          "type": "IP-CIDR",
+          "value": "148.252.188.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,148.252.188.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-58",
+          "index": 58,
+          "type": "IP-CIDR",
+          "value": "185.153.236.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,185.153.236.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-59",
+          "index": 59,
+          "type": "IP-CIDR",
+          "value": "185.153.237.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,185.153.237.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-60",
+          "index": 60,
+          "type": "IP-CIDR",
+          "value": "46.68.0.0/17",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,46.68.0.0/17,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-61",
+          "index": 61,
+          "type": "IP-CIDR",
+          "value": "46.68.57.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,46.68.57.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-62",
+          "index": 62,
+          "type": "IP-CIDR",
+          "value": "46.68.58.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,46.68.58.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-63",
+          "index": 63,
+          "type": "IP-CIDR",
+          "value": "46.68.59.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,46.68.59.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-64",
+          "index": 64,
+          "type": "IP-CIDR",
+          "value": "62.141.11.56/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,62.141.11.56/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-65",
+          "index": 65,
+          "type": "IP-CIDR",
+          "value": "87.194.0.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,87.194.0.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-66",
+          "index": 66,
+          "type": "IP-CIDR",
+          "value": "87.194.8.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,87.194.8.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-67",
+          "index": 67,
+          "type": "IP-CIDR",
+          "value": "87.194.88.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,87.194.88.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-68",
+          "index": 68,
+          "type": "IP-CIDR",
+          "value": "88.82.0.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,88.82.0.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-69",
+          "index": 69,
+          "type": "IP-CIDR",
+          "value": "88.82.11.0/24",
+          "outbound": "📱 UK-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,88.82.11.0/24,📱 UK-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-70",
+          "index": 70,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc001.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc001.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-71",
+          "index": 71,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc001.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc001.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-72",
+          "index": 72,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc001.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc001.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-73",
+          "index": 73,
+          "type": "DOMAIN",
+          "value": "ims.mnc001.mcc262.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ims.mnc001.mcc262.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-74",
+          "index": 74,
+          "type": "DOMAIN-SUFFIX",
+          "value": "telekom.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,telekom.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-75",
+          "index": 75,
+          "type": "DOMAIN-SUFFIX",
+          "value": "t-mobile.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,t-mobile.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-76",
+          "index": 76,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc002.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc002.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-77",
+          "index": 77,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc002.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc002.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-78",
+          "index": 78,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc002.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc002.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-79",
+          "index": 79,
+          "type": "DOMAIN",
+          "value": "ims.mnc002.mcc262.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ims.mnc002.mcc262.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-80",
+          "index": 80,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc009.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc009.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-81",
+          "index": 81,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc009.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc009.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-82",
+          "index": 82,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc009.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc009.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-83",
+          "index": 83,
+          "type": "DOMAIN",
+          "value": "ims.mnc009.mcc262.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ims.mnc009.mcc262.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-84",
+          "index": 84,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.drz1.vodafone-ip.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.drz1.vodafone-ip.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-85",
+          "index": 85,
+          "type": "DOMAIN-SUFFIX",
+          "value": "vodafone-dns.net",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,vodafone-dns.net,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-86",
+          "index": 86,
+          "type": "DOMAIN-SUFFIX",
+          "value": "vodafone-ip.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,vodafone-ip.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-87",
+          "index": 87,
+          "type": "DOMAIN-SUFFIX",
+          "value": "vodafone.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,vodafone.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-88",
+          "index": 88,
+          "type": "DOMAIN-SUFFIX",
+          "value": "arcor-ip.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,arcor-ip.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-89",
+          "index": 89,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc003.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc003.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-90",
+          "index": 90,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc003.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc003.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-91",
+          "index": 91,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc003.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc003.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-92",
+          "index": 92,
+          "type": "DOMAIN",
+          "value": "ims.mnc003.mcc262.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ims.mnc003.mcc262.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-93",
+          "index": 93,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc007.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc007.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-94",
+          "index": 94,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc007.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc007.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-95",
+          "index": 95,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc007.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc007.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-96",
+          "index": 96,
+          "type": "DOMAIN",
+          "value": "ims.mnc007.mcc262.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ims.mnc007.mcc262.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-97",
+          "index": 97,
+          "type": "DOMAIN-SUFFIX",
+          "value": "o2online.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,o2online.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-98",
+          "index": 98,
+          "type": "DOMAIN-SUFFIX",
+          "value": "telefonica.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,telefonica.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-99",
+          "index": 99,
+          "type": "DOMAIN-SUFFIX",
+          "value": "eplus.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,eplus.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-100",
+          "index": 100,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc023.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc023.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-101",
+          "index": 101,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc023.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc023.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-102",
+          "index": 102,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc023.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc023.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-103",
+          "index": 103,
+          "type": "DOMAIN",
+          "value": "ims.mnc023.mcc262.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ims.mnc023.mcc262.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-104",
+          "index": 104,
+          "type": "DOMAIN-SUFFIX",
+          "value": "1und1.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,1und1.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-105",
+          "index": 105,
+          "type": "DOMAIN-SUFFIX",
+          "value": "1u1.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,1u1.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-106",
+          "index": 106,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc014.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc014.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-107",
+          "index": 107,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc020.mcc262.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc020.mcc262.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-108",
+          "index": 108,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mcc262.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mcc262.visited-country.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-109",
+          "index": 109,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mcc262.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mcc262.visited-country.pub.3gppnetwork.org,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-110",
+          "index": 110,
+          "type": "DOMAIN-SUFFIX",
+          "value": "n26.com",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,n26.com,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-111",
+          "index": 111,
+          "type": "DOMAIN-SUFFIX",
+          "value": "support.n26.com",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,support.n26.com,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-112",
+          "index": 112,
+          "type": "DOMAIN-SUFFIX",
+          "value": "tech26.de",
+          "outbound": "📱 DE-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,tech26.de,📱 DE-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-113",
+          "index": 113,
+          "type": "DOMAIN",
+          "value": "epdg.epc.att.net",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,epdg.epc.att.net,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-114",
+          "index": 114,
+          "type": "DOMAIN",
+          "value": "sentitlement2.mobile.att.net",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,sentitlement2.mobile.att.net,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-115",
+          "index": 115,
+          "type": "DOMAIN",
+          "value": "vvm.mobile.att.net",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,vvm.mobile.att.net,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-116",
+          "index": 116,
+          "type": "DOMAIN",
+          "value": "mmsc.mobile.att.net",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,mmsc.mobile.att.net,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-117",
+          "index": 117,
+          "type": "IP-CIDR",
+          "value": "107.64.0.0/10",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,107.64.0.0/10,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-118",
+          "index": 118,
+          "type": "IP-CIDR",
+          "value": "129.192.0.0/16",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,129.192.0.0/16,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-119",
+          "index": 119,
+          "type": "IP-CIDR",
+          "value": "166.128.0.0/9",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,166.128.0.0/9,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-120",
+          "index": 120,
+          "type": "DOMAIN",
+          "value": "wo.vzwwo.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,wo.vzwwo.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-121",
+          "index": 121,
+          "type": "DOMAIN",
+          "value": "sg.vzwfemto.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,sg.vzwfemto.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-122",
+          "index": 122,
+          "type": "DOMAIN",
+          "value": "sgw.vzwfemto.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,sgw.vzwfemto.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-123",
+          "index": 123,
+          "type": "IP-CIDR",
+          "value": "141.207.0.0/16",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,141.207.0.0/16,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-124",
+          "index": 124,
+          "type": "IP-CIDR",
+          "value": "162.115.0.0/16",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,162.115.0.0/16,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-125",
+          "index": 125,
+          "type": "DOMAIN",
+          "value": "crl.t-mobile.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,crl.t-mobile.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-126",
+          "index": 126,
+          "type": "DOMAIN",
+          "value": "eas3.msg.t-mobile.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,eas3.msg.t-mobile.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-127",
+          "index": 127,
+          "type": "DOMAIN-SUFFIX",
+          "value": "msg.t-mobile.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,msg.t-mobile.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-128",
+          "index": 128,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sipgeo.t-mobile.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sipgeo.t-mobile.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-129",
+          "index": 129,
+          "type": "DOMAIN",
+          "value": "epdg.epc.mnc260.mcc310.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-130",
+          "index": 130,
+          "type": "DOMAIN",
+          "value": "ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-131",
+          "index": 131,
+          "type": "DOMAIN",
+          "value": "ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN,ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-132",
+          "index": 132,
+          "type": "IP-CIDR",
+          "value": "66.94.0.0/19",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,66.94.0.0/19,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-133",
+          "index": 133,
+          "type": "IP-CIDR",
+          "value": "208.54.0.0/16",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,208.54.0.0/16,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-134",
+          "index": 134,
+          "type": "IP-CIDR",
+          "value": "206.29.177.36/32",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,206.29.177.36/32,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-135",
+          "index": 135,
+          "type": "DOMAIN-SUFFIX",
+          "value": "inner-active.mobi",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,inner-active.mobi,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-136",
+          "index": 136,
+          "type": "DOMAIN-SUFFIX",
+          "value": "mobilefuse.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,mobilefuse.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-137",
+          "index": 137,
+          "type": "DOMAIN-SUFFIX",
+          "value": "inmobi.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,inmobi.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-138",
+          "index": 138,
+          "type": "DOMAIN-SUFFIX",
+          "value": "crashlytics.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,crashlytics.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-139",
+          "index": 139,
+          "type": "DOMAIN-SUFFIX",
+          "value": "talkatone.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,talkatone.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-140",
+          "index": 140,
+          "type": "DOMAIN-SUFFIX",
+          "value": "kochava.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,kochava.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-141",
+          "index": 141,
+          "type": "DOMAIN-SUFFIX",
+          "value": "cohere.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,cohere.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-142",
+          "index": 142,
+          "type": "DOMAIN-SUFFIX",
+          "value": "agkn.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,agkn.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-143",
+          "index": 143,
+          "type": "DOMAIN-SUFFIX",
+          "value": "tktn.at",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,tktn.at,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-144",
+          "index": 144,
+          "type": "DOMAIN-SUFFIX",
+          "value": "tktn.be",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,tktn.be,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-145",
+          "index": 145,
+          "type": "IP-CIDR",
+          "value": "50.117.27.0/24",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "IP-CIDR,50.117.27.0/24,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-146",
+          "index": 146,
+          "type": "IP-CIDR",
+          "value": "69.46.75.0/24",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "IP-CIDR,69.46.75.0/24,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-147",
+          "index": 147,
+          "type": "IP-CIDR",
+          "value": "205.164.56.0/24",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "IP-CIDR,205.164.56.0/24,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-148",
+          "index": 148,
+          "type": "IP-CIDR",
+          "value": "63.251.124.0/24",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "IP-CIDR,63.251.124.0/24,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-149",
+          "index": 149,
+          "type": "DOMAIN-SUFFIX",
+          "value": "chase.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,chase.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-150",
+          "index": 150,
+          "type": "DOMAIN-SUFFIX",
+          "value": "bankofamerica.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,bankofamerica.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-151",
+          "index": 151,
+          "type": "DOMAIN-SUFFIX",
+          "value": "wellsfargo.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,wellsfargo.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-152",
+          "index": 152,
+          "type": "DOMAIN-SUFFIX",
+          "value": "usbank.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,usbank.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-153",
+          "index": 153,
+          "type": "DOMAIN-SUFFIX",
+          "value": "capitalone.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,capitalone.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-154",
+          "index": 154,
+          "type": "DOMAIN-SUFFIX",
+          "value": "pnc.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,pnc.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-155",
+          "index": 155,
+          "type": "DOMAIN-SUFFIX",
+          "value": "truist.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,truist.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-156",
+          "index": 156,
+          "type": "DOMAIN-SUFFIX",
+          "value": "usaa.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,usaa.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-157",
+          "index": 157,
+          "type": "DOMAIN-SUFFIX",
+          "value": "navyfederal.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,navyfederal.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-158",
+          "index": 158,
+          "type": "DOMAIN-SUFFIX",
+          "value": "citibank.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,citibank.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-159",
+          "index": 159,
+          "type": "DOMAIN-SUFFIX",
+          "value": "citi.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,citi.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-160",
+          "index": 160,
+          "type": "DOMAIN-SUFFIX",
+          "value": "americanexpress.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,americanexpress.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-161",
+          "index": 161,
+          "type": "DOMAIN-SUFFIX",
+          "value": "amex.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,amex.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-162",
+          "index": 162,
+          "type": "DOMAIN-SUFFIX",
+          "value": "aexp.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,aexp.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-163",
+          "index": 163,
+          "type": "DOMAIN-SUFFIX",
+          "value": "amextravel.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,amextravel.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-164",
+          "index": 164,
+          "type": "DOMAIN-SUFFIX",
+          "value": "venmo.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,venmo.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-165",
+          "index": 165,
+          "type": "DOMAIN-SUFFIX",
+          "value": "cash.app",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,cash.app,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-166",
+          "index": 166,
+          "type": "DOMAIN-SUFFIX",
+          "value": "revolut.com",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,revolut.com,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-167",
+          "index": 167,
+          "type": "DOMAIN-SUFFIX",
+          "value": "pub.3gppnetwork.org",
+          "outbound": "📱 Bk-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,pub.3gppnetwork.org,📱 Bk-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-168",
+          "index": 168,
+          "type": "DOMAIN-SUFFIX",
+          "value": "3gppnetwork.org",
+          "outbound": "📱 Bk-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,3gppnetwork.org,📱 Bk-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-169",
+          "index": 169,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc260.mcc310.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-170",
+          "index": 170,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-171",
+          "index": 171,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mcc310.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mcc310.visited-country.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-172",
+          "index": 172,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mcc310.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mcc310.visited-country.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-173",
+          "index": 173,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-174",
+          "index": 174,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.att.net",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.att.net,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-175",
+          "index": 175,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.att-idns.net",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.att-idns.net,📱 US-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-176",
+          "index": 176,
+          "type": "IP-CIDR",
+          "value": "107.122.31.0/24",
+          "outbound": "📱 US-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,107.122.31.0/24,📱 US-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-177",
+          "index": 177,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc011.mcc274.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc011.mcc274.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-178",
+          "index": 178,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc011.mcc274.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc011.mcc274.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-179",
+          "index": 179,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mcc274.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mcc274.visited-country.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-180",
+          "index": 180,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mcc274.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mcc274.visited-country.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-181",
+          "index": 181,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc011.mcc274.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc011.mcc274.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-182",
+          "index": 182,
+          "type": "IP-CIDR",
+          "value": "78.40.249.0/24",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,78.40.249.0/24,📱 DR-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-183",
+          "index": 183,
+          "type": "IP-CIDR",
+          "value": "119.31.121.0/24",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,119.31.121.0/24,📱 DR-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-184",
+          "index": 184,
+          "type": "IP-CIDR",
+          "value": "119.31.123.0/24",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,119.31.123.0/24,📱 DR-WIFI,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-185",
+          "index": 185,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mnc003.mcc520.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mnc003.mcc520.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-186",
+          "index": 186,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mnc003.mcc520.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mnc003.mcc520.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-187",
+          "index": 187,
+          "type": "DOMAIN-SUFFIX",
+          "value": "epdg.epc.mcc520.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,epdg.epc.mcc520.visited-country.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-188",
+          "index": 188,
+          "type": "DOMAIN-SUFFIX",
+          "value": "sos.epdg.epc.mcc520.visited-country.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,sos.epdg.epc.mcc520.visited-country.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        },
+        {
+          "id": "rule-189",
+          "index": 189,
+          "type": "DOMAIN-SUFFIX",
+          "value": "ss.epdg.epc.mnc003.mcc520.pub.3gppnetwork.org",
+          "outbound": "📱 DR-WIFI",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,ss.epdg.epc.mnc003.mcc520.pub.3gppnetwork.org,📱 DR-WIFI",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "其他自定义规则",
+      "description": "规则集 / 兜底 / 加速",
+      "order": 5,
+      "rules": [
+        {
+          "id": "rule-190",
+          "index": 190,
+          "type": "RULE-SET",
+          "value": "Advertising",
+          "outbound": "🛑 广告拦截",
+          "modifiers": [],
+          "raw": "RULE-SET,Advertising,🛑 广告拦截",
+          "enabled": true
+        },
+        {
+          "id": "rule-191",
+          "index": 191,
+          "type": "RULE-SET",
+          "value": "Privacy",
+          "outbound": "🛑 广告拦截",
+          "modifiers": [],
+          "raw": "RULE-SET,Privacy,🛑 广告拦截",
+          "enabled": true
+        },
+        {
+          "id": "rule-192",
+          "index": 192,
+          "type": "RULE-SET",
+          "value": "Hijacking",
+          "outbound": "🛑 广告拦截",
+          "modifiers": [],
+          "raw": "RULE-SET,Hijacking,🛑 广告拦截",
+          "enabled": true
+        },
+        {
+          "id": "rule-193",
+          "index": 193,
+          "type": "GEOSITE",
+          "value": "CN",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "GEOSITE,CN,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-194",
+          "index": 194,
+          "type": "DOMAIN",
+          "value": "zhuzhuzhu.whtjdasha.com",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "DOMAIN,zhuzhuzhu.whtjdasha.com,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-195",
+          "index": 195,
+          "type": "IP-CIDR",
+          "value": "119.29.57.170/32",
+          "outbound": "🎯 全球直连",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,119.29.57.170/32,🎯 全球直连,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-196",
+          "index": 196,
+          "type": "DOMAIN",
+          "value": "dy.sbyun.org",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "DOMAIN,dy.sbyun.org,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-197",
+          "index": 197,
+          "type": "DOMAIN",
+          "value": "em.mesl.cloud",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "DOMAIN,em.mesl.cloud,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-198",
+          "index": 198,
+          "type": "IP-CIDR",
+          "value": "23.158.136.41/32",
+          "outbound": "🎯 全球直连",
+          "modifiers": [
+            "no-resolve"
+          ],
+          "raw": "IP-CIDR,23.158.136.41/32,🎯 全球直连,no-resolve",
+          "enabled": true
+        },
+        {
+          "id": "rule-199",
+          "index": 199,
+          "type": "DOMAIN-SUFFIX",
+          "value": "flowus.cn",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,flowus.cn,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-200",
+          "index": 200,
+          "type": "DOMAIN-SUFFIX",
+          "value": "shimo.im",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,shimo.im,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-201",
+          "index": 201,
+          "type": "DOMAIN-SUFFIX",
+          "value": "wuguimovie.com",
+          "outbound": "📽 Emby",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,wuguimovie.com,📽 Emby",
+          "enabled": true
+        },
+        {
+          "id": "rule-202",
+          "index": 202,
+          "type": "RULE-SET",
+          "value": "Speedtest",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "RULE-SET,Speedtest,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-203",
+          "index": 203,
+          "type": "RULE-SET",
+          "value": "OpenAI",
+          "outbound": "💬 Ai平台",
+          "modifiers": [],
+          "raw": "RULE-SET,OpenAI,💬 Ai平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-204",
+          "index": 204,
+          "type": "RULE-SET",
+          "value": "Claude",
+          "outbound": "💬 Ai平台",
+          "modifiers": [],
+          "raw": "RULE-SET,Claude,💬 Ai平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-205",
+          "index": 205,
+          "type": "RULE-SET",
+          "value": "Gemini",
+          "outbound": "💬 Ai平台",
+          "modifiers": [],
+          "raw": "RULE-SET,Gemini,💬 Ai平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-206",
+          "index": 206,
+          "type": "RULE-SET",
+          "value": "Google",
+          "outbound": "🐻 GOOGLE",
+          "modifiers": [],
+          "raw": "RULE-SET,Google,🐻 GOOGLE",
+          "enabled": true
+        },
+        {
+          "id": "rule-207",
+          "index": 207,
+          "type": "RULE-SET",
+          "value": "YouTube",
+          "outbound": "📹 油管视频",
+          "modifiers": [],
+          "raw": "RULE-SET,YouTube,📹 油管视频",
+          "enabled": true
+        },
+        {
+          "id": "rule-208",
+          "index": 208,
+          "type": "RULE-SET",
+          "value": "Netflix",
+          "outbound": "🎥 奈飞视频",
+          "modifiers": [],
+          "raw": "RULE-SET,Netflix,🎥 奈飞视频",
+          "enabled": true
+        },
+        {
+          "id": "rule-209",
+          "index": 209,
+          "type": "RULE-SET",
+          "value": "TikTok",
+          "outbound": "📲 电报消息",
+          "modifiers": [],
+          "raw": "RULE-SET,TikTok,📲 电报消息",
+          "enabled": true
+        },
+        {
+          "id": "rule-210",
+          "index": 210,
+          "type": "RULE-SET",
+          "value": "Telegram",
+          "outbound": "📲 电报消息",
+          "modifiers": [],
+          "raw": "RULE-SET,Telegram,📲 电报消息",
+          "enabled": true
+        },
+        {
+          "id": "rule-211",
+          "index": 211,
+          "type": "RULE-SET",
+          "value": "Twitter",
+          "outbound": "🌍 国外媒体",
+          "modifiers": [],
+          "raw": "RULE-SET,Twitter,🌍 国外媒体",
+          "enabled": true
+        },
+        {
+          "id": "rule-212",
+          "index": 212,
+          "type": "RULE-SET",
+          "value": "Meta",
+          "outbound": "🌍 国外媒体",
+          "modifiers": [],
+          "raw": "RULE-SET,Meta,🌍 国外媒体",
+          "enabled": true
+        },
+        {
+          "id": "rule-214",
+          "index": 214,
+          "type": "RULE-SET",
+          "value": "Microsoft",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "RULE-SET,Microsoft,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-215",
+          "index": 215,
+          "type": "DOMAIN-SUFFIX",
+          "value": "github.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,github.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-216",
+          "index": 216,
+          "type": "DOMAIN-SUFFIX",
+          "value": "api.github.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,api.github.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-217",
+          "index": 217,
+          "type": "DOMAIN-SUFFIX",
+          "value": "raw.githubusercontent.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,raw.githubusercontent.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-218",
+          "index": 218,
+          "type": "DOMAIN-SUFFIX",
+          "value": "objects.githubusercontent.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,objects.githubusercontent.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-219",
+          "index": 219,
+          "type": "DOMAIN-SUFFIX",
+          "value": "codeload.github.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,codeload.github.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-220",
+          "index": 220,
+          "type": "DOMAIN-SUFFIX",
+          "value": "githubassets.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,githubassets.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-221",
+          "index": 221,
+          "type": "DOMAIN-SUFFIX",
+          "value": "githubusercontent.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,githubusercontent.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-222",
+          "index": 222,
+          "type": "DOMAIN-SUFFIX",
+          "value": "docker.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,docker.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-223",
+          "index": 223,
+          "type": "DOMAIN-SUFFIX",
+          "value": "docker.io",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,docker.io,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-224",
+          "index": 224,
+          "type": "DOMAIN-SUFFIX",
+          "value": "registry-1.docker.io",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,registry-1.docker.io,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-225",
+          "index": 225,
+          "type": "DOMAIN-SUFFIX",
+          "value": "cloudflare.docker.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,cloudflare.docker.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-226",
+          "index": 226,
+          "type": "DOMAIN-SUFFIX",
+          "value": "cloudflare.com",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,cloudflare.com,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-227",
+          "index": 227,
+          "type": "DOMAIN-SUFFIX",
+          "value": "cloudflare.net",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,cloudflare.net,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-228",
+          "index": 228,
+          "type": "DOMAIN-SUFFIX",
+          "value": "workers.dev",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "DOMAIN-SUFFIX,workers.dev,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-229",
+          "index": 229,
+          "type": "RULE-SET",
+          "value": "Steam",
+          "outbound": "🎮 游戏平台",
+          "modifiers": [],
+          "raw": "RULE-SET,Steam,🎮 游戏平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-230",
+          "index": 230,
+          "type": "RULE-SET",
+          "value": "EA",
+          "outbound": "🎮 游戏平台",
+          "modifiers": [],
+          "raw": "RULE-SET,EA,🎮 游戏平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-231",
+          "index": 231,
+          "type": "RULE-SET",
+          "value": "Epic",
+          "outbound": "🎮 游戏平台",
+          "modifiers": [],
+          "raw": "RULE-SET,Epic,🎮 游戏平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-232",
+          "index": 232,
+          "type": "RULE-SET",
+          "value": "Nintendo",
+          "outbound": "🎮 游戏平台",
+          "modifiers": [],
+          "raw": "RULE-SET,Nintendo,🎮 游戏平台",
+          "enabled": true
+        },
+        {
+          "id": "rule-233",
+          "index": 233,
+          "type": "RULE-SET",
+          "value": "Proxy",
+          "outbound": "🚀 节点选择",
+          "modifiers": [],
+          "raw": "RULE-SET,Proxy,🚀 节点选择",
+          "enabled": true
+        },
+        {
+          "id": "rule-234",
+          "index": 234,
+          "type": "RULE-SET",
+          "value": "Direct",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "RULE-SET,Direct,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-235",
+          "index": 235,
+          "type": "RULE-SET",
+          "value": "ChinaMax",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "RULE-SET,ChinaMax,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-236",
+          "index": 236,
+          "type": "PROCESS-NAME",
+          "value": "aria2c.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,aria2c.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-237",
+          "index": 237,
+          "type": "PROCESS-NAME",
+          "value": "fdm.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,fdm.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-238",
+          "index": 238,
+          "type": "PROCESS-NAME",
+          "value": "Thunder.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,Thunder.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-239",
+          "index": 239,
+          "type": "PROCESS-NAME",
+          "value": "Transmission.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,Transmission.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-240",
+          "index": 240,
+          "type": "PROCESS-NAME",
+          "value": "uTorrent.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,uTorrent.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-241",
+          "index": 241,
+          "type": "PROCESS-NAME",
+          "value": "qbittorrent.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,qbittorrent.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-242",
+          "index": 242,
+          "type": "PROCESS-NAME",
+          "value": "BitComet.exe",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "PROCESS-NAME,BitComet.exe,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-243",
+          "index": 243,
+          "type": "GEOIP",
+          "value": "LAN",
+          "outbound": "DIRECT",
+          "modifiers": [],
+          "raw": "GEOIP,LAN,DIRECT",
+          "enabled": true
+        },
+        {
+          "id": "rule-244",
+          "index": 244,
+          "type": "GEOIP",
+          "value": "CN",
+          "outbound": "🎯 全球直连",
+          "modifiers": [],
+          "raw": "GEOIP,CN,🎯 全球直连",
+          "enabled": true
+        },
+        {
+          "id": "rule-245",
+          "index": 245,
+          "type": "MATCH",
+          "value": "",
+          "outbound": "🐟 漏网之鱼",
+          "modifiers": [],
+          "raw": "MATCH,🐟 漏网之鱼",
+          "enabled": true
+        }
+      ]
+    }
+  ]
+}

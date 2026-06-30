@@ -1,0 +1,113 @@
+/**
+ * VoHive header chip scoped to vohive-lab-shell
+ */
+
+.vohive-lab-shell .vohive-head__chip {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: fit-content;
+  max-width: min(100%, 380px);
+  padding: 8px 10px;
+  margin-top: 2px;
+}
+
+.vohive-lab-shell .vohive-chip__line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--vh-mint-neon, #6ee7b7);
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(110, 231, 183, 0.28);
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__icon .material-symbols-outlined {
+  font-size: 15px;
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__text--mono {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(248, 113, 113, 0.72);
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__status.online {
+  color: var(--vh-mint-neon, #6ee7b7);
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-chip__status.online .status-dot {
+  background: var(--vh-mint, #34d399);
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.75);
+}
+
+.vohive-lab-shell .vohive-head__chip.glass-frame {
+  --gf-radius: 12px;
+}
+
+.vohive-lab-shell .vohive-head__chip.glass-frame--compact {
+  border-radius: var(--gf-radius, 12px);
+  backdrop-filter: var(--glass-blur-soft);
+  -webkit-backdrop-filter: var(--glass-blur-soft);
+}
+
+/* 与下方 eSIM 选中卡同款绿色辉光框 */
+[data-theme='dark'] .vohive-lab-shell .vohive-head__chip.glass-frame.is-glow-green {
+  --frame-base-top: rgba(16, 28, 24, 0.41);
+  --frame-base-bottom: rgba(9, 17, 15, 0.44);
+  --frame-veil-top: rgba(200, 255, 230, 0.016);
+  --frame-veil-bottom: rgba(0, 0, 0, 0.055);
+  --lens-wash: rgba(52, 211, 153, 0.011);
+  --corner-glow-a: rgba(52, 211, 153, 0.1);
+  --corner-glow-b: rgba(52, 211, 153, 0.032);
+  --corner-glow-c: rgba(52, 211, 153, 0.008);
+  border-color: rgba(52, 211, 153, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(110, 231, 183, 0.14),
+    inset 1px 0 0 rgba(52, 211, 153, 0.18),
+    inset 0 -1px 0 var(--vh-edge-bottom),
+    0 0 0 1px rgba(52, 211, 153, 0.1),
+    0 0 48px rgba(52, 211, 153, 0.045),
+    var(--vh-card-shadow);
+}
+
+[data-theme='dark'] .vohive-lab-shell .vohive-head__chip.glass-frame.is-glow-green::before {
+  background: linear-gradient(
+    145deg,
+    rgba(110, 231, 183, 0.22) 0%,
+    rgba(52, 211, 153, 0.07) 24%,
+    rgba(255, 255, 255, 0.02) 52%,
+    rgba(52, 211, 153, 0.05) 100%
+  );
+}

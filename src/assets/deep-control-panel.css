@@ -1,0 +1,440 @@
+/**
+ * OneBord — Modern Glass Dashboard（仅暗黑模式）
+ * 2024 Glassmorphism · Depth · Soft Light · Low Saturation
+ * 不修改国旗 / 语义卡片内部结构
+ */
+
+[data-theme="dark"] {
+  /* ── 低饱和现代色板 ── */
+  --bg-base: #070812;
+  --bg-surface: rgba(26, 34, 53, 0.55);
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --bg-input: rgba(255, 255, 255, 0.04);
+  --bg-hover: rgba(255, 255, 255, 0.06);
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-field: rgba(255, 255, 255, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.08);
+
+  --glass-blur: 18px;
+  --glass-saturate: 105%;
+  --glass-card: rgba(255, 255, 255, 0.04);
+  --glass-rim: none;
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+
+  /* Soft elevation — 无硬黑影，带淡蓝辉光 */
+  --glass-shadow:
+    0 4px 24px rgba(26, 34, 53, 0.42),
+    0 0 40px rgba(56, 120, 200, 0.04);
+  --glass-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --glass-shadow-elevated:
+    0 8px 32px rgba(26, 40, 80, 0.38),
+    0 0 56px rgba(56, 120, 200, 0.07);
+
+  --shell-bg: rgba(255, 255, 255, 0.03);
+  --shell-border: rgba(255, 255, 255, 0.07);
+  --shell-shadow:
+    0 16px 48px rgba(26, 34, 53, 0.45),
+    0 0 72px rgba(56, 120, 200, 0.06);
+
+  --sidebar-bg: rgba(255, 255, 255, 0.035);
+  --sidebar-shadow:
+    0 8px 32px rgba(26, 34, 53, 0.38),
+    0 0 40px rgba(56, 120, 200, 0.05);
+
+  --stat-card-bg: rgba(255, 255, 255, 0.04);
+  --stat-card-border: rgba(255, 255, 255, 0.08);
+  --stat-card-shadow: var(--glass-shadow), var(--glass-shadow-inset);
+  --stat-card-shadow-hover:
+    0 10px 36px rgba(26, 40, 80, 0.36),
+    0 0 36px rgba(56, 120, 200, 0.09),
+    var(--glass-shadow-inset);
+  --stat-glass-blur: 18px;
+  --stat-label-color: rgba(255, 255, 255, 0.48);
+  --stat-value-color: rgba(255, 255, 255, 0.88);
+  --stat-sub-color: rgba(255, 255, 255, 0.48);
+  --stat-wave-stroke: rgba(110, 181, 255, 0.42);
+  --stat-wave-fill-top: rgba(56, 120, 200, 0.1);
+  --stat-wave-fill-bottom: rgba(56, 120, 200, 0);
+
+  --accent: #7eb8ff;
+  --accent-hover: #a3ccff;
+  --accent-soft: rgba(110, 181, 255, 0.1);
+  --green: #6ee7b7;
+  --green-soft: rgba(110, 231, 183, 0.1);
+  --danger: rgba(248, 113, 113, 0.68);
+  --warning: #fcd34d;
+
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.68);
+  --text-muted: rgba(255, 255, 255, 0.48);
+
+  --radius-md: 16px;
+  --radius-lg: 16px;
+  --radius-card: 16px;
+  --radius-card-sm: 16px;
+  --radius-panel: 16px;
+
+  --dcp-card-bg: rgba(255, 255, 255, 0.04);
+  --dcp-card-border: rgba(255, 255, 255, 0.08);
+  --dcp-card-radius: 16px;
+  --dcp-card-blur: 18px;
+  --dcp-hover-lift: -2px;
+  --dcp-hover-shadow:
+    0 12px 40px rgba(26, 40, 80, 0.34),
+    0 0 40px rgba(56, 120, 200, 0.1),
+    var(--glass-shadow-inset);
+  --dcp-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* 数据层级：latency / status */
+  --dcp-ms-color: #ffd84d;
+  --dcp-ms-glow: 0 0 16px rgba(255, 216, 77, 0.38);
+  --card-t-latency-glow: 0 0 16px rgba(255, 216, 77, 0.42);
+  --card-t-latency-size: 13px;
+
+  /* 状态灯 */
+  --dcp-online-glow: 0 0 14px rgba(110, 231, 183, 0.72);
+  --dcp-warning-glow: 0 0 14px rgba(252, 211, 77, 0.62);
+  --dcp-offline-color: rgba(248, 113, 113, 0.55);
+  --dcp-offline-glow: 0 0 10px rgba(248, 113, 113, 0.28);
+
+  --toggle-bg: rgba(255, 255, 255, 0.04);
+  --region-card-bg: var(--glass-card);
+  --corner-glow-large-bg: var(--dcp-card-bg);
+  --corner-glow-bg: var(--dcp-card-bg);
+}
+
+/* ── 背景：见 glass-frame-dark.css 实验室画布（html 层） ── */
+
+/* ── App Shell：透明布局壳，不遮挡 body 渐变 ── */
+[data-theme="dark"] .app-shell {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ── 侧栏：透明布局壳，见 sidebar-dark.css ── */
+[data-theme="dark"] .cp-sidebar {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ── 统一玻璃卡片 → 见 glass-frame-dark.css（最后加载） ── */
+/*
+[data-theme="dark"] :is(
+  .card,
+  .panel-card,
+  ...
+) { ... }
+*/
+
+[data-theme="dark"] .vohive-console :is(
+  .metric-card,
+  .device-card,
+  .overview-card
+) {
+  /* 图一样式见 vohive-ref.css */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* hover 抬升 → 见 glass-frame-dark.css */
+/*
+[data-theme="dark"] :is(.card, .panel-card, ...) :hover { ... }
+*/
+
+[data-theme="dark"] .vohive-console :is(
+  .metric-card,
+  .device-card,
+  .overview-card
+):hover {
+  transform: translateY(-2px);
+}
+
+/* ── 文字层级（页面 / 面板） ── */
+[data-theme="dark"] .vohive-console :is(
+  .panel-title,
+  .panel-title-lg,
+  .card-title,
+  .section-title,
+  .md-card-head-title,
+  .overview-card__title,
+  .device-card__name,
+  .vohive-head__title
+) {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] :is(
+  .panel-sub,
+  .card-sub,
+  .section-desc,
+  .md-card-head-sub,
+  .info-label,
+  .factory-label,
+  .factory-sub,
+  .stat-mini-label,
+  .device-card__ip-label,
+  .detail-row span:first-child,
+  .stage-label,
+  .sms-sub,
+  .sms-latest,
+  .global-label
+) {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+[data-theme="dark"] :is(
+  .factory-value,
+  .stat-mini-value,
+  .info-value,
+  .dns-stat-value,
+  .global-value
+) {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+[data-theme="dark"] .vohive-console .factory-value,
+[data-theme="dark"] .dns-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 数据视觉权重 ──
+   1 latency / status  2 node count  3 cpu / memory
+   ─────────────────────────────────────────────── */
+[data-theme="dark"] .dashboard-body > .stat-row:first-of-type .factory-value {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+[data-theme="dark"] .dashboard-body > .stat-row:first-of-type .factory-label,
+[data-theme="dark"] .dashboard-body > .stat-row:first-of-type .factory-sub {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+[data-theme="dark"] .dashboard-body > .stat-row:first-of-type .factory-chart {
+  opacity: 0.45;
+}
+
+[data-theme="dark"] .dashboard-body > .stat-row:nth-of-type(2) .factory-value {
+  font-size: 21px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 28px rgba(110, 181, 255, 0.1);
+}
+
+[data-theme="dark"] .dashboard-body > .stat-row:nth-of-type(2) .factory-label {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* global-stats · 四列数值统一字号 */
+[data-theme="dark"] .global-stat .global-value {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+[data-theme="dark"] .global-stat:nth-child(1) .global-value,
+[data-theme="dark"] .global-stat:nth-child(3) .global-value {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+[data-theme="dark"] .global-stat:nth-child(2) .global-value.accent-green {
+  color: var(--green);
+  text-shadow: 0 0 24px rgba(110, 231, 183, 0.32);
+}
+
+[data-theme="dark"] .global-stat:nth-child(3) .global-value.accent-blue {
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .global-stat:nth-child(4) .global-value.accent-green {
+  color: var(--green);
+  text-shadow: var(--dcp-online-glow);
+}
+
+[data-theme="dark"] .global-stat:nth-child(4) .global-value.accent-red {
+  color: var(--dcp-offline-color);
+  text-shadow: var(--dcp-offline-glow);
+}
+
+/* latency badge 强化 */
+[data-theme="dark"] :is(
+  .cnc-delay,
+  .dcc-delay,
+  .svc-delay,
+  .cine-delay
+) {
+  text-shadow: var(--card-t-latency-glow);
+  box-shadow: var(--dcp-ms-glow), var(--glass-shadow-inset);
+}
+
+[data-theme="dark"] .ob-delay-warn {
+  color: var(--warning) !important;
+  text-shadow: 0 0 14px rgba(252, 211, 77, 0.42) !important;
+  border-color: rgba(252, 211, 77, 0.38) !important;
+}
+
+[data-theme="dark"] .ob-delay-fast {
+  text-shadow: 0 0 14px rgba(110, 231, 183, 0.35) !important;
+}
+
+[data-theme="dark"] .ob-delay-slow {
+  color: var(--dcp-offline-color) !important;
+  text-shadow: var(--dcp-offline-glow) !important;
+}
+
+/* ── 状态灯系统 ── */
+[data-theme="dark"] .status-pill:not(.offline) {
+  color: var(--green);
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.22);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.1);
+}
+
+[data-theme="dark"] .status-pill:not(.offline) .dot {
+  background: var(--green);
+  box-shadow: var(--dcp-online-glow);
+}
+
+[data-theme="dark"] .status-pill.offline {
+  color: var(--dcp-offline-color);
+  background: rgba(248, 113, 113, 0.06);
+  border-color: rgba(248, 113, 113, 0.16);
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.06);
+}
+
+[data-theme="dark"] .status-pill.offline .dot {
+  background: var(--dcp-offline-color);
+  box-shadow: var(--dcp-offline-glow);
+}
+
+[data-theme="dark"] :is(
+  .cnc-status.success,
+  .cnc-status.active,
+  .dcc-status.success,
+  .rgc-status,
+  .semantic-visual-card .svc-status.on,
+  .semantic-visual-card .svc-status.effective,
+  .sub-provider-card__status.is-ok
+) {
+  box-shadow: 0 0 18px rgba(52, 211, 153, 0.12);
+}
+
+[data-theme="dark"] :is(
+  .cnc-status-dot,
+  .dcc-status-dot,
+  .rgc-status-dot,
+  .semantic-visual-card .svc-status-dot
+) {
+  box-shadow: 0 0 8px currentColor;
+}
+
+[data-theme="dark"] :is(
+  .cnc-status.error,
+  .dcc-status.error,
+  .semantic-visual-card .svc-status.off
+) {
+  box-shadow: 0 0 14px rgba(248, 113, 113, 0.1);
+}
+
+[data-theme="dark"] .cnc-status.fallback,
+[data-theme="dark"] .ob-delay-warn {
+  box-shadow: 0 0 14px rgba(252, 211, 77, 0.1);
+}
+
+[data-theme="dark"] .vohive-console .device-card__status.online,
+[data-theme="dark"] .vohive-console .vohive-head__status.online {
+  color: var(--green);
+}
+
+[data-theme="dark"] .vohive-console .device-card__status.online .status-dot,
+[data-theme="dark"] .vohive-console .vohive-head__status.online .status-dot {
+  background: var(--green);
+  box-shadow: var(--dcp-online-glow);
+}
+
+[data-theme="dark"] .vohive-console .device-card__status:not(.online),
+[data-theme="dark"] .vohive-console .vohive-head__status:not(.online) {
+  color: var(--dcp-offline-color);
+}
+
+[data-theme="dark"] .vohive-console .device-card__status:not(.online) .status-dot,
+[data-theme="dark"] .vohive-console .vohive-head__status:not(.online) .status-dot {
+  background: var(--dcp-offline-color);
+  box-shadow: var(--dcp-offline-glow);
+}
+
+[data-theme="dark"] .overview-badge.ready {
+  color: var(--green);
+  box-shadow: 0 0 16px rgba(52, 211, 153, 0.12);
+}
+
+[data-theme="dark"] .overview-badge.ready .overview-badge__dot {
+  box-shadow: var(--dcp-online-glow);
+}
+
+[data-theme="dark"] .vohive-console .metric-card__value--poll {
+  color: var(--dcp-ms-color);
+  text-shadow: var(--dcp-ms-glow);
+}
+
+[data-theme="dark"] .panel-icon {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .glass-inner {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+[data-theme="dark"] .progress-bar {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] :is(
+    .card,
+    .panel-card,
+    .factory-card,
+    .stat-mini,
+    .vohive-console .device-card
+  ):hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  [data-theme="dark"] :is(
+    .cp-sidebar,
+    .panel-card,
+    .factory-card,
+    .vohive-console
+  ) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(26, 34, 53, 0.94) !important;
+  }
+}

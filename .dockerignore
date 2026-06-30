@@ -1,0 +1,43 @@
+# Build context — keep lean; dist is produced inside the image.
+node_modules
+dist
+.git
+.github
+.cursor
+.agent
+terminals
+mcps
+.restore-tmp
+.onebord
+*.log
+npm-debug.log*
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Docs / dev — not needed in image
+*.md
+!README.md
+docs
+openwrt
+release/openwrt
+release/docker
+scripts/build-openwrt-release.mjs
+scripts/build-docker-release.mjs
+
+# Compose configs — not needed inside image
+docker-compose*.yml
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Tests / artifacts
+coverage
+*.tgz
+*.tar.gz

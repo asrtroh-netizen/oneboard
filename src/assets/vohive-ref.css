@@ -1,0 +1,196 @@
+/**
+ * VoHive 设备监控 — 实验室定稿 UI（仅 dark · 内容层）
+ * 框体见 glass-frame-dark.css
+ */
+
+[data-theme='dark'] .vohive-console__body.glass-frame {
+  padding: 14px;
+  border-radius: 14px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+[data-theme='dark'] .vohive-console__canvas {
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-theme='dark'] .vohive-console__body.glass-frame > *,
+[data-theme='dark'] .vohive-console__canvas > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme='dark'] .vohive-console {
+  --vh-surface: rgba(22, 26, 38, 0.58);
+  --vh-surface-hover: rgba(28, 32, 46, 0.68);
+  --vh-surface-inset: rgba(255, 255, 255, 0.035);
+  --vh-mint: #34d399;
+  --vh-mint-neon: #6ee7b7;
+  --vh-mint-soft: rgba(16, 48, 38, 0.72);
+  --vh-mint-border: rgba(52, 211, 153, 0.55);
+  --vh-label: rgba(148, 163, 184, 0.82);
+  --vh-text: #ffffff;
+}
+
+/* ── 统计卡图标 ── */
+[data-theme='dark'] .vohive-console .metric-card__icon {
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+
+[data-theme='dark'] .vohive-console .metric-card--blue .metric-card__icon {
+  color: #6eb5ff;
+  background: rgba(56, 120, 200, 0.16);
+  border-color: rgba(59, 130, 246, 0.14);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .vohive-console .metric-card--green .metric-card__icon {
+  color: var(--vh-mint-neon);
+  background: rgba(52, 211, 153, 0.14);
+  border-color: rgba(52, 211, 153, 0.14);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .vohive-console .metric-card--purple .metric-card__icon {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.14);
+  border-color: rgba(167, 139, 250, 0.14);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .vohive-console .metric-card--amber .metric-card__icon {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.14);
+  border-color: rgba(251, 191, 36, 0.14);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .vohive-console .metric-card__label,
+[data-theme='dark'] .vohive-console .metric-card__sub {
+  color: var(--vh-label) !important;
+}
+
+[data-theme='dark'] .vohive-console .metric-card__value {
+  color: var(--vh-text) !important;
+}
+
+[data-theme='dark'] .vohive-console .tone-success {
+  color: var(--vh-mint-neon) !important;
+}
+
+/* 设备卡横滑行见 vohive-device-row.css */
+
+/* ── SIM 水印视觉（banner 内） ── */
+[data-theme='dark'] .vohive-console .carrier-banner {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme='dark'] .vohive-console .sim-visual {
+  opacity: 0.34;
+}
+
+[data-theme='dark'] .vohive-console .sim-visual__glow {
+  background: radial-gradient(
+    ellipse 90% 80% at 12% 8%,
+    rgba(110, 231, 183, 0.22) 0%,
+    rgba(52, 211, 153, 0.08) 34%,
+    transparent 72%
+  );
+}
+
+[data-theme='dark'] .vohive-console .sim-visual__chip {
+  background: linear-gradient(145deg, rgba(52, 211, 153, 0.28) 0%, rgba(16, 185, 129, 0.16) 100%);
+  border: 1px solid rgba(110, 231, 183, 0.28);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.12);
+}
+
+/* ── 运行状态 / 详情 ── */
+[data-theme='dark'] .vohive-console .overview-badge.glass-frame--tone-green {
+  color: var(--vh-mint-neon, #6ee7b7) !important;
+}
+
+[data-theme='dark'] .vohive-console .overview-badge__dot {
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.55);
+}
+
+[data-theme='dark'] .vohive-console .overview-badge.glass-frame--tone-green .overview-badge__dot {
+  background: #34d399;
+}
+
+[data-theme='dark'] .vohive-console .stage-bar.ready {
+  background: linear-gradient(90deg, #34d399 0%, #10b981 100%) !important;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.35);
+}
+
+[data-theme='dark'] .vohive-console :is(.detail-box.glass-frame, .runtime-details.glass-frame) {
+  padding: 12px;
+}
+
+[data-theme='dark'] .vohive-console .detail-row span:first-child,
+[data-theme='dark'] .vohive-console .kv-row > span:first-child {
+  color: var(--vh-label) !important;
+}
+
+/* ── eSIM 切卡 ── */
+[data-theme='dark'] .vohive-console .esim-item.glass-frame {
+  padding: 12px;
+  border-radius: 12px;
+  appearance: none;
+}
+
+[data-theme='dark'] .vohive-console .esim-item.glass-frame--selectable:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .vohive-console .esim-item.glass-frame--selectable.is-glow-green .esim-item__name {
+  color: var(--vh-mint-neon) !important;
+}
+
+[data-theme='dark'] .vohive-console .esim-item__badge.current {
+  color: var(--vh-mint) !important;
+  background: rgba(52, 211, 153, 0.16) !important;
+  border: 1px solid rgba(110, 231, 183, 0.28) !important;
+}
+
+/* ── 短信 ── */
+[data-theme='dark'] .vohive-console .sms-head {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .vohive-console .sms-msg__bubble {
+  background: rgba(255, 255, 255, 0.018) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: var(--glass-blur-soft);
+  -webkit-backdrop-filter: var(--glass-blur-soft);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .vohive-console .sms-day__label {
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── 工具栏 ── */
+[data-theme='dark'] .vohive-console .runtime-action-btn,
+[data-theme='dark'] .vohive-console .vohive-at-input {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .vohive-console .runtime-action-btn:hover:not(:disabled) {
+  background: rgba(56, 120, 200, 0.1) !important;
+  border-color: rgba(110, 181, 255, 0.2) !important;
+}
+
+[data-theme='dark'] .vohive-console .vohive-head__status.online {
+  color: var(--vh-mint-neon) !important;
+}
