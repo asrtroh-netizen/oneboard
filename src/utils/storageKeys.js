@@ -5,6 +5,7 @@ export const STORAGE_KEYS = {
   authToken: 'oneboard-auth-token',
   authUser: 'oneboard-auth-user',
   clashBackend: 'oneboard-clash-backend',
+  clashAuthMode: 'oneboard-clash-auth-mode',
   vohiveConnection: 'oneboard-vohive-connection',
   vohiveActiveInstance: 'oneboard:vohive:active-instance-id',
   vohiveInstances: 'oneboard:vohive:instances',

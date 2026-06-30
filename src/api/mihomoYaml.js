@@ -1,4 +1,4 @@
-import { getMihomoApiBase, getMihomoAuthHeaders } from '../config/mihomo'
+import { getMihomoApiBase, fetchClashAPI } from '../config/mihomo'
 import {
   clashBackendState,
   resolveClashUpstreamBase,
@@ -73,11 +73,7 @@ async function mihomoApiRequest(path, options = {}) {
   if (shouldTrack) ticket = startLoading()
 
   try {
-    const res = await fetch(`${getMihomoApiBase()}${path.startsWith('/') ? path : `/${path}`}`, {
-      headers: getMihomoAuthHeaders(fetchOptions.headers),
-      method,
-      ...fetchOptions,
-    })
+    const res = await fetchClashAPI(path, { method, ...fetchOptions })
     const text = await res.text()
     if (!res.ok) {
       let message = text
@@ -86,6 +82,9 @@ async function mihomoApiRequest(path, options = {}) {
         message = json.message || json.status || json.error || text
       } catch {
         /* plain text */
+      }
+      if (res.status === 401) {
+        throw new Error('Clash 后端鉴权失败（HTTP 401）：请检查设置页中的 Secret（已自动尝试免鉴权与带 Secret 两种方式）')
       }
       throw new Error(message || `后端 ${path} → ${res.status}`)
     }
@@ -171,9 +170,7 @@ async function tryFetchYamlFromConfigsAcceptHeader() {
 
   for (const accept of acceptHeaders) {
     try {
-      const res = await fetch(`${getMihomoApiBase()}/configs`, {
-        headers: getMihomoAuthHeaders({ Accept: accept }),
-      })
+      const res = await fetchClashAPI('/configs', { headers: { Accept: accept } })
       const text = await res.text()
       if (!res.ok) continue
       if (looksLikeMihomoYaml(text)) {

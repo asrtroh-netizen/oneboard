@@ -7,12 +7,15 @@ import {
   clashBackendProfile,
   resolveClashUpstreamBase,
 } from './clashBackend'
+import { clearAllClashAuthModes } from './clashAuthMode'
 import { ControlPlaneEvents, emit } from './controlPlane/eventBus'
 import { refreshDnsSyncLayer } from './dnsSyncLayer'
 import { startMihomoSyncLayer, stopMihomoSyncLayer } from './mihomoSyncLayer'
 
 export function applyClashBackendSwitch(appState, formatBytes) {
   clearAllRemoteYamlCaches()
+  // 每次手动切换/重连后端都重新探测鉴权模式，避免沿用旧后端或旧 secret 的缓存判断。
+  clearAllClashAuthModes()
   stopMihomoSyncLayer()
   startMihomoSyncLayer(appState, formatBytes)
   refreshDnsSyncLayer()

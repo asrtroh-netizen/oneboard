@@ -1,4 +1,4 @@
-import { getMihomoApiBase, getMihomoWsBase, getMihomoAuthHeaders } from '../config/mihomo'
+import { getMihomoApiBase, getMihomoWsBase, fetchClashAPI } from '../config/mihomo'
 import {
   resolveClashSecret,
   backendSupports,
@@ -39,11 +39,6 @@ const DELAY_TEST_URL = 'http://www.gstatic.com/generate_204'
 const DELAY_BATCH_SIZE = 18
 const DELAY_TIMEOUT_MS = 4000
 let delayTestOffset = 0
-
-function apiUrl(path) {
-  const endpoint = path.startsWith('/') ? path : `/${path}`
-  return `${getMihomoApiBase()}${endpoint}`
-}
 
 function mihomoWsUrl(path) {
   const endpoint = path.startsWith('/') ? path : `/${path}`
@@ -88,11 +83,7 @@ async function mihomoFetch(path, options = {}) {
   if (shouldTrack) ticket = startLoading()
 
   try {
-    const res = await fetch(apiUrl(path), {
-      headers: getMihomoAuthHeaders(fetchOptions.headers),
-      method,
-      ...fetchOptions,
-    })
+    const res = await fetchClashAPI(path, { method, ...fetchOptions })
     const text = await res.text()
     if (!res.ok) {
       let message = text
@@ -102,8 +93,8 @@ async function mihomoFetch(path, options = {}) {
       } catch {
         /* plain text error from mihomo */
       }
-      if (res.status === 401 || /unauthorized|未授权/i.test(String(message))) {
-        throw new Error(`Clash 后端鉴权失败（HTTP 401）：请检查设置页中的 Secret 是否与 OpenClash/Mihomo 的 external-controller secret 一致`)
+      if (res.status === 401) {
+        throw new Error(`Clash 后端鉴权失败（HTTP 401）：请检查设置页中的 Secret 是否与 ${backendLabel()} 的 external-controller secret 一致（已自动尝试免鉴权与带 Secret 两种方式）`)
       }
       throw new Error(message || `${backendLabel()} ${path} → ${res.status}（检查设置页中的 Clash 后端地址与 Secret）`)
     }
@@ -226,10 +217,7 @@ export async function getMemory() {
   const timeout = window.setTimeout(() => controller.abort(), readTimeoutMs)
 
   try {
-    const res = await fetch(apiUrl('/memory'), {
-      headers: getMihomoAuthHeaders(),
-      signal: controller.signal,
-    })
+    const res = await fetchClashAPI('/memory', { signal: controller.signal })
     if (!res.ok) {
       const text = await res.text().catch(() => '')
       throw new Error(text || `${backendLabel()} /memory → ${res.status}`)
@@ -309,7 +297,7 @@ export function restartMihomoCore() {
 export function selectProxy(selectorName, proxyName) {
   return mihomoFetch(`/proxies/${encodeURIComponent(selectorName)}`, {
     method: 'PUT',
-    headers: getMihomoAuthHeaders({ 'Content-Type': 'application/json' }),
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: proxyName }),
     trackLoading: false,
   })
