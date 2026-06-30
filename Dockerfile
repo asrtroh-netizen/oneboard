@@ -13,6 +13,7 @@ RUN npm ci
 COPY vite.config.js index.html ./
 COPY public ./public
 COPY src ./src
+COPY server ./server
 RUN npm run build
 
 FROM node:22-bookworm-slim AS runtime
