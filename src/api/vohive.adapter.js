@@ -198,7 +198,8 @@ export async function vohiveAdapterRequest(path, options = {}) {
     }
   } catch (err) {
     if (err?.name === 'TypeError' && String(err.message).includes('fetch')) {
-      throw new Error(`无法连接 VoHive（${getVoHiveApiBase()}）`)
+      const base = upstream || getVoHiveApiBase()
+      throw new Error(`无法连接 VoHive（${base}）`)
     }
     throw err
   } finally {

@@ -99,9 +99,9 @@ export function resolveVoHiveUpstreamBase() {
 }
 
 export function shouldUseVoHiveProxy() {
-  if (import.meta.env.VITE_VOHIVE_USE_PROXY === 'true') return true
-  if (import.meta.env.VITE_VOHIVE_USE_PROXY === 'false') return false
-  return import.meta.env.DEV || import.meta.env.MODE === 'preview'
+  // Always proxy through the gateway (/vohive/) — gateway.js handles both dev and production.
+  // Set VITE_VOHIVE_USE_PROXY=false only if serving static files without the gateway.
+  return import.meta.env.VITE_VOHIVE_USE_PROXY !== 'false'
 }
 
 export function resolveVoHiveApiBase() {
