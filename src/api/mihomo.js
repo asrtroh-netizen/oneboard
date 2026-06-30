@@ -102,6 +102,9 @@ async function mihomoFetch(path, options = {}) {
       } catch {
         /* plain text error from mihomo */
       }
+      if (res.status === 401 || /unauthorized|未授权/i.test(String(message))) {
+        throw new Error(`Clash 后端鉴权失败（HTTP 401）：请检查设置页中的 Secret 是否与 OpenClash/Mihomo 的 external-controller secret 一致`)
+      }
       throw new Error(message || `${backendLabel()} ${path} → ${res.status}（检查设置页中的 Clash 后端地址与 Secret）`)
     }
     if (res.status === 204 || !text) return null
