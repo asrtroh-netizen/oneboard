@@ -1,106 +1,152 @@
-# OneBoard V1.1
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0f0f,100:1e90ff&height=220&section=header&text=OneBoard&fontSize=50&fontColor=ffffff&animation=fadeIn" />
+</p>
 
-OneBoard is a host-aware control plane for Mihomo, VoHive, and host runtime telemetry.
+<p align="center">
+  <b>🚀 A glass-style multi-system control plane for Mihomo / VoHive / OpenClash</b><br>
+  <i>Turn infrastructure into something you can actually see.</i>
+</p>
 
-**Production deployment: Docker only.** Devices (NAS / ARM / 飞牛) do not need Node.js or local `npm build`.
+<p align="center">
+  <img src="https://img.shields.io/badge/Vue-3.x-42b883?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ed?style=flat-square"/>
+  <img src="https://img.shields.io/badge/ARM-Compatible-orange?style=flat-square"/>
+  <img src="https://img.shields.io/github/stars/asrtroh-netizen/oneboard?style=flat-square"/>
+  <img src="https://img.shields.io/github/license/asrtroh-netizen/oneboard?style=flat-square"/>
+</p>
 
-## Quick Start (Docker — recommended)
+---
 
-On the target device (amd64 / arm64 / armv7):
+## 🌐 ENGLISH VERSION
 
-```bash
-docker compose pull
-docker compose up -d
-```
+### ⚡ What is OneBoard?
 
-Default image: `ghcr.io/oneboard/oneboard:1.1` (override with `ONEBOARD_IMAGE` in `.env`).
+OneBoard is a **next-generation control plane dashboard** designed for managing:
 
-Access: `http://<host-ip>:8866`
+- Mihomo / Clash core systems
+- VoHive multi-device infrastructure
+- OpenClash proxy ecosystems
+- Docker-based services
+- Home lab / NAS environments
 
-Verify:
+It transforms traditional network management into a **real-time visual control experience**.
 
-```bash
-curl http://127.0.0.1:8866/api/health
-```
+---
 
-### Volumes (data only)
+### 🔥 Key Features
 
-Production compose mounts **only**:
+- 🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
+- 📡 Real-time device & traffic visualization
+- 💳 SIM / eSIM control system
+- 💬 SMS center integration
+- 🌐 Smart proxy routing layer
+- 🎨 Glass UI (dark/light mode)
+- 🐳 Docker-first deployment
+- ⚡ ARM / x86 / NAS compatible
+- 🔄 Auto backend switching engine
 
-| Mount | Purpose |
-|-------|---------|
-| `onebord-data` → `/app/.onebord` | App data / user DB |
-| `/proc` → `/host/proc:ro` | Host CPU/memory metrics |
-| `/` → `/host/root:ro` | Host disk metrics |
+---
 
-Do **not** mount `src/`, `dist/`, or `node_modules/` into the container.
-
-### 飞牛 NAS / docker.fnnas.com 401
-
-If pulling **`node:22-alpine`** (or any base image) from `docker.fnnas.com` returns **401 Unauthorized**, **do not build on the device**. That registry mirror often blocks upstream base layers.
-
-Use the **pre-built multi-arch image** from GHCR instead:
-
-```bash
-# .env
-ONEBOARD_IMAGE=ghcr.io/<your-org>/oneboard:1.1
-
-docker compose pull
-docker compose up -d
-```
-
-CI builds `linux/amd64`, `linux/arm64`, and **`linux/arm/v7`** — ARMv7 is fully supported.
-
-### Local build (maintainers only)
-
-Requires Docker on a build machine (not on ARM NAS):
+### 🚀 Quick Start
 
 ```bash
-docker compose -f docker-compose.build.yml build
-docker compose -f docker-compose.build.yml up -d
-```
+docker pull ghcr.io/asrtroh-netizen/oneboard:latest
+⚡ Core Features
+🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
+📡 Real-time traffic visualization
+📱 Device control center
+💳 SIM / eSIM switching system
+💬 SMS center integration
+🌐 Smart proxy routing engine
+🎨 Glass UI (dark / light mode)
+🐳 Docker one-click deployment
+⚡ ARM / x86 / NAS / OpenWrt support
+🔄 Auto backend switching (no stale state)
+🧩 Unified control API layer
 
-Multi-arch publish is handled by GitHub Actions: [`.github/workflows/docker-image.yml`](.github/workflows/docker-image.yml).
 
-### Base image note
+⚡ Core Features
+🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
+📡 Real-time traffic visualization
+📱 Device control center
+💳 SIM / eSIM switching system
+💬 SMS center integration
+🌐 Smart proxy routing engine
+🎨 Glass UI (dark / light mode)
+🐳 Docker one-click deployment
+⚡ ARM / x86 / NAS / OpenWrt support
+🔄 Auto backend switching (no stale state)
+🧩 Unified control API layer
+🔥 System Philosophy
 
-Images use **`node:22-bookworm-slim`** (Debian/glibc) instead of Alpine/musl for better compatibility on ARM and armv7, especially with native Node addons.
+We don’t just display networks.
+We make them observable, controllable, and slightly dangerous.
 
-## Architecture
+🚀 Quick Start
+📦 Pull Image
+docker pull ghcr.io/asrtroh-netizen/oneboard:latest
+🐳 Run Container
+docker run -d \
+  --name oneboard \
+  --restart unless-stopped \
+  -p 8866:8866 \
+  ghcr.io/asrtroh-netizen/oneboard:latest
+🌐 Access
+http://localhost:8866
 
-```mermaid
-flowchart LR
-  Browser["Browser"] --> Gateway["OneBoard Gateway :8866"]
-  Gateway --> Agent["embedded agent"]
-  Agent --> Host["Host System"]
-  Agent --> Mihomo["Mihomo API"]
-  Agent --> VoHive["VoHive API"]
-```
+or
 
-## Runtime Endpoints
+http://YOUR-IP:8866
+🔐 Default Login
+Username: admin
+Password: admin
 
-- `GET /api/health`
-- `GET /api/control-plane/snapshot`
-- `WS /api/control-plane/ws`
-- `GET /api/system-info`
-- `GET /api/version`
-- `/mihomo/*` proxy
-- `/vohive/*` proxy
+⚠️ Please change it after first login (unless you like chaos).
 
-## Local Development
+🧠 Architecture
+Frontend: Vue 3 + Vite 🎨
+Backend: Node Gateway ⚙️
+Proxy Layer: Mihomo / VoHive / Clash 🌐
+Deployment: Docker 🐳
+🐳 Supported Platforms
+Linux 🐧
+NAS 📦
+OpenWrt 📡
+ARM devices ⚡
+x86 servers 🖥
+HomeLab chaos machines 💀
+⚠️ Notes
+🚫 Do NOT expose to public internet blindly
+⚙️ Mihomo / VoHive must be configured manually
+🧠 First login uses default credentials
+🔥 If it breaks → it’s probably your network
+📦 Docker Ports
+8866
+🧃 Status
+✔ Running
+✔ Stable enough
+✔ Slightly overpowered
+✔ Designed for homelab chaos
+💀 Final Warning
 
-Requires Node.js on your **dev machine** only:
+You are not just using a dashboard.
+You are operating a control plane.
 
-```bash
-npm install
-npm run dev
-```
+👨‍💻 Author
 
-Production-style local run:
+asrtroh-netizen
 
-```bash
-npm run build
-ONEBORD_RUNTIME=docker ONEBORD_PORT=8866 npm start
-```
+Built for fun.
+Became serious.
+Now it controls networks.
 
-See [release/docker/README.md](release/docker/README.md) for release bundle details.
+🚀 One Line Summary
+OneBoard = Visual Control Plane for Everything That Has an API
+<p align="center"> <b>⚡ OneBoard — Control the Invisible ⚡</b> </p> ```
+
+
+
+
+
+
+
