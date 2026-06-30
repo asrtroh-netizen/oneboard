@@ -3,6 +3,21 @@
 ⚡ Glass-Engineered Multi-System Control Plane  
 ⚡ 玻璃拟态多系统控制中枢
 
+
+
+📸 实际界面展示：
+
+![OneBoard UI 1](https://i.ibb.co/5gfYTTxG/b5876537e014fcb3b7624831de182559.jpg)
+
+![OneBoard UI 2](https://i.ibb.co/fY8x3xCM/2c1544aa4cf7fdb66984cf0203228bbf.jpg)
+
+![OneBoard UI 3](https://i.ibb.co/277GY185/3971983c6abd3725c220f0fc6ecbad8c.jpg)
+
+![OneBoard UI 4](https://i.ibb.co/kZv7r42/35b88e6bd99c16f6b47ef9494113dbc9.jpg)
+
+![OneBoard UI 5](https://i.ibb.co/zWZJQ2F9/f0aef2ad91e60dc02df890422098401a.jpg)
+
+
 ---
 
 ## 🌍 Overview / 项目概述
@@ -134,6 +149,8 @@ You are operating a control plane.
 ## 👨‍💻 Author / 作者
 
 asrtroh-netizen  
+
+📢 TG Group: https://t.me/OneBoardX
 
 Built for fun → Became serious → Now it controls networks.
 
