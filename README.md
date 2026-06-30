@@ -164,6 +164,27 @@ https://github.com/vernesong/OpenClash
 🙏 VoHive Release & Distribution Repository  
 https://github.com/iniwex5/vohive-release  
 
+
+--------------------------------------------
+
+💰 支持项目 / Donation
+
+如果你觉得这个项目对你有帮助，可以考虑支持一下 👇
+
+[img][https://i.ibb.co/xxxxx/your-pay-image.jpg](https://i.ibb.co/b50Q1Sv9/40f3af89d821a4b97090c8876ef2fc9d.jpg)[/img]
+
+☕ 一杯咖啡 = 一个更稳定的 OneBoard
+
+感谢支持 🙏
+
+--------------------------------------------
+
+💀 End
+
+OneBoard = Control the Invisible
+
+--------------------------------------------
+
 ---
 
 💡 These projects provide the foundational infrastructure layer for proxy systems, device management, and backend orchestration. OneBoard integrates and extends these capabilities into a unified visual control plane.
