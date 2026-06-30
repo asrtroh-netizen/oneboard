@@ -9,6 +9,22 @@ import {
 } from '../config/clashBackend'
 const ENV_SECRET = String(import.meta.env.VITE_MIHOMO_SECRET || '').trim()
 
+/**
+ * 常见复制粘贴失误：从 YAML（secret: "xxxx"）里连引号一起复制进设置框，
+ * 导致密钥比配置里多了一对引号，造成 401。这里统一去除首尾空白与包裹引号。
+ */
+function cleanSecret(raw) {
+  let value = String(raw || '').trim()
+  if (value.length >= 2) {
+    const first = value[0]
+    const last = value[value.length - 1]
+    if ((first === '"' && last === '"') || (first === "'" && last === "'")) {
+      value = value.slice(1, -1).trim()
+    }
+  }
+  return value
+}
+
 function readStored() {
   try {
     const raw = localStorage.getItem(CLASH_BACKEND_STORAGE_KEY)
@@ -29,7 +45,7 @@ function loadInitialState() {
     type,
     host: String(stored?.host || '').trim(),
     port: Number.isFinite(port) && port > 0 ? port : DEFAULT_CLASH_PORT,
-    secret: String(stored?.secret || '').trim(),
+    secret: cleanSecret(stored?.secret),
     connected: false,
     lastError: '',
   }
@@ -100,7 +116,7 @@ export function setClashBackendConnection({ type, host, port, secret }) {
     const n = Number(port)
     clashBackendState.port = Number.isFinite(n) && n > 0 ? n : DEFAULT_CLASH_PORT
   }
-  if (secret != null) clashBackendState.secret = String(secret).trim()
+  if (secret != null) clashBackendState.secret = cleanSecret(secret)
   persistClashBackend()
 }
 
@@ -131,7 +147,7 @@ export function hydrateClashBackendFromStorage() {
   clashBackendState.type = type
   clashBackendState.host = String(stored?.host || '').trim()
   clashBackendState.port = Number.isFinite(port) && port > 0 ? port : DEFAULT_CLASH_PORT
-  clashBackendState.secret = String(stored?.secret || '').trim()
+  clashBackendState.secret = cleanSecret(stored?.secret)
 }
 
 export function setClashBackendConnected(connected, error = '') {

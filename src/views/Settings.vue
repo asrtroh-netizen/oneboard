@@ -460,7 +460,7 @@ async function handleChangePassword() {
             </label>
             <label class="backend-field">
               <span>Secret</span>
-              <input v-model="draftSecret" type="password" placeholder="Bearer Token（可选）" />
+              <input v-model="draftSecret" type="password" placeholder="Bearer Token（可选）" autocomplete="off" />
             </label>
           </div>
           </div>
