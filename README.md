@@ -171,7 +171,7 @@ https://github.com/iniwex5/vohive-release
 
 如果你觉得这个项目对你有帮助，可以考虑支持一下 👇
 
-![OneBoard UI 1](https://i.ibb.co/5gfYTTxG/b5876537e014fcb3b7624831de182559.jpg)
+![OneBoard UI](https://i.ibb.co/5gfYTTxG/b5876537e014fcb3b7624831de182559.jpg)
 
 ☕ 一杯咖啡 = 一个更稳定的 OneBoard 
 
