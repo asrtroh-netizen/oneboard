@@ -743,10 +743,15 @@
   color: rgba(148, 163, 184, 0.72);
 }
 
-/* Overview grid */
+/* Overview grid
+ * Cards use a fixed max width instead of stretching to fill 1fr, so the
+ * absolute card size (and the ratio of card width to gap) stays the same
+ * regardless of monitor size / browser width — only the leftover space
+ * (if any) changes, not the cards themselves. */
 .vohive-lab-shell .overview-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 260px));
+  justify-content: center;
   gap: var(--space-grid);
 }
 
