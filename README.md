@@ -136,3 +136,30 @@ You are operating a control plane.
 asrtroh-netizen  
 
 Built for fun → Became serious → Now it controls networks.
+
+
+
+## 🙏 Acknowledgements / 致谢
+
+OneBoard is built on top of several open-source ecosystems and infrastructure projects. We sincerely appreciate their contributions to modern networking, proxy, and device control systems.
+
+🙏 Mihomo Project (MetaCubeX)  
+https://github.com/MetaCubeX/mihomo  
+
+🙏 Clash Core / OpenClash Ecosystem  
+https://github.com/Dreamacro/clash  
+https://github.com/vernesong/OpenClash  
+
+🙏 VoHive Release & Distribution Repository  
+https://github.com/iniwex5/vohive-release  
+
+---
+
+💡 These projects provide the foundational infrastructure layer for proxy systems, device management, and backend orchestration. OneBoard integrates and extends these capabilities into a unified visual control plane.
+
+💡 这些项目构成了现代网络代理、设备管理与发布体系的基础层，OneBoard 在其之上实现统一可视化控制中枢。
+
+---
+
+⚡ Respect open source. Build on it. Contribute back.  
+⚡ 尊重开源社区，在其之上构建，并回馈社区。
