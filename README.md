@@ -1,152 +1,138 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0f0f,100:1e90ff&height=220&section=header&text=OneBoard&fontSize=50&fontColor=ffffff&animation=fadeIn" />
-</p>
+# 🚀 OneBoard
 
-<p align="center">
-  <b>🚀 A glass-style multi-system control plane for Mihomo / VoHive / OpenClash</b><br>
-  <i>Turn infrastructure into something you can actually see.</i>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Vue-3.x-42b883?style=flat-square"/>
-  <img src="https://img.shields.io/badge/Docker-Ready-2496ed?style=flat-square"/>
-  <img src="https://img.shields.io/badge/ARM-Compatible-orange?style=flat-square"/>
-  <img src="https://img.shields.io/github/stars/asrtroh-netizen/oneboard?style=flat-square"/>
-  <img src="https://img.shields.io/github/license/asrtroh-netizen/oneboard?style=flat-square"/>
-</p>
+⚡ Glass-Engineered Multi-System Control Plane  
+⚡ 玻璃拟态多系统控制中枢
 
 ---
 
-## 🌐 ENGLISH VERSION
+## 🌍 Overview / 项目概述
 
-### ⚡ What is OneBoard?
+🚀 OneBoard is a unified control plane designed for modern distributed network infrastructure. It integrates Mihomo, VoHive, OpenClash, and Docker systems into a single coherent operational dashboard with real-time state synchronization and multi-backend orchestration.
 
-OneBoard is a **next-generation control plane dashboard** designed for managing:
-
-- Mihomo / Clash core systems
-- VoHive multi-device infrastructure
-- OpenClash proxy ecosystems
-- Docker-based services
-- Home lab / NAS environments
-
-It transforms traditional network management into a **real-time visual control experience**.
+🚀 OneBoard 是一个统一控制中枢系统，用于现代分布式网络架构，将 Mihomo、VoHive、OpenClash 与 Docker 等系统整合为一个统一可视化操作平台，实现实时状态同步与多后端控制。
 
 ---
 
-### 🔥 Key Features
+## ⚡ Core Features / 核心功能
 
-- 🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
-- 📡 Real-time device & traffic visualization
-- 💳 SIM / eSIM control system
-- 💬 SMS center integration
-- 🌐 Smart proxy routing layer
-- 🎨 Glass UI (dark/light mode)
-- 🐳 Docker-first deployment
-- ⚡ ARM / x86 / NAS compatible
-- 🔄 Auto backend switching engine
+🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)  
+🧠 多后端统一调度（Mihomo / VoHive / Clash）
+
+📡 Real-time traffic & device monitoring  
+📡 实时流量与设备监控
+
+💳 SIM / eSIM lifecycle control  
+💳 SIM / eSIM 生命周期管理
+
+💬 Messaging center integration (SMS)  
+💬 短信中心集成
+
+🌐 Smart proxy routing engine  
+🌐 智能代理路由系统
+
+🎨 Glass UI (light & dark mode)  
+🎨 玻璃拟态界面（明暗模式）
+
+🐳 Docker multi-architecture deployment  
+🐳 Docker 多架构部署支持
+
+⚡ ARM / x86 / NAS / OpenWrt support  
+⚡ 支持 ARM / x86 / NAS / OpenWrt
+
+🔄 Auto backend switching (no stale state)  
+🔄 自动后端切换（无状态残留）
 
 ---
 
-### 🚀 Quick Start
+## 🚀 Quick Start / 快速启动
 
-```bash
+📦 Pull Image / 拉取镜像
+
 docker pull ghcr.io/asrtroh-netizen/oneboard:latest
-⚡ Core Features
-🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
-📡 Real-time traffic visualization
-📱 Device control center
-💳 SIM / eSIM switching system
-💬 SMS center integration
-🌐 Smart proxy routing engine
-🎨 Glass UI (dark / light mode)
-🐳 Docker one-click deployment
-⚡ ARM / x86 / NAS / OpenWrt support
-🔄 Auto backend switching (no stale state)
-🧩 Unified control API layer
 
+---
 
-⚡ Core Features
-🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
-📡 Real-time traffic visualization
-📱 Device control center
-💳 SIM / eSIM switching system
-💬 SMS center integration
-🌐 Smart proxy routing engine
-🎨 Glass UI (dark / light mode)
-🐳 Docker one-click deployment
-⚡ ARM / x86 / NAS / OpenWrt support
-🔄 Auto backend switching (no stale state)
-🧩 Unified control API layer
-🔥 System Philosophy
+🐳 Run Container / 运行容器
 
-We don’t just display networks.
-We make them observable, controllable, and slightly dangerous.
+docker run -d --name oneboard --restart unless-stopped -p 8866:8866 ghcr.io/asrtroh-netizen/oneboard:latest
 
-🚀 Quick Start
-📦 Pull Image
-docker pull ghcr.io/asrtroh-netizen/oneboard:latest
-🐳 Run Container
-docker run -d \
-  --name oneboard \
-  --restart unless-stopped \
-  -p 8866:8866 \
-  ghcr.io/asrtroh-netizen/oneboard:latest
-🌐 Access
-http://localhost:8866
+---
 
-or
+🌐 Access / 访问地址
 
+http://localhost:8866  
 http://YOUR-IP:8866
-🔐 Default Login
-Username: admin
-Password: admin
 
-⚠️ Please change it after first login (unless you like chaos).
+---
 
-🧠 Architecture
-Frontend: Vue 3 + Vite 🎨
-Backend: Node Gateway ⚙️
-Proxy Layer: Mihomo / VoHive / Clash 🌐
-Deployment: Docker 🐳
-🐳 Supported Platforms
-Linux 🐧
-NAS 📦
-OpenWrt 📡
-ARM devices ⚡
-x86 servers 🖥
-HomeLab chaos machines 💀
-⚠️ Notes
-🚫 Do NOT expose to public internet blindly
-⚙️ Mihomo / VoHive must be configured manually
-🧠 First login uses default credentials
-🔥 If it breaks → it’s probably your network
-📦 Docker Ports
+## 🔐 Default Login / 默认登录
+
+Username / 用户名: admin  
+Password / 密码: admin  
+
+⚠️ Change after first login / 首次登录后请修改密码
+
+---
+
+## 🧱 Architecture / 系统架构
+
+Frontend / 前端: Vue 3 + Vite  
+Backend / 后端: Node.js Gateway  
+Adapters / 适配层: Mihomo / VoHive / Clash  
+Deployment / 部署: Docker multi-stage build  
+
+---
+
+## 🐳 Supported Platforms / 支持平台
+
+Linux 🐧  
+NAS 📦  
+OpenWrt 📡  
+ARM devices ⚡  
+x86 servers 🖥  
+HomeLab / Edge nodes 💀  
+
+---
+
+## ⚠️ Notes / 注意事项
+
+🚫 Do NOT expose to public internet without protection  
+🚫 不建议直接暴露公网
+
+⚙️ Mihomo / VoHive must be configured manually  
+⚙️ Mihomo / VoHive 需手动配置
+
+🧠 If something breaks, it is usually networking related  
+🧠 出问题通常是网络配置问题
+
+---
+
+## 📦 Port / 端口
+
 8866
-🧃 Status
-✔ Running
-✔ Stable enough
-✔ Slightly overpowered
-✔ Designed for homelab chaos
-💀 Final Warning
 
-You are not just using a dashboard.
+---
+
+## 🧃 Status / 状态
+
+✔ Running / 运行中  
+✔ Stable / 稳定  
+✔ Production Ready / 可部署  
+✔ Multi-platform / 多平台支持  
+
+---
+
+## 💀 Philosophy / 核心理念
+
+You are not just using a dashboard.  
 You are operating a control plane.
 
-👨‍💻 Author
+你不是在使用一个面板，而是在操作一个控制系统。
 
-asrtroh-netizen
+---
 
-Built for fun.
-Became serious.
-Now it controls networks.
+## 👨‍💻 Author / 作者
 
-🚀 One Line Summary
-OneBoard = Visual Control Plane for Everything That Has an API
-<p align="center"> <b>⚡ OneBoard — Control the Invisible ⚡</b> </p> ```
+asrtroh-netizen  
 
-
-
-
-
-
-
+Built for fun → Became serious → Now it controls networks.
