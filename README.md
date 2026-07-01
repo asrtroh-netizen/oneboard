@@ -1,197 +1,104 @@
-# 🚀 OneBoard
+🚀 OneBoard
 
-⚡ Glass-Engineered Multi-System Control Plane  
+⚡ Glass-Engineered Multi-System Control Plane
 ⚡ 玻璃拟态多系统控制中枢
-📸 实际界面展示：
 
-![OneBoard UI 1](https://i.ibb.co/5gfYTTxG/b5876537e014fcb3b7624831de182559.jpg)
+📸 实际界面展示 / UI Preview
+<table> <tr> <td><img src="https://i.ibb.co/chDWGcxk/1.png" width="100%"/></td> <td><img src="https://i.ibb.co/DgVH9P22/2.png" width="100%"/></td> <td><img src="https://i.ibb.co/gbfF92V7/3.png" width="100%"/></td> <td><img src="https://i.ibb.co/YTQr7r0s/4.png" width="100%"/></td> </tr> <tr> <td><img src="https://i.ibb.co/8DLFJDXP/5.png" width="100%"/></td> <td><img src="https://i.ibb.co/qMh3j79D/6.png" width="100%"/></td> <td><img src="https://i.ibb.co/dswt1pgH/7.png" width="100%"/></td> <td><img src="https://i.ibb.co/n8ZSxcgn/8.png" width="100%"/></td> </tr> </table>
+🌍 Overview / 项目概述
 
-![OneBoard UI 2](https://i.ibb.co/fY8x3xCM/2c1544aa4cf7fdb66984cf0203228bbf.jpg)
+那天晚上的一个情景再现。你在 Vohive 里切节点，又打开 ZashBoard 去改规则，再去 Mihomo / Clash 面板确认状态，最后还要进 YAML 手动补配置。整个流程很熟悉，但也很割裂：每个工具都“能用”，但没有一个是“整体系统”，状态不统一，操作不闭环，YAML 永远躲不掉。于是一个很直接的想法出现了：既然这些系统都已经成熟，那为什么不能把它们统一成一个“控制层”？不是再做一个面板，而是做一个真正的 Multi-System Control Plane（多系统控制中枢）。OneBoard 就是在这种想法下诞生的——一个把 Mihomo / VoHive / OpenClash / Docker 等系统统一到同一操作空间的控制平台。
 
-![OneBoard UI 3](https://i.ibb.co/277GY185/3971983c6abd3725c220f0fc6ecbad8c.jpg)
+⚡ Core Features / 核心功能
 
-![OneBoard UI 4](https://i.ibb.co/kZv7r42/35b88e6bd99c16f6b47ef9494113dbc9.jpg)
+🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)
+📡 Real-time traffic & device monitoring
+💳 SIM / eSIM lifecycle control
+💬 Messaging center integration (SMS)
+🌐 Smart proxy routing engine
+🎨 Glass UI (light & dark mode)
+🐳 Docker multi-architecture deployment
+⚡ ARM / x86 / NAS / OpenWrt support
+🔄 Auto backend switching (no stale state)
 
-![OneBoard UI 5](https://i.ibb.co/zWZJQ2F9/f0aef2ad91e60dc02df890422098401a.jpg)
-
----
-
-## 🌍 Overview / 项目概述
-
-🚀 OneBoard is a unified control plane designed for modern distributed network infrastructure. It integrates Mihomo, VoHive, OpenClash, and Docker systems into a single coherent operational dashboard with real-time state synchronization and multi-backend orchestration.
-
-🚀 OneBoard 是一个统一控制中枢系统，用于现代分布式网络架构，将 Mihomo、VoHive、OpenClash 与 Docker 等系统整合为一个统一可视化操作平台，实现实时状态同步与多后端控制。
-
----
-
-## ⚡ Core Features / 核心功能
-
-🧠 Multi-backend orchestration (Mihomo / VoHive / Clash)  
-🧠 多后端统一调度（Mihomo / VoHive / Clash）
-
-📡 Real-time traffic & device monitoring  
-📡 实时流量与设备监控
-
-💳 SIM / eSIM lifecycle control  
-💳 SIM / eSIM 生命周期管理
-
-💬 Messaging center integration (SMS)  
-💬 短信中心集成
-
-🌐 Smart proxy routing engine  
-🌐 智能代理路由系统
-
-🎨 Glass UI (light & dark mode)  
-🎨 玻璃拟态界面（明暗模式）
-
-🐳 Docker multi-architecture deployment  
-🐳 Docker 多架构部署支持
-
-⚡ ARM / x86 / NAS / OpenWrt support  
-⚡ 支持 ARM / x86 / NAS / OpenWrt
-
-🔄 Auto backend switching (no stale state)  
-🔄 自动后端切换（无状态残留）
-
----
-
-## 🚀 Quick Start / 快速启动
-
-📦 Pull Image / 拉取镜像
+🚀 Quick Start / 快速启动
+📦 Pull Image
 
 docker pull ghcr.io/asrtroh-netizen/oneboard:latest
 
----
-
-🐳 Run Container / 运行容器
+🐳 Run Container
 
 docker run -d --name oneboard --restart unless-stopped -p 8866:8866 ghcr.io/asrtroh-netizen/oneboard:latest
 
----
+🌐 Access
 
-🌐 Access / 访问地址
-
-http://localhost:8866  
+http://localhost:8866
 http://YOUR-IP:8866
 
----
+🔐 Default Login / 默认登录
 
-## 🔐 Default Login / 默认登录
+Username: admin
+Password: admin
 
-Username / 用户名: admin  
-Password / 密码: admin  
+⚠️ 首次登录后请务必修改密码
 
-⚠️ Change after first login / 首次登录后请修改密码
+🧱 Architecture / 系统架构
 
----
+Frontend: Vue 3 + Vite
+Backend: Node.js Gateway
+Adapters: Mihomo / VoHive / Clash
+Deployment: Docker multi-stage build
 
-## 🧱 Architecture / 系统架构
+🐳 Supported Platforms / 支持平台
 
-Frontend / 前端: Vue 3 + Vite  
-Backend / 后端: Node.js Gateway  
-Adapters / 适配层: Mihomo / VoHive / Clash  
-Deployment / 部署: Docker multi-stage build  
+Linux
+NAS
+OpenWrt
+ARM devices
+x86 servers
+HomeLab / Edge nodes
 
----
+⚠️ Notes / 注意事项
 
-## 🐳 Supported Platforms / 支持平台
+不建议直接暴露公网
+Mihomo / VoHive 需手动配置
+网络问题优先检查 DNS / 路由
 
-Linux 🐧  
-NAS 📦  
-OpenWrt 📡  
-ARM devices ⚡  
-x86 servers 🖥  
-HomeLab / Edge nodes 💀  
-
----
-
-## ⚠️ Notes / 注意事项
-
-🚫 Do NOT expose to public internet without protection  
-🚫 不建议直接暴露公网
-
-⚙️ Mihomo / VoHive must be configured manually  
-⚙️ Mihomo / VoHive 需手动配置
-
-🧠 If something breaks, it is usually networking related  
-🧠 出问题通常是网络配置问题
-
----
-
-## 📦 Port / 端口
+📦 Port / 端口
 
 8866
 
----
+💀 Philosophy / 核心理念
 
-## 🧃 Status / 状态
+You are not just using a dashboard. You are operating a control plane.
+你不是在使用一个面板，你是在操作一个系统级控制中枢。
 
-✔ Running / 运行中  
-✔ Stable / 稳定  
-✔ Production Ready / 可部署  
-✔ Multi-platform / 多平台支持  
+🧃 Status / 状态
 
----
+✔ Running
+✔ Stable
+✔ Production Ready
+✔ Multi-platform
 
-## 💀 Philosophy / 核心理念
+👨‍💻 Author / 作者
 
-You are not just using a dashboard.  
-You are operating a control plane.
-
-你不是在使用一个面板，而是在操作一个控制系统。
-
----
-
-## 👨‍💻 Author / 作者
-
-asrtroh-netizen  
-
+asrtroh-netizen
 Built for fun → Became serious → Now it controls networks.
-📢 TG Group: https://t.me/OneBoardX
+TG: https://t.me/OneBoardX
 
+🙏 Acknowledgements / 致谢
 
-## 🙏 Acknowledgements / 致谢
+Mihomo: https://github.com/MetaCubeX/mihomo
+Clash / OpenClash: https://github.com/Dreamacro/clash + https://github.com/vernesong/OpenClash
+VoHive: https://github.com/iniwex5/vohive-release
 
-OneBoard is built on top of several open-source ecosystems and infrastructure projects. We sincerely appreciate their contributions to modern networking, proxy, and device control systems.
-
-🙏 Mihomo Project (MetaCubeX)  
-https://github.com/MetaCubeX/mihomo  
-
-🙏 Clash Core / OpenClash Ecosystem  
-https://github.com/Dreamacro/clash  
-https://github.com/vernesong/OpenClash  
-
-🙏 VoHive Release & Distribution Repository  
-https://github.com/iniwex5/vohive-release  
-
-
---------------------------------------------
-
-💰 支持项目 / Donation
-
-如果你觉得这个项目对你有帮助，可以考虑支持一下 👇
-
+💰 Donation / 支持项目
 ![OneBoard UI](https://i.ibb.co/b50Q1Sv9/40f3af89d821a4b97090c8876ef2fc9d.jpg)
 
-☕ 一杯咖啡 = 一个更稳定的 OneBoard 
-
-感谢支持 🙏
-
---------------------------------------------
+一杯咖啡 = 一个更稳定的 OneBoard
 
 💀 End
 
 OneBoard = Control the Invisible
 
---------------------------------------------
-
----
-
-💡 These projects provide the foundational infrastructure layer for proxy systems, device management, and backend orchestration. OneBoard integrates and extends these capabilities into a unified visual control plane.
-
-💡 这些项目构成了现代网络代理、设备管理与发布体系的基础层，OneBoard 在其之上实现统一可视化控制中枢。
-
----
-
-⚡ Respect open source. Build on it. Contribute back.  
-⚡ 尊重开源社区，在其之上构建，并回馈社区。
+如果你下一步要再升级，我可以帮你做一个GitHub 爆款 README（带徽章 + 动态 stats + 更像商业 SaaS 首页那种） 😄
