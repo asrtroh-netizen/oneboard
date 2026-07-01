@@ -1,11 +1,14 @@
-🚀 OneBoard
+from pathlib import Path
 
-⚡ Glass-Engineered Multi-System Control Plane
-⚡ 玻璃拟态多系统控制中枢
+content = """# 🚀 OneBoard
+
+⚡ Glass-Engineered Multi-System Control Plane  
+⚡ 玻璃拟态多系统控制中枢  
 
 ============================================================
 
-📸 UI Preview / 实际界面展示
+## 📸 UI Preview / 实际界面展示
+
 <img src="https://i.ibb.co/chDWGcxk/1.png" width="100%" />
 <img src="https://i.ibb.co/DgVH9P22/2.png" width="100%" />
 <img src="https://i.ibb.co/gbfF92V7/3.png" width="100%" />
@@ -17,7 +20,7 @@
 
 ============================================================
 
-🌍 Overview / 项目概述
+## 🌍 Overview / 项目概述
 
 那天晚上的一个情景再现。
 
@@ -25,11 +28,11 @@
 
 整个流程很熟悉，但也很割裂：
 
-每个工具都能用
-但没有一个是整体系统
-状态不统一
-操作不闭环
-YAML 永远躲不掉
+- 每个工具都能用  
+- 但没有一个是整体系统  
+- 状态不统一  
+- 操作不闭环  
+- YAML 永远躲不掉  
 
 于是一个很直接的想法出现了：
 
@@ -43,108 +46,122 @@ OneBoard 就是在这种思路下诞生的——一个把 Mihomo / VoHive / Open
 
 ============================================================
 
-⚡ Core Features / 核心功能
-Multi-backend orchestration (Mihomo / VoHive / Clash)
-Real-time traffic & device monitoring
-SIM / eSIM lifecycle control
-Messaging center integration (SMS)
-Smart proxy routing engine
-Glass UI (light & dark mode)
-Docker multi-architecture deployment
-ARM / x86 / NAS / OpenWrt support
-Auto backend switching (no stale state)
+## ⚡ Core Features / 核心功能
+
+- Multi-backend orchestration (Mihomo / VoHive / Clash)
+- Real-time traffic & device monitoring
+- SIM / eSIM lifecycle control
+- Messaging center integration (SMS)
+- Smart proxy routing engine
+- Glass UI (light & dark mode)
+- Docker multi-architecture deployment
+- ARM / x86 / NAS / OpenWrt support
+- Auto backend switching (no stale state)
 
 ============================================================
 
-🚀 Quick Start
+## 🚀 Quick Start
+
 docker pull ghcr.io/asrtroh-netizen/oneboard:latest
+
 docker run -d --name oneboard --restart unless-stopped -p 8866:8866 ghcr.io/asrtroh-netizen/oneboard:latest
 
 ============================================================
 
-🌐 Access
+## 🌐 Access
+
 http://localhost:8866
 http://YOUR-IP:8866
 
 ============================================================
 
-🔐 Default Login
+## 🔐 Default Login
 
-Username: admin
-Password: admin
-
-============================================================
-
-🧱 Architecture
-Frontend: Vue 3 + Vite
-Backend: Node.js Gateway
-Adapters: Mihomo / VoHive / Clash
-Deployment: Docker multi-stage build
+Username: admin  
+Password: admin  
 
 ============================================================
 
-🐳 Supported Platforms
-Linux
-NAS
-OpenWrt
-ARM
-x86
-HomeLab
+## 🧱 Architecture
+
+Frontend: Vue 3 + Vite  
+Backend: Node.js Gateway  
+Adapters: Mihomo / VoHive / Clash  
+Deployment: Docker multi-stage build  
 
 ============================================================
 
-⚠️ Notes
-不建议直接暴露公网
-Mihomo / VoHive 需手动配置
-网络问题优先检查 DNS / 路由
+## 🐳 Supported Platforms
+
+Linux  
+NAS  
+OpenWrt  
+ARM  
+x86  
+HomeLab  
 
 ============================================================
 
-📦 Port
-8866
+## ⚠️ Notes
+
+- 不建议直接暴露公网  
+- Mihomo / VoHive 需手动配置  
+- 网络问题优先检查 DNS / 路由  
 
 ============================================================
 
-💀 Philosophy
+## 📦 Port
 
-You are not just using a dashboard. You are operating a control plane.
+8866  
+
+============================================================
+
+## 💀 Philosophy
+
+You are not just using a dashboard. You are operating a control plane.  
 你不是在使用一个面板，你是在操作一个系统级控制中枢。
 
 ============================================================
 
-🧃 Status
-Running
-Stable
-Production Ready
-Multi-platform
+## 🧃 Status
+
+Running  
+Stable  
+Production Ready  
+Multi-platform  
 
 ============================================================
 
-👨‍💻 Author
+## 👨‍💻 Author
 
-asrtroh-netizen
-Built for fun → Became serious → Now it controls networks.
-TG: https://t.me/OneBoardX
-
-============================================================
-
-🙏 Acknowledgements
-Mihomo: https://github.com/MetaCubeX/mihomo
-Clash / OpenClash: https://github.com/Dreamacro/clash
-VoHive: https://github.com/iniwex5/vohive-release
+asrtroh-netizen  
+Built for fun → Became serious → Now it controls networks.  
+TG: https://t.me/OneBoardX  
 
 ============================================================
 
-💰 Donation
+## 🙏 Acknowledgements
 
-一杯咖啡 = 一个更稳定的 OneBoard
+Mihomo: https://github.com/MetaCubeX/mihomo  
+Clash/OpenClash: https://github.com/Dreamacro/clash + https://github.com/vernesong/OpenClash  
+VoHive: https://github.com/iniwex5/vohive-release  
+
+============================================================
+
+## 💰 Donation
+
+一杯咖啡 = 一个更稳定的 OneBoard  
 
 <img src="https://i.ibb.co/b50Q1Sv9/40f3af89d821a4b97090c8876ef2fc9d.jpg" width="100%" />
 
 ============================================================
 
-💀 End
+## 💀 End
 
 OneBoard = Control the Invisible
+"""
 
-============================================================
+file_path = Path("/mnt/data/OneBoard_README.md")
+file_path.write_text(content, encoding="utf-8")
+
+file_path.name
