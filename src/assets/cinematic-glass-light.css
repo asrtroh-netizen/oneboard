@@ -2001,33 +2001,8 @@ html[data-theme='light'] {
   background: var(--cg-inner-surface-bg-hover) !important;
 }
 
-[data-theme='light'] .settings-page .version-channel-card {
-  border-color: rgba(15, 23, 42, 0.08) !important;
-}
-
 [data-theme='light'] .settings-page .version-info-row .panel-card {
   box-shadow: var(--se-card-shadow) !important;
-}
-
-[data-theme='light'] .settings-page .channel-toggle {
-  background: var(--mat-inner-bg) !important;
-  border: 1px solid var(--mat-inner-border) !important;
-  border-radius: 999px !important;
-  padding: 3px !important;
-  backdrop-filter: blur(var(--mat-blur));
-  -webkit-backdrop-filter: blur(var(--mat-blur));
-}
-
-[data-theme='light'] .settings-page .channel-toggle button {
-  border-radius: 999px !important;
-  color: rgba(15, 23, 42, 0.62) !important;
-  font-weight: 500;
-}
-
-[data-theme='light'] .settings-page .channel-toggle button.active {
-  color: #fff !important;
-  background: var(--cg-btn-primary-bg) !important;
-  box-shadow: var(--cg-btn-primary-shadow) !important;
 }
 
 [data-theme='light'] .settings-page :is(

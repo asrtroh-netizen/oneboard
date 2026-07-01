@@ -17,6 +17,8 @@ export const VOHIVE_ENDPOINTS = Object.freeze({
   HEALTH: '/health',
   TRAFFIC: '/traffic/analysis',
   LOGIN: '/auth/login',
+  SYSTEM_INFO: '/system/info',
+  CHANGE_PASSWORD: '/settings/password',
 })
 
 const ALLOWED_EXACT = new Set([
@@ -24,6 +26,8 @@ const ALLOWED_EXACT = new Set([
   VOHIVE_ENDPOINTS.HEALTH,
   VOHIVE_ENDPOINTS.TRAFFIC,
   VOHIVE_ENDPOINTS.LOGIN,
+  VOHIVE_ENDPOINTS.SYSTEM_INFO,
+  VOHIVE_ENDPOINTS.CHANGE_PASSWORD,
   '/devices/actions/rescan',
   '/devices/discovered',
   '/rotateip',
@@ -239,6 +243,21 @@ export function getDevices(ctx = {}) {
 
 export function getHealth(ctx = {}) {
   return vohiveAdapterRequest(VOHIVE_ENDPOINTS.HEALTH, { trackLoading: false, ...ctx })
+}
+
+/** VoHive 主机自身的版本 / 构建时间（GET /system/info -> { version, build_time, config, docs }） */
+export function getSystemInfo(ctx = {}) {
+  return vohiveAdapterRequest(VOHIVE_ENDPOINTS.SYSTEM_INFO, { trackLoading: false, ...ctx })
+}
+
+/** 修改 VoHive 登录密码（POST /settings/password -> { old_password, new_password, confirm_password }） */
+export function changeVoHivePassword(body, ctx = {}) {
+  return vohiveAdapterRequest(VOHIVE_ENDPOINTS.CHANGE_PASSWORD, {
+    method: 'POST',
+    body,
+    trackLoading: false,
+    ...ctx,
+  })
 }
 
 export function getTraffic(params = {}) {

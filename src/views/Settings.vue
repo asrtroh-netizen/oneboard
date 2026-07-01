@@ -18,6 +18,8 @@ import {
   resolveClashUpstreamBase,
   isClashBackendConfigured,
 } from '../stores/clashBackend'
+import { changeVoHivePassword } from '../api/vohive.adapter'
+import { isVoHiveGlobalConfigured } from '../stores/vohiveConnection'
 
 const { state, formatBytes, showToast } = useAppStore()
 const mihomo = useMihomoEngine()
@@ -33,6 +35,7 @@ const draftSecret = ref(clashBackendState.secret)
 
 const oneboardVersion = ref('—')
 const oneboardStatus = ref('loading')
+
 const kernelCurrent = ref('—')
 const kernelLatest = ref('—')
 const kernelLatestError = ref('')
@@ -291,6 +294,58 @@ async function handleChangePassword() {
     changingPassword.value = false
   }
 }
+
+const vohiveOldPassword = ref('')
+const vohiveNewPassword = ref('')
+const vohiveConfirmPassword = ref('')
+const vohiveChangingPassword = ref(false)
+
+async function handleChangeVoHivePassword() {
+  if (vohiveChangingPassword.value) return
+
+  if (!isVoHiveGlobalConfigured()) {
+    showToast('请先配置 VoHive 主机', 'warning')
+    return
+  }
+
+  const oldPassword = String(vohiveOldPassword.value || '')
+  const nextPassword = String(vohiveNewPassword.value || '')
+  const confirm = String(vohiveConfirmPassword.value || '')
+
+  if (!oldPassword) {
+    showToast('请填写 VoHive 当前密码', 'warning')
+    return
+  }
+  if (!nextPassword || !confirm) {
+    showToast('请填写新密码并确认', 'warning')
+    return
+  }
+  if (nextPassword.length < 8) {
+    showToast('新密码至少 8 位', 'warning')
+    return
+  }
+  if (nextPassword !== confirm) {
+    showToast('两次输入的新密码不一致', 'warning')
+    return
+  }
+
+  vohiveChangingPassword.value = true
+  try {
+    await changeVoHivePassword({
+      old_password: oldPassword,
+      new_password: nextPassword,
+      confirm_password: confirm,
+    })
+    vohiveOldPassword.value = ''
+    vohiveNewPassword.value = ''
+    vohiveConfirmPassword.value = ''
+    showToast('VoHive 密码修改成功', 'success')
+  } catch (err) {
+    showToast(err?.message || 'VoHive 密码修改失败，请稍后重试', 'error')
+  } finally {
+    vohiveChangingPassword.value = false
+  }
+}
 </script>
 
 <template>
@@ -308,29 +363,6 @@ async function handleChangePassword() {
           <div class="section-desc">检查并更新系统组件到最新版本</div>
         </div>
       </div>
-      <div class="panel-card panel-neutral version-channel-card">
-        <div class="version-channel-row">
-          <span class="info-label">更新渠道</span>
-          <div class="channel-toggle">
-            <button type="button" :class="{ active: updateChannel === 'stable' }" @click="updateChannel = 'stable'">
-              正式版
-            </button>
-            <button type="button" :class="{ active: updateChannel === 'beta' }" @click="updateChannel = 'beta'">
-              测试版
-            </button>
-          </div>
-          <button
-            type="button"
-            class="ob-action-btn version-channel-refresh"
-            title="检查更新"
-            :disabled="loadingVersions"
-            @click="refreshVersions"
-          >
-            <MIcon name="refresh" size="sm" />
-          </button>
-        </div>
-      </div>
-
       <div class="info-row version-info-row">
         <div class="panel-card panel-blue version-card">
           <div class="version-card__head panel-head panel-head-between">
@@ -423,7 +455,7 @@ async function handleChangePassword() {
             <div class="panel-head-left">
               <div class="panel-icon"><MIcon name="tune" /></div>
               <div>
-                <div class="panel-title">Clash 后端</div>
+                <div class="panel-title">透明代理后端</div>
                 <div class="panel-sub">手动选择 API 客户端</div>
               </div>
             </div>
@@ -486,6 +518,7 @@ async function handleChangePassword() {
             </button>
           </div>
         </div>
+
       </div>
 
       <p v-if="kernelLoadError || kernelLatestError" class="version-error">
@@ -543,7 +576,7 @@ async function handleChangePassword() {
           <div class="section-desc">管理账户密码和授权信息</div>
         </div>
       </div>
-      <div class="settings-row">
+      <div class="settings-row settings-row--triple">
         <div class="card">
           <div class="card-title">修改密码</div>
           <form @submit.prevent="handleChangePassword">
@@ -579,6 +612,44 @@ async function handleChangePassword() {
             </div>
             <button class="btn btn-primary" type="submit" :disabled="changingPassword">
               {{ changingPassword ? '提交中…' : '提交修改' }}
+            </button>
+          </form>
+        </div>
+        <div class="card">
+          <div class="card-title">修改 VoHive 密码</div>
+          <form @submit.prevent="handleChangeVoHivePassword">
+            <div class="form-group">
+              <label>当前密码</label>
+              <input
+                v-model="vohiveOldPassword"
+                type="password"
+                autocomplete="current-password"
+                placeholder="请输入 VoHive 当前密码"
+                :disabled="vohiveChangingPassword"
+              />
+            </div>
+            <div class="form-group">
+              <label>新密码</label>
+              <input
+                v-model="vohiveNewPassword"
+                type="password"
+                autocomplete="new-password"
+                placeholder="至少 8 位"
+                :disabled="vohiveChangingPassword"
+              />
+            </div>
+            <div class="form-group">
+              <label>确认密码</label>
+              <input
+                v-model="vohiveConfirmPassword"
+                type="password"
+                autocomplete="new-password"
+                placeholder="请再次输入新密码"
+                :disabled="vohiveChangingPassword"
+              />
+            </div>
+            <button class="btn btn-primary" type="submit" :disabled="vohiveChangingPassword">
+              {{ vohiveChangingPassword ? '提交中…' : '提交修改' }}
             </button>
           </form>
         </div>
@@ -650,46 +721,6 @@ async function handleChangePassword() {
 
 <style scoped>
 .section-block { margin-bottom: 24px; }
-
-.version-channel-card {
-  margin-bottom: var(--space-grid, 12px);
-  padding: 14px 18px;
-}
-
-.version-channel-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.channel-toggle {
-  display: flex;
-  background: var(--bg-input);
-  border-radius: 999px;
-  padding: 2px;
-  border: 1px solid var(--border-subtle);
-}
-
-.channel-toggle button {
-  padding: 6px 14px;
-  font-size: var(--fs-sm);
-  color: var(--text-muted);
-  border-radius: 999px;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.channel-toggle button.active {
-  background: var(--accent);
-  color: #fff;
-}
-
-.version-channel-refresh {
-  margin-left: auto;
-  min-width: 36px;
-  min-height: 36px;
-  padding: 0 10px;
-}
 
 .version-info-row {
   display: grid;
@@ -836,6 +867,13 @@ async function handleChangePassword() {
   cursor: not-allowed;
 }
 .settings-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.settings-row--triple { grid-template-columns: 1fr 1fr 1fr; }
+
+@media (max-width: 1200px) {
+  .settings-row--triple {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .theme-options { display: flex; gap: 10px; }
 .theme-opt {
   flex: 1;
