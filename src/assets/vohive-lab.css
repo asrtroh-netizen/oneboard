@@ -63,9 +63,10 @@
 }
 
 .vohive-lab-shell {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px 18px 32px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 12px 0 24px;
 }
 
 .vohive-lab-shell .vohive-lab-console {
@@ -743,16 +744,12 @@
   color: rgba(148, 163, 184, 0.72);
 }
 
-/* Overview grid
- * Cards use a fixed max width instead of stretching to fill 1fr, so the
- * absolute card size (and the ratio of card width to gap) stays the same
- * regardless of monitor size / browser width — only the leftover space
- * (if any) changes, not the cards themselves. */
+/* Overview grid — four equal columns fill available width */
 .vohive-lab-shell .overview-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 260px));
-  justify-content: center;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-grid);
+  width: 100%;
 }
 
 .vohive-lab-shell .overview-card {
