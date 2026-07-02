@@ -16,6 +16,14 @@ dist-ssr
 .env.local
 .env.*.local
 
+# 构建产物与调试残留（不入库）
+release
+.restore-tmp
+tmp-*
+snippet-out.txt
+_config_snippet.txt
+_pg.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

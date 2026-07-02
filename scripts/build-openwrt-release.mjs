@@ -4,6 +4,7 @@
  * Output: release/openwrt/
  */
 import { execSync } from 'node:child_process'
+import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,7 +17,7 @@ const dataDir = path.join(releaseDir, 'data')
 const stagingDir = path.join(releaseDir, 'staging')
 const rootfsDir = path.join(stagingDir, 'onebord')
 
-const PROD_DEPS = ['bcryptjs', 'echarts', 'vue', 'vue-router', 'ws']
+const PROD_DEPS = ['bcryptjs', 'vue', 'vue-router', 'ws']
 
 const PKG_TARGETS = [
   { name: 'onebord-openwrt-amd64', target: 'node18-linux-x64', arch: 'x86_64' },
@@ -140,6 +141,27 @@ fs.mkdirSync(binDir, { recursive: true })
 const buildNotes = []
 buildPkgBinaries(buildNotes)
 fs.writeFileSync(path.join(binDir, 'BUILD_NOTES.txt'), `${buildNotes.join('\n')}\n`)
+
+// 远程安装（install.sh remote）按需拉取的拆分资产：
+//  webui   = data/dist 前端静态资源（二进制模式必需，避免整包下载）
+//  support = init.d + env 模板 + 安装脚本 + 说明（每种模式都要）
+run(`tar -czf "${path.join(releaseDir, 'onebord-openwrt-webui.tar.gz')}" -C "${releaseDir}" data`)
+run(
+  `tar -czf "${path.join(releaseDir, 'onebord-openwrt-support.tar.gz')}" -C "${releaseDir}" init.d env install.sh README.md`,
+)
+
+// GitHub Release 资产完整性清单（sha256sum -c 兼容格式，文件名按上传后的扁平名）
+{
+  const assets = [
+    ...['onebord-openwrt-node.tar.gz', 'onebord-openwrt-webui.tar.gz', 'onebord-openwrt-support.tar.gz', 'install.sh']
+      .map((name) => path.join(releaseDir, name)),
+    ...fs.readdirSync(binDir).filter((name) => name.startsWith('onebord-openwrt-')).map((name) => path.join(binDir, name)),
+  ]
+  const sums = assets
+    .filter((file) => fs.existsSync(file))
+    .map((file) => `${crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')}  ${path.basename(file)}`)
+  fs.writeFileSync(path.join(releaseDir, 'SHA256SUMS'), `${sums.join('\n')}\n`)
+}
 
 for (const legacy of ['onebord-openwrt-standalone.tar.gz', 'onebord.init', 'onebord.env.example']) {
   try {

@@ -1,7 +1,7 @@
 import { getSystemInfo } from './systemInfo.js'
 import { getOnebordVersionInfo } from './onebordVersion.js'
 import { getMihomoLatestRemote } from './mihomoLatest.js'
-import { handleLoginRequest, handleLogoutRequest } from './loginAuth.js'
+import { handleRateLimitedLogin, handleLogoutRequest } from './loginAuth.js'
 import { handleChangePasswordRequest } from './changePassword.js'
 import { parseBearerToken, getSession } from './sessionStore.js'
 import { ensureUserDb } from './userDb.js'
@@ -84,7 +84,7 @@ function attachLoginRoutes(server) {
     }
     try {
       const body = await readJsonBody(req)
-      const data = handleLoginRequest(body)
+      const data = handleRateLimitedLogin(req, body)
       sendJson(res, 200, data)
     } catch (err) {
       sendJson(res, err.status || 401, { message: err?.message || '登录失败' })

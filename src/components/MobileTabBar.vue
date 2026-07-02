@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MIcon from './MIcon.vue'
 import { splitMobileNav, NAV_AUXILIARY, matchNavItem } from '../config/sidebarNav'
@@ -12,6 +12,8 @@ const { minimized, keyboardHidden } = useLiquidTabBar()
 
 const { primary, overflow } = splitMobileNav()
 const moreOpen = ref(false)
+const moreBtnRef = ref(null)
+const sheetRef = ref(null)
 
 const isActive = (item) => matchNavItem(route.path, item)
 /** 「更多」内任一页处于激活态时，底栏的更多按钮也点亮 */
@@ -20,6 +22,30 @@ const moreActive = computed(() => overflow.some((item) => isActive(item)))
 // 切路由自动收起抽屉（含从抽屉里点击跳转）
 watch(() => route.path, () => {
   moreOpen.value = false
+})
+
+function onSheetKeydown(event) {
+  if (event.key === 'Escape') {
+    event.stopPropagation()
+    moreOpen.value = false
+  }
+}
+
+// 无障碍：开抽屉时焦点移入首个菜单项（键盘可直接上手），
+// 关抽屉时归还给「更多」触发按钮，焦点不迷路
+watch(moreOpen, async (open) => {
+  if (open) {
+    document.addEventListener('keydown', onSheetKeydown)
+    await nextTick()
+    sheetRef.value?.querySelector('[role="menuitem"]')?.focus()
+  } else {
+    document.removeEventListener('keydown', onSheetKeydown)
+    moreBtnRef.value?.focus({ preventScroll: true })
+  }
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', onSheetKeydown)
 })
 
 async function onAux(item) {
@@ -50,6 +76,7 @@ async function onAux(item) {
     </router-link>
 
     <button
+      ref="moreBtnRef"
       type="button"
       class="lg-tab"
       :class="{ active: moreActive || moreOpen }"
@@ -69,7 +96,7 @@ async function onAux(item) {
         class="lg-sheet-backdrop"
         @click.self="moreOpen = false"
       >
-        <div class="lg-sheet lg-material" role="menu" aria-label="更多页面">
+        <div ref="sheetRef" class="lg-sheet lg-material" role="menu" aria-label="更多页面">
           <div class="lg-sheet__handle" aria-hidden="true" />
           <div class="lg-sheet__grid">
             <router-link

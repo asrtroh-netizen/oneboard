@@ -34,6 +34,7 @@
 - **Liquid Glass 材质**（`liquid-glass.css` 的 `.lg-material`）：`backdrop-filter blur(24px) saturate(180%)` 折射环境色 + 顶缘镜面高光 + 边缘透镜 rim + spring 缓动（过冲回弹曲线），明暗双主题 token 化。
 - **降级链**：不支持 `backdrop-filter` → 实底；`prefers-reduced-transparency` → 实底；`prefers-reduced-motion` → 去位移缩放只留透明度过渡；桌面端组件不渲染（`matchMedia` 守卫）+ CSS 双保险隐藏。
 - **内容让位**：`--lg-tabbar-clearance` 统一管理底部让位高度，`mobile.css` 中 `.layout` padding-bottom 引用之。
+- **键盘无障碍**：「更多」抽屉打开时焦点自动移入首个菜单项，`Esc` 关闭并把焦点归还「更多」触发按钮（`role="menu"`/`menuitem` + `aria-expanded` 语义齐备）。
 
 ## 三、关键文件
 
@@ -47,6 +48,7 @@
 | `scripts/generate-pwa-icons.mjs` | 零依赖 PNG 图标生成器（品牌环形 Logo，改图标后重跑：`node scripts/generate-pwa-icons.mjs`） |
 | `src/stores/theme.js` | `applyTheme()` 同步 `meta[theme-color]`，切主题时系统栏颜色跟随 |
 | `server/gateway.js` | 新增 `.webmanifest` → `application/manifest+json` MIME |
+| `public/fonts/` | 自托管 Roboto（300-600）与 Bebas Neue 的 latin woff2 + `fonts.css`（替代 Google Fonts CDN，弱网/大陆环境首屏不再被字体请求挂起） |
 
 ## 四、验证记录
 

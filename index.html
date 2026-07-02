@@ -18,10 +18,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <!-- 面板内大量 ICCID/端口等数字，禁用 iOS 自动识别为电话号码 -->
     <meta name="format-detection" content="telephone=no" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <!-- 字体自托管：摆脱 Google Fonts CDN（大陆环境首屏挂起），离线可用 -->
+    <link rel="preload" href="/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
     <title>OneBoard 控制面板</title>
     <style id="boot-critical">
       html {

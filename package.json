@@ -9,13 +9,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node server/gateway.js",
+    "test": "node --test \"server/tests/*.test.mjs\"",
     "build:docker": "node scripts/build-docker-release.mjs",
     "build:release": "node scripts/build-docker-release.mjs",
+    "build:openwrt": "node scripts/build-openwrt-release.mjs",
     "build:rule-blocks": "node scripts/build-rule-blocks.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "echarts": "^6.1.0",
     "lucide-vue-next": "^1.0.0",
     "vue": "^3.5.38",
     "vue-router": "^4.6.4",

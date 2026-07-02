@@ -13,24 +13,37 @@ release/openwrt/
     onebord-openwrt-arm64
     onebord-openwrt-armv7
     BUILD_NOTES.txt
-  data/dist/                 # pkg 二进制安装时复制到 /opt/onebord/dist
+  data/dist/                        # pkg 二进制安装时复制到 /opt/onebord/dist
   init.d/onebord
   env/onebord.env.example
-  onebord-openwrt-node.tar.gz
+  onebord-openwrt-node.tar.gz       # Node 通用运行包（全架构，需 opkg node）
+  onebord-openwrt-webui.tar.gz      # data/dist 单独包（remote 二进制模式按需拉取）
+  onebord-openwrt-support.tar.gz    # init.d + env + install.sh + README
+  SHA256SUMS                        # 全部资产校验和（sha256sum -c 兼容）
   install.sh
   README.md
 ```
 
-## 构建（开发机）
+## 构建（开发机 / CI）
 
 ```bash
 npm install
 npm run build:openwrt
 ```
 
-`pkg` 在 Windows/macOS 上交叉编译 Linux 二进制可能失败，详见 `bin/BUILD_NOTES.txt`。失败时使用 `onebord-openwrt-node.tar.gz` + 路由器上的 `node`。
+- 推送 `v*` tag 后，GitHub Actions（`.github/workflows/release.yml`）会在 Linux 上自动构建以上产物并发布到 GitHub Releases。
+- `pkg` 在 Windows/macOS 上交叉编译 Linux 二进制可能失败，详见 `bin/BUILD_NOTES.txt`。失败时使用 `onebord-openwrt-node.tar.gz` + 路由器上的 `node`。
 
-## 方式 A：pkg 二进制（推荐，若构建成功）
+## 方式 0：远程一键安装（推荐，无需预先拷贝文件）
+
+```bash
+wget -O install.sh https://github.com/asrtroh-netizen/oneboard/releases/latest/download/install.sh
+sh install.sh remote          # 或 sh install.sh remote v1.1 指定版本
+```
+
+自动检测架构：amd64 / arm64 / armv7 优先预编译二进制（缺席自动回退 Node 包）；MIPS 等其余架构直接使用 Node 通用包（需先 `opkg update && opkg install node`）。
+
+## 方式 A：pkg 二进制（本地包安装）
 
 ```bash
 # 复制整个 release/openwrt/ 到路由器 /tmp/onebord/

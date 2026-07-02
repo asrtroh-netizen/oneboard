@@ -7,7 +7,7 @@ import { WebSocket, WebSocketServer } from 'ws'
 import { createOneBordAgent } from './agent/onebordAgent.js'
 import { getOnebordVersionInfo } from './onebordVersion.js'
 import { getMihomoLatestRemote } from './mihomoLatest.js'
-import { handleLoginRequest, handleLogoutRequest } from './loginAuth.js'
+import { handleRateLimitedLogin, handleLogoutRequest } from './loginAuth.js'
 import { handleChangePasswordRequest } from './changePassword.js'
 import { parseBearerToken, getSession } from './sessionStore.js'
 import { ensureUserDb } from './userDb.js'
@@ -188,7 +188,7 @@ async function handleApi(req, res) {
     }
     if (url.pathname === '/api/login') {
       if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed' })
-      return sendJson(res, 200, handleLoginRequest(await readJsonBody(req)))
+      return sendJson(res, 200, handleRateLimitedLogin(req, await readJsonBody(req)))
     }
     if (url.pathname === '/api/logout') {
       if (req.method !== 'POST') return sendJson(res, 405, { error: 'Method not allowed' })

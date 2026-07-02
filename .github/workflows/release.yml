@@ -1,0 +1,52 @@
+name: Release
+
+# tag 推送（vX.Y.Z）触发：构建 OpenWrt 多架构安装资产并发布 GitHub Release。
+# Docker 镜像由 docker-image.yml 在同一 tag 上独立构建推送 GHCR。
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  openwrt-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 产出：node 通用包 / webui 静态包 / support 支持包 / pkg 二进制（尽力而为，
+      # 失败自动记入 BUILD_NOTES.txt，install.sh remote 会回退 Node 包）/ SHA256SUMS
+      - name: Build OpenWrt release bundle
+        run: npm run build:openwrt
+
+      - name: Collect release assets
+        run: |
+          mkdir -p upload
+          cp release/openwrt/onebord-openwrt-node.tar.gz upload/
+          cp release/openwrt/onebord-openwrt-webui.tar.gz upload/
+          cp release/openwrt/onebord-openwrt-support.tar.gz upload/
+          cp release/openwrt/install.sh upload/
+          cp release/openwrt/SHA256SUMS upload/
+          cp release/openwrt/bin/BUILD_NOTES.txt upload/ 2>/dev/null || true
+          find release/openwrt/bin -maxdepth 1 -type f -name 'onebord-openwrt-*' -exec cp {} upload/ \;
+          ls -lh upload/
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: upload/*
+          generate_release_notes: true
