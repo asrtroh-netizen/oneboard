@@ -1,0 +1,39 @@
+{
+  "name": "OneBoard 控制面板",
+  "short_name": "OneBoard",
+  "description": "Host-Aware Control Plane · Mihomo / VoHive 实时指挥面",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "zh-CN",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070812",
+  "theme_color": "#070812",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

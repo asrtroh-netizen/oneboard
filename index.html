@@ -3,7 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover：允许内容延伸进 iOS 刘海/灵动岛区域，由 CSS safe-area 接管留白 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Android/iOS 系统级 UI 着色（状态栏 / Safari 标签栏），运行时由主题切换动态同步 -->
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#070812" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8edff" />
+    <!-- 添加到主屏幕：Android（W3C manifest）+ iOS（apple-* 专属标签） -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="application-name" content="OneBoard" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="OneBoard" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <!-- 面板内大量 ICCID/端口等数字，禁用 iOS 自动识别为电话号码 -->
+    <meta name="format-detection" content="telephone=no" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -68,6 +82,32 @@
       html[data-theme='light'] .boot-shell__aside,
       html[data-theme='light'] .boot-shell__main {
         background: rgba(255, 255, 255, 0.42);
+      }
+
+      /* 移动端首帧骨架：侧栏变顶部横条，留白收紧并避开刘海安全区 */
+      @media (max-width: 900px) {
+        .boot-shell {
+          flex-direction: column;
+          gap: 10px;
+          padding: 12px;
+          padding-top: max(12px, env(safe-area-inset-top));
+        }
+
+        .boot-shell__aside {
+          flex: 0 0 64px;
+        }
+      }
+
+      /* iOS Safari 地址栏收展会改变 100vh，动态视口单位更稳 */
+      @supports (min-height: 100dvh) {
+        body,
+        #app {
+          min-height: 100dvh;
+        }
+
+        .boot-shell {
+          min-height: 100dvh;
+        }
       }
     </style>
     <script src="/storage-migrate.js"></script>
