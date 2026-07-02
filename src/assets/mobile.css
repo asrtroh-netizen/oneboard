@@ -82,13 +82,14 @@ select {
     --radius-shell: 22px;
   }
 
-  /* 覆盖 MainLayout scoped 的 16px：收紧四边并让出刘海/圆角/Home 指示条 */
+  /* 覆盖 MainLayout scoped 的 16px：收紧四边并让出刘海/圆角/Home 指示条；
+     底部额外让出悬浮 Tab 栏的高度（--lg-tabbar-clearance 见 liquid-glass.css） */
   .layout {
     min-height: 100vh;
     padding: 12px !important;
     padding-top: max(10px, env(safe-area-inset-top)) !important;
     padding-right: max(12px, env(safe-area-inset-right)) !important;
-    padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+    padding-bottom: calc(var(--lg-tabbar-clearance, 88px) + 8px) !important;
     padding-left: max(12px, env(safe-area-inset-left)) !important;
   }
 
@@ -188,43 +189,10 @@ select {
     border-top: none;
   }
 
-  /* 导航轨道横向化：胶囊 chip + 惯性滑动 + 两端渐隐提示可滚 */
+  /* 页面导航由底部悬浮 Tab 栏（MobileTabBar）承担，顶部坞只保留身份与主题，
+     避免双重导航（rail 仅桌面侧边栏使用） */
   .cp-sidebar__rail {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    margin-top: 10px;
-    padding: 10px 2px 2px;
-    border-top: 1px solid var(--cp-dock-divider);
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 20px), transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 20px), transparent 100%);
-  }
-
-  .cp-nav-item {
-    flex: 0 0 auto;
-    width: auto;
-    min-height: 40px;
-    padding: 7px 13px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-
-  .cp-nav-item:hover {
-    transform: none;
-  }
-
-  .cp-sidebar__rail-divider {
-    flex: 0 0 1px;
-    width: 1px;
-    height: 22px;
-    margin: 0 4px;
-    align-self: center;
+    display: none;
   }
 }
 

@@ -22,8 +22,9 @@ import './assets/vohive-chip.css'
 import './assets/overview-panels.css'
 import './assets/dark-clickables.css'
 import './assets/form-select.css'
-// 移动端适配层必须最后引入：靠 cascade 顺序覆盖上游同权重规则
+// 移动端适配层与流体玻璃层最后引入：靠 cascade 顺序覆盖上游同权重规则
 import './assets/mobile.css'
+import './assets/liquid-glass.css'
 import App from './App.vue'
 import router from './router'
 import { initTheme } from './stores/theme'

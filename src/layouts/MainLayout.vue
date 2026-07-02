@@ -1,11 +1,19 @@
 <script setup>
-import { computed, watch, onUnmounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Sidebar from '../components/Sidebar.vue'
 import Toast from '../components/Toast.vue'
+import MobileTabBar from '../components/MobileTabBar.vue'
 
 const route = useRoute()
 const isEmbedded = computed(() => route.matched.some((record) => record.meta?.embedded))
+
+// 悬浮 Tab 栏仅移动端渲染：桌面端连滚动监听都不挂，零开销
+const mobileQuery = window.matchMedia('(max-width: 900px)')
+const isMobile = ref(mobileQuery.matches)
+const onMobileChange = (event) => {
+  isMobile.value = event.matches
+}
 
 watch(
   isEmbedded,
@@ -15,7 +23,12 @@ watch(
   { immediate: true },
 )
 
+onMounted(() => {
+  mobileQuery.addEventListener('change', onMobileChange)
+})
+
 onUnmounted(() => {
+  mobileQuery.removeEventListener('change', onMobileChange)
   document.documentElement.classList.remove('onebord-embed')
 })
 </script>
@@ -31,6 +44,7 @@ onUnmounted(() => {
       </main>
     </div>
     <Toast />
+    <MobileTabBar v-if="isMobile" />
   </div>
 </template>
 

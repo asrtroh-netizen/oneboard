@@ -37,6 +37,19 @@ export const NAV_AUXILIARY = [
   { id: 'logout', label: '退出登录', icon: 'logout', action: 'logout' },
 ]
 
+/** 移动端底部悬浮栏的常驻目的地（其余进「更多」抽屉），按手机高频使用排序 */
+export const MOBILE_TAB_PATHS = ['/dashboard', '/vohive-devices', '/sms', '/nodes']
+
+/** 按 MOBILE_TAB_PATHS 把导航拆成「底栏常驻 + 更多抽屉」两组，数据仍复用 NAV_MODULES */
+export function splitMobileNav() {
+  const all = NAV_MODULES.flatMap((group) => group.items)
+  const primary = MOBILE_TAB_PATHS
+    .map((path) => all.find((item) => item.path === path))
+    .filter(Boolean)
+  const overflow = all.filter((item) => !MOBILE_TAB_PATHS.includes(item.path))
+  return { primary, overflow }
+}
+
 export function matchNavItem(routePath, item) {
   if (item.matchPrefix) return routePath.startsWith(item.matchPrefix)
   return routePath === item.path
