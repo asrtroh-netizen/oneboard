@@ -187,11 +187,6 @@ TG: <https://t.me/OneBoardX>
 
 ---
 
-## 💰 Donation
-
-一杯咖啡 = 一个更稳定的 OneBoard
-
-<img src="https://i.ibb.co/b50Q1Sv9/40f3af89d821a4b97090c8876ef2fc9d.jpg" width="100%" />
 
 ---
 
