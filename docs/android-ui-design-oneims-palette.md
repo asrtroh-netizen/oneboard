@@ -1,22 +1,69 @@
 # OneBoard Android UI 设计规范
 
-> **原则**：信息架构 / 页面结构 / 交互节奏对齐 Web OneBoard；配色 / 材质 / 主题系统参考 OneIMS。  
-> **状态**：设计定稿（可进入实现） · 2026-07-13  
+> **原则**：**网页端喜爱点优先保留**；配色家族对齐 OneIMS；材质做「等价翻译」而不是推倒重来。  
+> **状态**：v1.1 对齐策略修订 · 2026-07-13  
 > **证据源**：`onebord/src/**` CSS 主题 · `OneIMS/.../ui/theme/Theme.kt` · `sidebarNav.js`
+
+---
+
+## 0. 一致化口号（给实现的人看）
+
+**「Web 的魂，OneIMS 的皮。」**
+
+- **魂** = 你喜欢的网页端：模块结构、卡片编排、Hero 气场、玻璃层次感、控制台节奏  
+- **皮** = OneIMS：主色 / 表面色 / 品牌红 / 主题三态 / 触控尺度  
+- **翻译** = 安卓上用半透明 Surface + 细描边高光模拟玻璃，**不**硬上 40px backdrop blur
 
 ---
 
 ## 1. 设计目标
 
-| 维度 | 跟谁对齐 | 不跟谁 |
-|------|----------|--------|
-| 导航模块与路由语义 | OneBoard Web（监控 / 控制 / 系统） | — |
-| 页面信息层级（Hero → 分组卡 → 列表行） | OneBoard Web | — |
-| 配色 / 语义色 / 主题模式 | OneIMS Material 3 | Web 玻璃霓虹色、mint 激活绿 |
-| 材质语言 | OneIMS 扁平 Surface + 大圆角 | Web 强 blur 玻璃拟态 |
-| 移动导航容器 | OneIMS 悬浮 Dock / 大屏 Rail | Web 左侧 floating sidebar 原样搬到手机 |
+| 维度 | 跟谁对齐 | 说明 |
+|------|----------|------|
+| 导航模块与路由语义 | OneBoard Web | 监控 / 控制 / 系统 原样 |
+| 页面信息层级 | OneBoard Web | Hero → 色板卡 → 分组列表，密度与节奏跟 Web |
+| 卡片「玻璃感」气场 | OneBoard Web（翻译实现） | 保留分层、描边高光、悬浮 dock 感 |
+| 配色 / 语义色 / 主题 | OneIMS Material 3 | 换色不换骨架 |
+| 触控热区 / Dock 容器 | OneIMS | 手机底栏可用性优先 |
+| 强 blur / 霓虹 mint / 宇宙 mesh | **弱化或替换** | 性能 + 品牌一致性，用等价视觉代替 |
 
-**一句话**：看起来是「OneBoard 的功能与布局逻辑」，摸起来是「OneIMS / Pixel 的颜色与触感」。
+**一句话**：打开 App 要觉得「这就是 OneBoard」，颜色则像 OneIMS 一家人。
+
+---
+
+## 1.5 必留 / 可改 / 必换（喜爱点对齐清单）
+
+### ✅ 必留（Web 灵魂，尽量原味）
+
+| 喜爱点 | 安卓怎么对齐 |
+|--------|----------------|
+| 三模块信息架构 | Dock/Rail 仍按 监控｜控制｜系统 |
+| 控制台页结构（仪表盘 Hero、节点卡、规则列表…） | 同页同区块顺序，不重排成「陌生设置页」 |
+| 大圆角壳层 / 卡片（20–32） | 直接用 20 / 28 / 32 dp |
+| 侧栏「悬浮岛」气质 | 手机 → 底悬浮 Dock；平板 → 左 Rail 玻璃感容器 |
+| 状态胶囊 / 运行指示 | Pill 形态保留，色改 OneIMS primary/error |
+| 深浅双主题切换入口 | 设置里三态 + 动态色，交互位置对齐 Web 习惯 |
+| 分区着色卡片（蓝/紫/绿玻璃卡语义） | **保留分区语义**，底色改成 primaryContainer / tertiaryContainer / secondaryContainer |
+
+### 🔁 可改（等价翻译，不丢感觉）
+
+| Web 做法 | 安卓等价 |
+|----------|----------|
+| `backdrop-filter: blur(18–40px)` | `surfaceContainerHigh` + alpha 0.88–0.94 + 1dp 亮边描边（模拟玻璃边） |
+| 多色 mesh 页面底 | OneIMS `background`；可选极淡 primary 径向（≤6% alpha，可关） |
+| 侧栏 mint 激活 | `primary` 激活（色换，形状/动效保留） |
+| Bebas Neue 大数字 | SansSerif SemiBold / 系统展示字重，字号层级跟 Web Hero |
+| 内容字号偏桌面（12.5px） | 升到可读触控级，但层级比例跟 Web |
+
+### ⛔ 必换（跟 OneIMS 家族色走）
+
+| 项 | 从 Web | 换成 OneIMS |
+|----|--------|-------------|
+| 主色 accent | `#8ab4f8` / `#4F8CFF` | `#0B57D0` / `#A9C7FF`（可动态色） |
+| 页面底 | `#070812` 宇宙紫黑 / `#e8edff` mesh | `#111318` / `#F9F9FF` |
+| 危险/成功 | Web 独立绿系成功色 | 成功→primaryContainer；危险→error |
+| 品牌启动识别 | （Web 弱） | `#D6242F` 闪屏与 Mark |
+| 主 CTA | accent 蓝实心 | 白底黑字药丸（OneIMS） |
 
 ---
 
@@ -26,12 +73,12 @@
 |--------|--------------|--------|------------------|
 | 主色 | 深 `#8ab4f8` / 浅 `#4F8CFF` | `#0B57D0` / 动态色 `#A9C7FF` | **用 OneIMS primary**（默认可开 Material You） |
 | 品牌识别 | 无独立红标 | `#D6242F` 闪屏/图标/Rail | **保留品牌红**作启动与 Mark，不进 primary |
-| 激活导航色 | mint `#86efac` / teal `#0f766e` | `primary` 选中 | **用 primary**，弃 mint |
-| 背景 | 紫黑宇宙 / 浅蓝 mesh | `#F9F9FF` / `#111318` | **用 OneIMS background/surface** |
-| 卡片材质 | backdrop-filter 玻璃 | surfaceContainer* 扁平 | **扁平 Surface**；仅 Dock `alpha≈0.94` |
-| 成功色 | `#81c995` / `#059669` | 无独立 success，用 primaryContainer | **跟 OneIMS**：成功 = primaryContainer |
-| 手机导航 | ≤900px 侧栏改顶部块 | 底悬浮 Dock + ≥720dp Rail | **底 Dock（三主模块）+ 更多进抽屉** |
-| 主 CTA | accent 蓝按钮 | 白底黑字药丸 | **跟 OneIMS PrimaryButton**（白/黑） |
+| 激活导航色 | mint `#86efac` / teal `#0f766e` | `primary` 选中 | **色换 primary，形状/指示条跟 Web** |
+| 背景 | 紫黑宇宙 / 浅蓝 mesh | `#F9F9FF` / `#111318` | **OneIMS 底色**；允许极淡氛围光（可关） |
+| 卡片材质 | 强 blur 玻璃 | 扁平 Surface | **「玻璃魂」**：半透明 Surface + 亮边 + 分层阴影，不做重 blur |
+| 成功色 | `#81c995` / `#059669` | primaryContainer | **跟 OneIMS** |
+| 手机导航 | ≤900px 侧栏改顶部块 | 底悬浮 Dock + ≥720dp Rail | **底 Dock（三主模块）+ 更多抽屉**；视觉贴近 Web dock |
+| 主 CTA | accent 蓝按钮 | 白底黑字药丸 | **跟 OneIMS PrimaryButton** |
 
 ---
 
@@ -126,9 +173,11 @@ Scaffold(background)
 | 水平边距 | **20dp** | OneIMS；Web gutter 28 在手机上改为 16–20 |
 | 分组间距 | **12dp** | OneIMS itemSpacing |
 
-**禁止**：`backdrop-filter` 强模糊、多色 radial mesh 背景、Bebas Neue 展示字（Android 用 SansSerif SemiBold）。
+**禁止（性能/一致性硬伤）**：Android 上大规模实时 `backdrop-filter`、满屏多色 mesh、未配对对比度的半透明白字。
 
-**允许的轻微氛围**：Dock `surfaceContainerHigh` + alpha 0.94；选中态用 primary 而非发光边。
+**必须保留的「Web 感觉」**：分层卡片、亮边描边、悬浮 Dock、Hero 气场、分区语义色卡。
+
+**允许的氛围翻译**：Dock/卡片 `surfaceContainerHigh` + alpha 0.88–0.94 + 1dp 亮边；选中态用 primary 指示条（形状跟 Web，色跟 OneIMS）。
 
 ---
 
@@ -204,13 +253,14 @@ Scaffold(background)
 
 ## 10. 验收标准（UI）
 
-- [ ] 深/浅/系统三态切换无色漂、无闪屏红以外的硬编码霓虹色  
-- [ ] 导航模块与 Web `NAV_MODULES` 一一对应，无丢页  
-- [ ] 主色来自 OneIMS scheme；品牌红仅启动/Mark  
-- [ ] 无强玻璃 blur；卡片为 Surface 层级  
+- [ ] **一眼 OneBoard**：模块与关键页区块顺序与 Web 一致，不是「换皮陌生 App」  
+- [ ] **色是 OneIMS**：主色/表面/错误来自 scheme；品牌红仅启动/Mark  
+- [ ] **玻璃魂仍在**：卡片有分层 + 亮边 + 悬浮感（允许无重 blur）  
+- [ ] 深/浅/系统三态无色漂  
 - [ ] 手机 Dock 可用；≥720dp 切 Rail  
 - [ ] 主 CTA 为白底黑字药丸  
+- [ ] 分区色卡语义保留（蓝/紫/绿区 → M3 container 色）  
 
 ---
 
-*文档归属：OneBoard 移动端设计。配色真源以 OneIMS `Theme.kt` 为准；IA 真源以 `sidebarNav.js` 为准。*
+*文档归属：OneBoard 移动端设计。配色真源以 OneIMS `Theme.kt` 为准；IA 与喜爱布局真源以 Web OneBoard 为准。v1.1 强调：一致化 ≠ 砍掉 Web 审美。*
