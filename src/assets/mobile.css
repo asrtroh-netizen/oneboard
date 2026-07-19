@@ -174,7 +174,9 @@ select {
   .vohive-lab-shell .metric-row,
   .vohive-lab-shell .overview-grid,
   .inline-expand-grid,
-  .rule-list {
+  .rule-list,
+  .vohive-lab-shell .soft-label-grid,
+  .soft-label-grid {
     grid-template-columns: 1fr !important;
   }
 }

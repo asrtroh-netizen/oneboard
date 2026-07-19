@@ -1107,6 +1107,119 @@
   }
 
   .vohive-lab-shell .device-card {
-    flex-basis: 85%;
+    flex-basis: 92%;
+  }
+
+  /* 指标卡：给正文列真正宽度，拉开标签/数值呼吸 */
+  .vohive-lab-shell .metric-card {
+    gap: 16px;
+    padding: 18px 16px;
+  }
+
+  .vohive-lab-shell .metric-card__body {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .vohive-lab-shell .metric-card__label {
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .vohive-lab-shell .metric-card__value {
+    font-size: 22px;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .vohive-lab-shell .metric-card__sub {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* 设备卡文字别挤 */
+  .vohive-lab-shell .device-card {
+    padding: 16px 16px 14px;
+  }
+
+  .vohive-lab-shell .device-card__head {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .vohive-lab-shell .device-card__name {
+    font-size: 15px;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .vohive-lab-shell .device-card__tag,
+  .vohive-lab-shell .overview-badge.ready {
+    margin-bottom: 12px;
+    padding: 8px 14px;
+  }
+
+  .vohive-lab-shell .device-card__ip {
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .vohive-lab-shell .device-card__ip-label,
+  .vohive-lab-shell .device-card__ip-value {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* 概览信息：IMEI/ICCID 等改单列大行，避免双列把长串捏扁 */
+  .vohive-lab-shell .overview-card {
+    padding: 16px 14px;
+    min-height: 0;
+  }
+
+  .vohive-lab-shell .soft-label-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+
+  .vohive-lab-shell .soft-label-grid .soft-label-card {
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .vohive-lab-shell .soft-label-grid .soft-label-card__title {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  .vohive-lab-shell .soft-label-grid .soft-label-card__value,
+  .vohive-lab-shell .soft-label-grid .soft-label-card__value--mono {
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-all;
+  }
+
+  .vohive-lab-shell .esim-item {
+    padding: 14px 14px;
+  }
+
+  .vohive-lab-shell .esim-item__head {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .vohive-lab-shell .esim-item__name {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .vohive-lab-shell .esim-item__meta {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.45;
+    word-break: break-all;
   }
 }
