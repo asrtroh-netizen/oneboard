@@ -169,7 +169,7 @@ const ruleCount = computed(() =>
   .group-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .group-list { grid-template-columns: 1fr; }
 }
 

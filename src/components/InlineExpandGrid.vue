@@ -64,9 +64,9 @@ const gridStyle = computed(() => ({
   min-width: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .inline-expand-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 </style>

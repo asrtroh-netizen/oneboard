@@ -121,7 +121,7 @@ defineEmits(['toggle-rule', 'edit-rule', 'copy-rule', 'delete-rule', 'add-rule']
   color: rgba(255, 255, 255, 0.4);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .rule-list {
     grid-template-columns: 1fr;
   }

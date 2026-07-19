@@ -220,6 +220,13 @@ onUnmounted(() => stopDnsSyncLayer())
 
 .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .rank-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+
+@media (max-width: 900px) {
+  .stat-row,
+  .rank-row {
+    grid-template-columns: 1fr;
+  }
+}
 .rank-card { min-height: 200px; }
 .rank-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
 .rank-list { list-style: none; margin: 0; padding: 0; }

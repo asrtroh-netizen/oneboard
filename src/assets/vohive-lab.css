@@ -1096,7 +1096,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .vohive-lab-shell .vohive-head {
     flex-direction: column;
   }

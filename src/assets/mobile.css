@@ -142,7 +142,10 @@ select {
     display: none !important;
   }
 
-  /* 仪表盘多列卡：强制每卡一行（压过 scoped 的 repeat(3/4)） */
+  /*
+   * 全站卡片网格：≤900px 一律单列（压过各页 scoped 的 repeat(2/3/4)）。
+   * 不含「更多」抽屉的 3 列图标宫格（.lg-sheet__grid）——那是导航不是内容卡。
+   */
   .dashboard .stat-row,
   .dashboard .info-row,
   .dashboard .traffic-charts,
@@ -153,7 +156,25 @@ select {
   .dashboard-shell .traffic-charts,
   .dashboard-shell .country-grid,
   .dashboard-shell .global-stats,
-  .status-hero__layer--metrics {
+  .status-hero__layer--metrics,
+  .stat-row,
+  .info-row,
+  .rank-row,
+  .country-grid,
+  .global-stats,
+  .subscriptions-grid,
+  .metric-row,
+  .overview-grid,
+  .group-list,
+  .inline-detail-panel__grid,
+  .version-info-row,
+  .settings-row,
+  .settings-row--triple,
+  .data-row,
+  .vohive-lab-shell .metric-row,
+  .vohive-lab-shell .overview-grid,
+  .inline-expand-grid,
+  .rule-list {
     grid-template-columns: 1fr !important;
   }
 }

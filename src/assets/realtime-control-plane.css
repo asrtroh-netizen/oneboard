@@ -312,7 +312,7 @@
   display: none;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .status-hero__layer--metrics {
     grid-template-columns: 1fr;
     max-width: 100%;

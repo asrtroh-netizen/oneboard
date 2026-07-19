@@ -133,7 +133,7 @@ defineProps({
   .country-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .country-grid { grid-template-columns: 1fr; }
 }
 
@@ -155,6 +155,6 @@ defineProps({
 }
 
 @media (max-width: 900px) {
-  .global-stats { grid-template-columns: repeat(2, 1fr); }
+  .global-stats { grid-template-columns: 1fr; }
 }
 </style>

@@ -70,13 +70,7 @@ defineProps({
   }
 }
 
-@media (max-width: 768px) {
-  .inline-detail-panel__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 900px) {
   .inline-detail-panel__grid {
     grid-template-columns: 1fr;
   }
