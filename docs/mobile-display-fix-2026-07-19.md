@@ -35,17 +35,20 @@
 - 结果：登录卡完整可见、无横向溢出；主壳 `.layout` 高度贴合视口、`padding-bottom: 96px`、`.lg-tabbar` 悬浮底栏在、`.content` 可滚
 - 截图目录：`release/mobile-smoke/`（本地产物，可不入库）
 
-## 「更多」菜单点不动（三次修复）
+## 「更多」菜单点不动（三次 / 四次修复）
 
-- **现象**：底部「更多」抽屉里部分项点了没反应
+- **现象**：底部「更多」抽屉里部分项点了没反应；用户反馈仅 DNS、设置可点
 - **根因**：
   1. iOS 上 `fixed` + `transform` 的底栏可能叠在 sheet 底部命中区之上
-  2. 「帮助 / 关于」原为 `href="#"` 死链，点了只加 hash、不跳页
+  2. 「帮助 / 关于」原为 `href="#"` 死链
+  3. 在带 `backdrop-filter` 的 sheet 上叠加 `overflow` 滚动，会在 iOS Safari 造成「部分子按钮不可点」
+  4. `router-link` + `role=menu` + 开抽屉强抢焦点，触屏上不稳定
 - **修复**：
-  - 打开抽屉时底栏 `pointer-events: none` + 降 z-index；backdrop 提到 `z-index: 200`
-  - sheet 可滚动、菜单项 `position:relative; z-index:1; touch-action:manipulation`
-  - 帮助改为跳转 `/settings`（版本/关于信息在设置页）；Sidebar 同步支持 `path`
-- **复验**：Playwright 命中测试 `allHit=true`、`covered=false`、`helpHref=/settings`；DNS/规则/订阅等可导航
+  - 打开抽屉时底栏 `pointer-events: none`；backdrop `z-index: 200`
+  - 帮助改为 `/settings`；Sidebar 同步 `path`
+  - sheet 去掉 overflow 滚动；菜单全部改为 `<button>` + `router.push`
+  - 触屏不再 autofocus；图标 `pointer-events: none`
+- **复验**：8 个按钮命中全过；规则/订阅/Proxy/设置/日志/帮助导航 PASS（Playwright）
 
 ## 纵向滑动截断（二次修复）
 
