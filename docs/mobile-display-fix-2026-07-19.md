@@ -34,3 +34,12 @@
 - 脚本：`scripts/mobile-narrow-smoke.mjs`（登录页）；主壳验收用一次性临时口令登录后**立即还原** `users.json`
 - 结果：登录卡完整可见、无横向溢出；主壳 `.layout` 高度贴合视口、`padding-bottom: 96px`、`.lg-tabbar` 悬浮底栏在、`.content` 可滚
 - 截图目录：`release/mobile-smoke/`（本地产物，可不入库）
+
+## 纵向滑动截断（二次修复）
+
+- **现象**：左右 OK，向下滑底部被裁切
+- **根因**：`MainLayout` 在 ≤900px 把 `.app-shell` 设为 `height:auto; overflow:visible`，壳随内容长高，再被 `.layout` 的 `overflow:hidden` 裁掉；`.content` 未形成真实滚动视口
+- **修复**：
+  - `MainLayout.vue`：小屏改为 layout 列 flex → shell `flex:1; min-height:0; overflow:hidden` → content `overflow-y:auto`
+  - `mobile.css`：用 `100dvh` + 同构滚动链 `!important` 加固
+- **复验（390×844 Dashboard）**：`content.scrollHeight=2017 > clientHeight=626`，滚到底 `atEnd`，末块在 Tab 上方且在 layout 内

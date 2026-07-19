@@ -128,19 +128,33 @@ onUnmounted(() => {
 }
 
 @media (max-width: 900px) {
+  /*
+   * 小屏滚动链：layout 锁视口 → app-shell 吃剩余高度 → content 独占纵向滚动。
+   * 旧版 height:auto + overflow:visible 会让壳层随内容长高，再被 layout 的
+   * overflow:hidden 裁掉底部，表现为「向下滑被截断」。
+   */
   .layout {
+    display: flex;
+    flex-direction: column;
     padding: 16px;
   }
 
   .app-shell {
+    flex: 1 1 auto;
     flex-direction: column;
+    min-height: 0;
     height: auto;
     max-height: none;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .content {
+    flex: 1 1 auto;
+    min-height: 0;
     padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .layout--embedded {

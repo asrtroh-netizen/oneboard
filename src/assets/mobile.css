@@ -83,9 +83,16 @@ select {
   }
 
   /* 覆盖 MainLayout scoped 的 16px：收紧四边并让出刘海/圆角/Home 指示条；
-     底部额外让出悬浮 Tab 栏的高度（--lg-tabbar-clearance 见 liquid-glass.css） */
+     底部额外让出悬浮 Tab 栏的高度（--lg-tabbar-clearance 见 liquid-glass.css）。
+     同时锁死滚动链，避免壳层 height:auto 撑破后被 layout overflow:hidden 裁切。 */
   .layout {
-    min-height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
     padding: 12px !important;
     padding-top: max(10px, env(safe-area-inset-top)) !important;
     padding-right: max(12px, env(safe-area-inset-right)) !important;
@@ -93,14 +100,31 @@ select {
     padding-left: max(12px, env(safe-area-inset-left)) !important;
   }
 
-  @supports (min-height: 100dvh) {
+  @supports (height: 100dvh) {
     .layout {
-      min-height: 100dvh;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
     }
   }
 
-  .app-shell {
+  .app-shell:not(.app-shell--embedded) {
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
     gap: 12px;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .content:not(.content--embedded) {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    /* 滚到底时最后一块内容不被悬浮 Tab 视觉遮挡（layout 底 padding 之外再留一点） */
+    scroll-padding-bottom: 12px;
   }
 
   /* 压制 cinematic-glass-light 的 22px/24px !important 内衬 */
