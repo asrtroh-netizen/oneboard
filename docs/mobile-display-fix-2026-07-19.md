@@ -27,3 +27,10 @@
 2. 滚动各主页面到底，确认不被底栏/地址栏裁切
 3. iOS Safari：地址栏收展时布局不跳动（依赖 `100dvh`）
 4. 刘海机：顶部/底部 safe-area 留白正常
+
+## 本机窄屏冒烟（2026-07-19）
+
+- 命令：`npm run dev`（`http://localhost:5173/`）+ Playwright 390×844 / 375×812 / 768×1024
+- 脚本：`scripts/mobile-narrow-smoke.mjs`（登录页）；主壳验收用一次性临时口令登录后**立即还原** `users.json`
+- 结果：登录卡完整可见、无横向溢出；主壳 `.layout` 高度贴合视口、`padding-bottom: 96px`、`.lg-tabbar` 悬浮底栏在、`.content` 可滚
+- 截图目录：`release/mobile-smoke/`（本地产物，可不入库）
