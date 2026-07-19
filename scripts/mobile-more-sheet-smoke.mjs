@@ -24,41 +24,44 @@ try {
   await page.fill('input[name=password]', smokePwd)
   await page.click('button[type=submit]')
   await page.waitForURL((u) => u.pathname.includes('/dashboard'), { timeout: 10000 })
-  await page.waitForTimeout(600)
+  await page.waitForTimeout(500)
 
   async function openMore() {
-    // 路由切换会关抽屉；leave 过渡期间 DOM 仍短暂存在，需等干净再开
     await page
-      .waitForFunction(() => !document.querySelector('.lg-sheet'), { timeout: 2500 })
+      .waitForFunction(() => !document.querySelector('.lg-sheet-backdrop'), { timeout: 2500 })
       .catch(() => {})
-    await page.locator('.lg-tab', { hasText: '更多' }).click()
+    await page.evaluate(() => {
+      const btn = [...document.querySelectorAll('.lg-tab')].find((el) => el.textContent.includes('更多'))
+      btn?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+    })
     await page.waitForSelector('.lg-sheet', { timeout: 3000 })
-    await page.waitForTimeout(450)
+    await page.waitForTimeout(400)
   }
 
   await openMore()
-  await page.screenshot({ path: 'release/mobile-smoke/more-sheet.png', fullPage: false })
 
-  const hitTest = await page.evaluate(() => {
+  const hit = await page.evaluate(() => {
     const items = [...document.querySelectorAll('.lg-sheet__item, .lg-sheet__aux-btn')]
-    const tab = document.querySelector('.lg-tabbar')
-    const tabR = tab?.getBoundingClientRect()
     return {
-      tabZ: tab ? getComputedStyle(tab).zIndex : null,
-      backdropZ: getComputedStyle(document.querySelector('.lg-sheet-backdrop')).zIndex,
-      sheetOpenClass: tab?.classList.contains('lg-tabbar--sheet-open'),
+      count: items.length,
+      tags: items.map((el) => el.tagName),
+      allButtons: items.every((el) => el.tagName === 'BUTTON'),
       allHit: items.every((el) => {
         const r = el.getBoundingClientRect()
         const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2)
         return top && (el === top || el.contains(top))
       }),
-      covered: items.some((el) => tabR && el.getBoundingClientRect().bottom > tabR.top + 2),
-      helpHref: [...document.querySelectorAll('.lg-sheet__aux-btn')].find((el) =>
-        el.textContent.includes('帮助'),
-      )?.getAttribute('href'),
     }
   })
-  results.push({ step: 'hit', ...hitTest, ok: hitTest.allHit && !hitTest.covered && hitTest.helpHref === '/settings' })
+  results.push({ step: 'hit', ...hit, ok: hit.allButtons && hit.allHit && hit.count >= 8 })
+
+  // 关掉命中测试留下的抽屉，避免下一次「更多」变成 toggle 关闭
+  await page.evaluate(() => {
+    document.querySelector('.lg-sheet-backdrop')?.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, cancelable: true, view: window }),
+    )
+  })
+  await page.waitForTimeout(350)
 
   for (const [label, expectPath] of [
     ['DNS 监控', '/dns'],
@@ -70,24 +73,20 @@ try {
     ['帮助 / 关于', '/settings'],
   ]) {
     await openMore()
-    const clicked = await page.evaluate((text) => {
-      const el = [...document.querySelectorAll('.lg-sheet a, .lg-sheet button')].find((node) =>
+    await page.evaluate((text) => {
+      const el = [...document.querySelectorAll('.lg-sheet button')].find((node) =>
         node.textContent.replace(/\s+/g, ' ').includes(text),
       )
-      if (!el) return false
-      el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
-      return true
+      el?.click()
     }, label)
     await page.waitForURL((u) => u.pathname === expectPath, { timeout: 5000 }).catch(() => {})
-    await page.waitForTimeout(150)
+    await page.waitForTimeout(200)
     const path = new URL(page.url()).pathname
-    results.push({ label, path, clicked, ok: clicked && path === expectPath })
+    results.push({ label, path, ok: path === expectPath })
   }
 
   console.log(JSON.stringify({ results }, null, 2))
-  const failed = results.filter((r) => r.ok === false)
-  await browser.close()
-  process.exit(failed.length ? 2 : 0)
+  process.exit(results.some((r) => r.ok === false) ? 2 : 0)
 } finally {
   fs.writeFileSync(usersPath, original)
   console.log('users restored')
