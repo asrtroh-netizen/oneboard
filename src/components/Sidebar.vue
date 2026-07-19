@@ -35,6 +35,11 @@ function onAuxClick(item, event) {
   if (item.action === 'logout') {
     event.preventDefault()
     void handleLogout()
+    return
+  }
+  if (item.path) {
+    event.preventDefault()
+    void router.push(item.path)
   }
 }
 </script>
@@ -76,8 +81,24 @@ function onAuxClick(item, event) {
         <div class="cp-sidebar__rail-divider" aria-hidden="true" />
 
         <template v-for="item in NAV_AUXILIARY" :key="item.id">
+          <router-link
+            v-if="item.path"
+            :to="item.path"
+            class="cp-nav-item cp-nav-item--aux"
+            :class="{ active: matchNavItem(route.path, item) }"
+          >
+            <span class="cp-nav-item__icon-wrap">
+              <MIcon
+                v-if="item.icon"
+                :name="item.icon"
+                size="sm"
+                class="cp-nav-item__icon"
+              />
+            </span>
+            <span class="cp-nav-item__label">{{ item.label }}</span>
+          </router-link>
           <a
-            v-if="item.href"
+            v-else-if="item.href"
             :href="item.href"
             class="cp-nav-item cp-nav-item--aux"
           >
@@ -94,7 +115,8 @@ function onAuxClick(item, event) {
           <button
             v-else
             type="button"
-            class="cp-nav-item cp-nav-item--aux cp-nav-item--danger"
+            class="cp-nav-item cp-nav-item--aux"
+            :class="{ 'cp-nav-item--danger': item.action === 'logout' }"
             @click="onAuxClick(item, $event)"
           >
             <span class="cp-nav-item__icon-wrap">

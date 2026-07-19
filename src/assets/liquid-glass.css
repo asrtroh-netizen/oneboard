@@ -124,6 +124,12 @@
   pointer-events: none;
 }
 
+/* 抽屉打开时：底栏让出命中（避免 iOS 上 fixed+transform 叠在 sheet 底部菜单之上） */
+.lg-tabbar--sheet-open {
+  pointer-events: none;
+  z-index: 80;
+}
+
 .lg-tab {
   flex: 1 1 0;
   min-width: 0;
@@ -196,7 +202,7 @@
 .lg-sheet-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 96;
+  z-index: 200;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -207,11 +213,18 @@
 
 .lg-sheet {
   width: min(520px, 100%);
+  max-height: min(72vh, 560px);
   margin: 0 12px;
   margin-bottom: calc(var(--lg-tabbar-clearance) + 6px);
   padding: 10px 14px calc(14px + env(safe-area-inset-bottom) * 0.3);
   border-radius: 30px;
   transform-origin: 50% 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  /* 保证菜单项叠在材质伪元素之上，可点 */
+  isolation: isolate;
 }
 
 .lg-sheet__handle {
@@ -230,6 +243,8 @@
 }
 
 .lg-sheet__item {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -247,6 +262,7 @@
   text-decoration: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
 }
 
@@ -273,12 +289,14 @@
 }
 
 .lg-sheet__aux-btn {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: 42px;
+  min-height: 44px;
   border: 1px solid transparent;
   border-radius: 999px;
   background: transparent;
@@ -288,6 +306,7 @@
   text-decoration: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: color 0.22s ease, background 0.22s ease;
 }
 

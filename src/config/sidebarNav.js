@@ -33,7 +33,8 @@ export const NAV_MODULES = [
 ]
 
 export const NAV_AUXILIARY = [
-  { id: 'help', label: '帮助 / 关于', icon: 'help_outline', href: '#' },
+  /** 暂无独立关于页：复用设置页版本/关于信息区 */
+  { id: 'help', label: '帮助 / 关于', icon: 'help_outline', path: '/settings' },
   { id: 'logout', label: '退出登录', icon: 'logout', action: 'logout' },
 ]
 

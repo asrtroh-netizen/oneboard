@@ -35,6 +35,18 @@
 - 结果：登录卡完整可见、无横向溢出；主壳 `.layout` 高度贴合视口、`padding-bottom: 96px`、`.lg-tabbar` 悬浮底栏在、`.content` 可滚
 - 截图目录：`release/mobile-smoke/`（本地产物，可不入库）
 
+## 「更多」菜单点不动（三次修复）
+
+- **现象**：底部「更多」抽屉里部分项点了没反应
+- **根因**：
+  1. iOS 上 `fixed` + `transform` 的底栏可能叠在 sheet 底部命中区之上
+  2. 「帮助 / 关于」原为 `href="#"` 死链，点了只加 hash、不跳页
+- **修复**：
+  - 打开抽屉时底栏 `pointer-events: none` + 降 z-index；backdrop 提到 `z-index: 200`
+  - sheet 可滚动、菜单项 `position:relative; z-index:1; touch-action:manipulation`
+  - 帮助改为跳转 `/settings`（版本/关于信息在设置页）；Sidebar 同步支持 `path`
+- **复验**：Playwright 命中测试 `allHit=true`、`covered=false`、`helpHref=/settings`；DNS/规则/订阅等可导航
+
 ## 纵向滑动截断（二次修复）
 
 - **现象**：左右 OK，向下滑底部被裁切

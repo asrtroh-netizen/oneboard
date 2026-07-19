@@ -53,6 +53,10 @@ async function onAux(item) {
   if (item.action === 'logout') {
     await logout()
     await router.push('/login')
+    return
+  }
+  if (item.path) {
+    await router.push(item.path)
   }
 }
 </script>
@@ -60,8 +64,13 @@ async function onAux(item) {
 <template>
   <nav
     class="lg-tabbar lg-material"
-    :class="{ 'lg-tabbar--min': minimized && !moreOpen, 'lg-tabbar--hidden': keyboardHidden }"
+    :class="{
+      'lg-tabbar--min': minimized && !moreOpen,
+      'lg-tabbar--hidden': keyboardHidden,
+      'lg-tabbar--sheet-open': moreOpen,
+    }"
     aria-label="移动端主导航"
+    :aria-hidden="moreOpen ? 'true' : undefined"
   >
     <router-link
       v-for="item in primary"
@@ -114,8 +123,18 @@ async function onAux(item) {
           <div class="lg-sheet__divider" aria-hidden="true" />
           <div class="lg-sheet__aux">
             <template v-for="item in NAV_AUXILIARY" :key="item.id">
+              <router-link
+                v-if="item.path"
+                :to="item.path"
+                class="lg-sheet__aux-btn"
+                role="menuitem"
+                @click="moreOpen = false"
+              >
+                <MIcon :name="item.icon" size="sm" />
+                {{ item.label }}
+              </router-link>
               <a
-                v-if="item.href"
+                v-else-if="item.href"
                 :href="item.href"
                 class="lg-sheet__aux-btn"
                 role="menuitem"
@@ -127,7 +146,8 @@ async function onAux(item) {
               <button
                 v-else
                 type="button"
-                class="lg-sheet__aux-btn lg-sheet__aux-btn--danger"
+                class="lg-sheet__aux-btn"
+                :class="{ 'lg-sheet__aux-btn--danger': item.action === 'logout' }"
                 role="menuitem"
                 @click="onAux(item)"
               >
