@@ -1,7 +1,7 @@
 import { getSystemInfo } from './systemInfo.js'
 import { getOnebordVersionInfo } from './onebordVersion.js'
 import { getMihomoLatestRemote } from './mihomoLatest.js'
-import { handleRateLimitedLogin, handleLogoutRequest } from './loginAuth.js'
+import { handleLoginRequest, handleLogoutRequest } from './loginAuth.js'
 import { handleChangePasswordRequest } from './changePassword.js'
 import { parseBearerToken, getSession } from './sessionStore.js'
 import { ensureUserDb } from './userDb.js'
@@ -84,7 +84,7 @@ function attachLoginRoutes(server) {
     }
     try {
       const body = await readJsonBody(req)
-      const data = handleRateLimitedLogin(req, body)
+      const data = handleLoginRequest(body)
       sendJson(res, 200, data)
     } catch (err) {
       sendJson(res, err.status || 401, { message: err?.message || '登录失败' })
@@ -216,14 +216,42 @@ function attachApiRoutes(server) {
   attachMihomoConfigRoutes(server)
 }
 
+/**
+ * 手机/代理断开时底层 TCP 常抛 ECONNRESET；若不监听，Node 会把
+ * Socket 'error' 当成未处理异常直接打崩整个 Vite 进程，表现为「网页打不开」。
+ */
+function hardenHttpServer(httpServer) {
+  if (!httpServer || httpServer.__onebordHardened) return
+  httpServer.__onebordHardened = true
+
+  httpServer.on('clientError', (_err, socket) => {
+    try {
+      socket.destroy()
+    } catch {
+      /* ignore */
+    }
+  })
+
+  httpServer.on('connection', (socket) => {
+    socket.on('error', () => {
+      /* swallow transient socket errors (ECONNRESET / EPIPE) */
+    })
+  })
+}
+
 export function systemInfoPlugin() {
   return {
     name: 'onebord-system-info',
     configureServer(server) {
       attachApiRoutes(server)
+      hardenHttpServer(server.httpServer)
+      // httpServer 可能稍晚才就绪
+      queueMicrotask(() => hardenHttpServer(server.httpServer))
     },
     configurePreviewServer(server) {
       attachApiRoutes(server)
+      hardenHttpServer(server.httpServer)
+      queueMicrotask(() => hardenHttpServer(server.httpServer))
     },
   }
 }
