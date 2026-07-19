@@ -26,7 +26,7 @@ export const effectiveTheme = computed(() => resolveEffective(themeState.mode))
 export const isDark = computed(() => effectiveTheme.value === 'dark')
 
 /** 与 index.html / manifest.webmanifest 保持一致的系统级 UI 着色 */
-const THEME_COLORS = { dark: '#070812', light: '#e8edff' }
+const THEME_COLORS = { dark: '#050507', light: '#e8edff' }
 
 /**
  * 同步 meta[name=theme-color]，让 Android 状态栏 / iOS Safari 标签栏

@@ -338,3 +338,65 @@ select {
     }
   }
 }
+
+/* ── 7. 移动端暗色：更深墨黑，去掉顶区蓝紫光晕 ── */
+
+@media (max-width: 900px) {
+  html[data-theme='dark'],
+  html[data-theme='dark'] body,
+  html[data-theme='dark'] #app {
+    background-color: #050507 !important;
+    background-image: linear-gradient(180deg, #0a0a0c 0%, #050507 55%, #030305 100%) !important;
+  }
+
+  [data-theme='dark'] {
+    --bg-base: #050507;
+    --bg-surface: rgba(18, 18, 20, 0.72);
+    --shell-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
+    --glass-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.5),
+      0 0 28px rgba(0, 0, 0, 0.2);
+    --cp-dock-bg: linear-gradient(
+      168deg,
+      rgba(22, 22, 26, 0.96) 0%,
+      rgba(14, 14, 16, 0.98) 52%,
+      rgba(10, 10, 12, 0.99) 100%
+    );
+    --cp-dock-border: rgba(255, 255, 255, 0.1);
+    --cp-dock-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 16px 36px rgba(0, 0, 0, 0.55);
+    --cp-dock-divider: rgba(255, 255, 255, 0.08);
+    /* Tab / 顶栏液态玻璃：去蓝紫高光，改中性深灰 */
+    --lg-surface: linear-gradient(
+      155deg,
+      rgba(32, 32, 36, 0.9) 0%,
+      rgba(16, 16, 18, 0.94) 100%
+    );
+    --lg-surface-solid: #121214;
+    --lg-border: rgba(255, 255, 255, 0.12);
+    --lg-specular: rgba(255, 255, 255, 0.1);
+    --lg-pill: rgba(255, 255, 255, 0.08);
+    --lg-pill-border: rgba(255, 255, 255, 0.14);
+    --lg-text-active: #f4f4f5;
+    --lg-tab-accent: #a1a1aa;
+  }
+
+  [data-theme='dark'] .cp-sidebar__dock {
+    background: var(--cp-dock-bg) !important;
+    border-color: var(--cp-dock-border) !important;
+    box-shadow: var(--cp-dock-shadow) !important;
+  }
+
+  [data-theme='dark'] .lg-tabbar.lg-material,
+  [data-theme='dark'] .lg-sheet.lg-material {
+    background: var(--lg-surface) !important;
+    border-color: var(--lg-border) !important;
+  }
+
+  [data-theme='dark'] .lg-material::before {
+    background:
+      radial-gradient(120% 65% at 50% -12%, rgba(255, 255, 255, 0.08) 0%, transparent 58%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 34%) !important;
+  }
+}
