@@ -102,9 +102,13 @@
   }
 }
 
-@media (max-width: 768px) {
+/* 与 mobile 断点（900px）对齐：每张卡独占一行 */
+@media (max-width: 900px) {
   .dashboard-shell .stat-row,
-  .dashboard-shell .info-row {
+  .dashboard-shell .info-row,
+  .dashboard-shell .country-grid,
+  .dashboard-shell .global-stats,
+  .dashboard-shell .traffic-charts {
     grid-template-columns: 1fr;
   }
 }

@@ -141,6 +141,21 @@ select {
   .status-hero__visual {
     display: none !important;
   }
+
+  /* 仪表盘多列卡：强制每卡一行（压过 scoped 的 repeat(3/4)） */
+  .dashboard .stat-row,
+  .dashboard .info-row,
+  .dashboard .traffic-charts,
+  .dashboard .country-grid,
+  .dashboard .global-stats,
+  .dashboard-shell .stat-row,
+  .dashboard-shell .info-row,
+  .dashboard-shell .traffic-charts,
+  .dashboard-shell .country-grid,
+  .dashboard-shell .global-stats,
+  .status-hero__layer--metrics {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* ── 4. ≤900px 侧边栏 → 顶部玻璃导航坞 ── */

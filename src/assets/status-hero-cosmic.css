@@ -675,8 +675,9 @@
   }
 }
 
-@media (max-width: 720px) {
-  [data-theme='dark'] .status-hero__layer--metrics {
+@media (max-width: 900px) {
+  [data-theme='dark'] .status-hero__layer--metrics,
+  [data-theme='light'] .status-hero__layer--metrics {
     grid-template-columns: 1fr;
     max-width: 100%;
   }

@@ -352,6 +352,15 @@ function kernelStatusLabel() {
   margin-bottom: 0;
 }
 
+/* 与全局移动断点对齐：小屏每个卡片独占一行，避免被挤成 1/4 宽 */
+@media (max-width: 900px) {
+  .stat-row,
+  .info-row,
+  .traffic-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
 .status-pill.offline .dot {
   background: var(--text-muted);
   box-shadow: none;
