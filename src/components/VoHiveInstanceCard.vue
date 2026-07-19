@@ -706,4 +706,88 @@ onMounted(() => start())
   background: rgba(15, 23, 42, 0.03);
   border-color: rgba(15, 23, 42, 0.12);
 }
+
+/* 小屏：配置头单列排开，避免 150px 输入框乱折成「一坨」 */
+@media (max-width: 900px) {
+  .vohive-instance {
+    gap: 14px;
+    padding: 14px 12px;
+  }
+
+  .vhi-head {
+    gap: 14px;
+  }
+
+  .vhi-head__row--top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .vhi-title {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .vhi-title__input {
+    width: auto;
+    flex: 1 1 120px;
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .vhi-title__upstream {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+
+  .vhi-head__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .vhi-head__actions .vohive-at-input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .vhi-head__actions .vhi-btn {
+    width: 100%;
+    justify-content: center;
+    align-self: stretch;
+  }
+
+  .vhi-head__row--config {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .vhi-field,
+  .vhi-field--port {
+    width: 100%;
+  }
+
+  .vhi-field input,
+  .vhi-field--port input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 11px 12px;
+  }
+
+  .vhi-head__row--config .vhi-btn {
+    width: 100%;
+    justify-content: center;
+    align-self: stretch;
+    min-height: 44px;
+  }
+
+  .vhi-btn:hover:not(:disabled) {
+    transform: none;
+  }
+}
 </style>
