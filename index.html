@@ -6,7 +6,7 @@
     <!-- viewport-fit=cover：允许内容延伸进 iOS 刘海/灵动岛区域，由 CSS safe-area 接管留白 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- Android/iOS 系统级 UI 着色（状态栏 / Safari 标签栏），运行时由主题切换动态同步 -->
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#050507" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#070812" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8edff" />
     <!-- 添加到主屏幕：Android（W3C manifest）+ iOS（apple-* 专属标签） -->
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -38,8 +38,11 @@
       }
 
       html[data-theme='dark'] {
-        background-color: #050507;
-        background-image: linear-gradient(180deg, #0a0a0c 0%, #050507 52%, #030305 100%);
+        background-color: #070812;
+        background-image:
+          radial-gradient(circle at 72% 16%, rgba(139, 92, 246, 0.07), transparent 42%),
+          radial-gradient(circle at 18% 12%, rgba(120, 100, 220, 0.045), transparent 52%),
+          linear-gradient(180deg, #0a0818 0%, #050610 100%);
         background-attachment: fixed;
         background-repeat: no-repeat;
       }

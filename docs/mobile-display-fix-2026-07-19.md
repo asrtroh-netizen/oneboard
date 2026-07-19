@@ -59,8 +59,8 @@
   - `mobile.css`：用 `100dvh` + 同构滚动链 `!important` 加固
 - **复验（390×844 Dashboard）**：`content.scrollHeight=2017 > clientHeight=626`，滚到底 `atEnd`，末块在 Tab 上方且在 layout 内
 
-## 暗色去玻璃质感（2026-07-19）
+## 暗色去玻璃质感（2026-07-19）→ 已按用户要求回退配色
 
-- **现象**：移动端暗色仍是半透明模糊 + 紫角高光，「一坨玻璃」
-- **处置**：`mobile.css` §7（≤900px + dark）统一关掉 `backdrop-filter`，隐藏 glass `::before/::after`，卡片/底栏/VoHive frame 改为实心 `#141416`，页底 `#050507`；选中绿态仅保留实心描边
-- **验收**：手机暗色硬刷 VoHive / 仪表盘，卡片应不透底、无模糊、无蓝紫晕
+- 曾尝试墨黑 / 去玻璃；用户反馈「布局 OK，颜色回退上一版」
+- **保留**：单列网格、VoHive 表单疏朗等布局修复
+- **回退**：`index.html` / `theme.js` 暗色底与紫径向；删除 `mobile.css` §7 全部暗色覆盖
