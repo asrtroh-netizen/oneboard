@@ -1,7 +1,7 @@
 {
   "name": "oneboard",
   "private": true,
-  "version": "1.1",
+  "version": "1.2",
   "description": "OneBoard V1.1 — host-aware control plane for Mihomo, VoHive, and runtime telemetry",
   "type": "module",
   "scripts": {
