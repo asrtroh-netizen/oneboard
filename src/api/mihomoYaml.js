@@ -124,6 +124,23 @@ function looksLikeMihomoYaml(text) {
     || (trimmed.includes('rules:') && trimmed.includes(':'))
 }
 
+/** 运行时拼装的最小 YAML（通常无 proxies 节点段）不可安全 PUT 回写 */
+export function isRuntimeOnlyConfigYaml(yaml, source = '') {
+  if (String(source || '') === 'remote-runtime') return true
+  const text = String(yaml || '')
+  if (!text.trim()) return false
+  const hasProxies = /(^|\n)\s*proxies\s*:/m.test(text)
+  const hasGroupsOrRules = /(^|\n)\s*(proxy-groups|rules)\s*:/m.test(text)
+  return !hasProxies && hasGroupsOrRules
+}
+
+export function assertConfigYamlWritable(yaml, source = '') {
+  if (!isRuntimeOnlyConfigYaml(yaml, source)) return
+  throw new Error(
+    '当前只有运行时快照，没有完整配置 YAML（缺 proxies/订阅 URL）。OpenClash 无法经 API 导出完整文件；请先在设置页导入完整 YAML，再回规则页同步',
+  )
+}
+
 export async function getMihomoStorageValue(key) {
   const text = await mihomoApiRequest(`/storage/${encodeURIComponent(key)}`, {
     trackLoading: false,
@@ -312,6 +329,7 @@ export async function applyMihomoConfigYaml(yaml) {
 export async function saveMihomoConfigYaml(yaml) {
   const text = String(yaml || '').trim()
   if (!text) throw new Error('YAML 内容不能为空')
+  assertConfigYamlWritable(text)
 
   await applyMihomoConfigYaml(text)
   await cacheMihomoConfigYamlText(text).catch(() => false)

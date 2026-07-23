@@ -21,6 +21,7 @@ export function useRulesPageView() {
   const blocks = ref([])
   const overflow = ref([])
   const configYaml = ref('')
+  const yamlSource = ref('')
   const storageUpdatedAt = ref(null)
   const loading = ref(true)
   const saving = ref(false)
@@ -92,12 +93,15 @@ export function useRulesPageView() {
     ])
 
     configYaml.value = yamlBundle?.yaml || configYaml.value || ''
+    yamlSource.value = yamlBundle?.source || yamlSource.value || ''
     storageUpdatedAt.value = yamlBundle?.updatedAt || storageUpdatedAt.value
 
     if (!configYaml.value) {
       configWarning.value = reloadYaml
         ? '远程后端尚无完整 YAML，同步时将尝试写入 rules 段'
         : '无法从远程后端读取 YAML'
+    } else if (yamlBundle?.source === 'remote-runtime') {
+      configWarning.value = '当前为运行时快照（非完整配置文件）。请先在设置页导入完整 YAML，再同步规则'
     }
 
     const apiRules = (rulesData?.rules || []).map((r, i) => normalizeApiRule(r, i)).filter(Boolean)
@@ -152,6 +156,11 @@ export function useRulesPageView() {
       const baseYaml = await loadBaseYaml({ reloadYaml: false })
       if (!baseYaml) {
         throw new Error('远程后端中无 YAML，请先同步配置')
+      }
+      if (yamlSource.value === 'remote-runtime' || !/(^|\n)\s*proxies\s*:/m.test(baseYaml)) {
+        throw new Error(
+          '当前只有运行时快照，没有完整配置 YAML（缺 proxies/订阅 URL）。OpenClash 无法经 API 导出完整文件；请先在设置页导入完整 YAML，再回规则页同步',
+        )
       }
 
       const nextYaml = buildReconciledYaml(baseYaml)

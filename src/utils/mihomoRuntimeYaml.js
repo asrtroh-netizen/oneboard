@@ -75,21 +75,40 @@ function buildRulesSection(rulesData) {
   return count ? lines : []
 }
 
+const PROVIDER_VEHICLE_TYPES = new Set(['http', 'file', 'inline'])
+
+function resolveProviderVehicleType(provider = {}) {
+  const vehicle = String(provider.vehicleType || provider.vehicle_type || '').trim()
+  const rawType = vehicle || String(provider.type || '').trim()
+  if (!rawType) return ''
+  // REST 常把提供者类别写成 Proxy/Rule；YAML 需要的是载具类型
+  if (/^(proxy|rule)$/i.test(rawType)) return ''
+  return rawType.toLowerCase()
+}
+
 function buildProxyProvidersSection(providersData) {
   const providers = providersData?.providers || {}
   const names = Object.keys(providers)
   if (!names.length) return []
 
   const lines = ['proxy-providers:']
+  let count = 0
   for (const name of names.sort()) {
     const provider = providers[name] || {}
+    const yamlType = resolveProviderVehicleType(provider)
+    if (!PROVIDER_VEHICLE_TYPES.has(yamlType)) continue
+    // 运行时快照通常不含订阅 URL；缺 url/path 的 http/file 无法安全回写
+    if (yamlType === 'http' && !provider.url) continue
+    if (yamlType === 'file' && !provider.path && !provider.url) continue
+
+    count += 1
     lines.push(`  ${yamlScalar(name)}:`)
-    lines.push(`    type: ${yamlScalar(provider.type || provider.vehicleType || 'http')}`)
+    lines.push(`    type: ${yamlScalar(yamlType)}`)
     if (provider.url) lines.push(`    url: ${yamlScalar(provider.url)}`)
     if (provider.path) lines.push(`    path: ${yamlScalar(provider.path)}`)
     if (provider.interval != null) lines.push(`    interval: ${Number(provider.interval) || 3600}`)
   }
-  return lines
+  return count ? lines : []
 }
 
 export function buildYamlFromRemoteSnapshot({ proxies, rules, providers } = {}) {
