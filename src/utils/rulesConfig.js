@@ -100,6 +100,19 @@ export function extractRuleRawsFromConfigYaml(yamlText) {
   return raws
 }
 
+/** YAML rules 段是否带 # === / # == 分组注释（可直接当网页分组真源） */
+export function yamlRulesHasGroupMarkers(yamlText) {
+  const { sectionStart, sectionEnd, lines } = findRulesSection(yamlText)
+  if (sectionStart < 0) return false
+  for (let i = sectionStart + 1; i < sectionEnd; i += 1) {
+    const trimmed = lines[i].trim()
+    if (!trimmed.startsWith('#')) continue
+    const content = trimmed.slice(1).trim()
+    if (/^={2,}\s*.+?\s*={2,}$/.test(content)) return true
+  }
+  return false
+}
+
 function multisetDiff(leftKeys, rightKeys) {
   const count = (keys) => {
     const map = new Map()

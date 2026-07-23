@@ -6,12 +6,13 @@ import {
   applyEditorStoreToView,
   applyGroupYamlEdit,
   buildRulesPageView,
+  buildRulesPageViewFromYaml,
   flattenBlocksToApiRules,
   loadRulesEditorStore,
   normalizeApiRule,
   saveRulesEditorStore,
 } from '../utils/rulesDsl'
-import { applyRulesSectionToConfigYaml, compareRulesSync } from '../utils/rulesConfig'
+import { applyRulesSectionToConfigYaml, compareRulesSync, yamlRulesHasGroupMarkers } from '../utils/rulesConfig'
 import { formatSyncUpdatedAt } from '../utils/mihomoConfigSync'
 import rulesDslText from '../data/rules.dsl?raw'
 
@@ -105,14 +106,31 @@ export function useRulesPageView() {
     }
 
     const apiRules = (rulesData?.rules || []).map((r, i) => normalizeApiRule(r, i)).filter(Boolean)
-    let merged = buildRulesPageView(rulesDslText, apiRules)
 
-    const store = loadRulesEditorStore()
-    if (store?.groupOverrides) {
-      merged = applyEditorStoreToView(merged, store)
-      hasLocalEdits.value = true
-    } else {
+    let merged
+    const yamlText = configYaml.value
+    if (yamlText && yamlRulesHasGroupMarkers(yamlText)) {
+      // 真源：YAML 注释分组 + 规则行（可编辑即改 YAML）
+      merged = buildRulesPageViewFromYaml(yamlText)
       hasLocalEdits.value = false
+      if (!configWarning.value && yamlBundle?.source === 'remote-runtime') {
+        configWarning.value = '当前 YAML 来自运行时快照；建议导入完整配置后再同步写回'
+      }
+    } else {
+      // 回退：内置 DSL 骨架 + 运行规则按内容对齐
+      merged = buildRulesPageView(rulesDslText, apiRules)
+      const store = loadRulesEditorStore()
+      if (store?.groupOverrides) {
+        merged = applyEditorStoreToView(merged, store)
+        hasLocalEdits.value = true
+      } else {
+        hasLocalEdits.value = false
+      }
+      if (yamlText && !yamlRulesHasGroupMarkers(yamlText)) {
+        configWarning.value =
+          configWarning.value ||
+          '当前 YAML 无 # === / # == 分组注释，已用内置骨架按内容对齐；导入带注释的完整 YAML 后将与文件一一对应'
+      }
     }
 
     blocks.value = merged.blocks

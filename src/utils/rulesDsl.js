@@ -513,6 +513,121 @@ export function buildRulesPageView(dslText, apiRules) {
   return mergeDslWithApiRules(dsl, apiRules)
 }
 
+/**
+ * 直接从配置 YAML 的 rules: 段（含 # === / # == 注释）生成可编辑分组。
+ * 分组结构 = YAML 注释，规则内容 = YAML 行——与文件一一对应。
+ */
+export function buildRulesPageViewFromYaml(yamlText) {
+  const text = String(yamlText || '')
+  const lines = text.split(/\r?\n/)
+  let sectionStart = -1
+  let sectionEnd = lines.length
+  for (let i = 0; i < lines.length; i += 1) {
+    if (/^rules:\s*$/.test(lines[i])) {
+      sectionStart = i
+      for (let j = i + 1; j < lines.length; j += 1) {
+        if (/^[a-zA-Z][\w-]*:\s*$/.test(lines[j]) && !lines[j].startsWith('rules:')) {
+          sectionEnd = j
+          break
+        }
+      }
+      break
+    }
+  }
+
+  const slice =
+    sectionStart >= 0
+      ? lines.slice(sectionStart, sectionEnd).join('\n')
+      : text
+
+  const blocks = []
+  let currentBlock = null
+  let currentGroup = null
+  let ruleIndex = 0
+
+  function ensureBlock(name = '未命名区块') {
+    if (!currentBlock) {
+      currentBlock = { id: `block-${blocks.length}`, name, groups: [] }
+      blocks.push(currentBlock)
+    }
+  }
+
+  function ensureGroup(name = '默认') {
+    ensureBlock()
+    if (!currentGroup) {
+      currentGroup = {
+        id: `${currentBlock.id}-group-${currentBlock.groups.length}`,
+        name,
+        slotCount: 0,
+        expectedRaws: [],
+        rules: [],
+      }
+      currentBlock.groups.push(currentGroup)
+    }
+  }
+
+  for (const rawLine of slice.split(/\r?\n/)) {
+    const line = rawLine.trim()
+    if (!line || line === 'rules:') continue
+
+    const marker = parseMarker(line)
+    if (marker?.kind === 'block') {
+      currentBlock = { id: `block-${blocks.length}`, name: marker.name, groups: [] }
+      blocks.push(currentBlock)
+      currentGroup = null
+      continue
+    }
+    if (marker?.kind === 'group') {
+      ensureBlock()
+      currentGroup = {
+        id: `${currentBlock.id}-group-${currentBlock.groups.length}`,
+        name: marker.name,
+        slotCount: 0,
+        expectedRaws: [],
+        rules: [],
+      }
+      currentBlock.groups.push(currentGroup)
+      continue
+    }
+
+    if (line.startsWith('-') || (line.startsWith('#') && line.includes('-'))) {
+      let body = line
+      let enabled = true
+      if (line.startsWith('#')) {
+        const uncommented = line.replace(/^#\s*/, '')
+        if (!uncommented.startsWith('-')) continue
+        body = uncommented
+        enabled = false
+      }
+      const parsed = parseRawClashLine(body.replace(/^-\s*/, ''))
+      if (!parsed) continue
+      ensureGroup()
+      const display = toRuleDisplayModel({ ...parsed, enabled, index: ruleIndex }, ruleIndex)
+      if (display) {
+        currentGroup.rules.push(display)
+        currentGroup.expectedRaws.push(parsed.raw)
+        currentGroup.slotCount += 1
+        ruleIndex += 1
+      }
+    }
+  }
+
+  for (const block of blocks) {
+    block.ruleCount = block.groups.reduce((sum, g) => sum + (g.rules?.length || 0), 0)
+  }
+
+  return {
+    blocks,
+    overflow: [],
+    stats: {
+      totalApi: ruleIndex,
+      mappedCount: ruleIndex,
+      slotCount: ruleIndex,
+    },
+    source: 'yaml',
+  }
+}
+
 export function loadRulesEditorStore() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
