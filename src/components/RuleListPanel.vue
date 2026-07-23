@@ -1,6 +1,7 @@
 <script setup>
 import RuleSubCard from './RuleSubCard.vue'
 import WifiCallAddRuleCard from './WifiCallAddRuleCard.vue'
+import { clashBackendLabel } from '../stores/clashBackend'
 
 defineProps({
   rules: { type: Array, default: () => [] },
@@ -8,6 +9,8 @@ defineProps({
 })
 
 defineEmits(['toggle-rule', 'edit-rule', 'copy-rule', 'delete-rule', 'add-rule'])
+
+const backendLabel = clashBackendLabel
 </script>
 
 <template>
@@ -43,7 +46,7 @@ defineEmits(['toggle-rule', 'edit-rule', 'copy-rule', 'delete-rule', 'add-rule']
     </div>
 
     <div v-else class="rule-list-empty">
-      等待 Mihomo API 返回规则…
+      等待 {{ backendLabel }} API 返回规则…
     </div>
   </div>
 </template>

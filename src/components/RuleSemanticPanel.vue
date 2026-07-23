@@ -2,6 +2,7 @@
 import { computed, reactive, ref, watch } from 'vue'
 import RuleSemanticBucketCard from './RuleSemanticBucketCard.vue'
 import { buildSemanticBuckets } from '../utils/ruleSemantic'
+import { clashBackendLabel } from '../stores/clashBackend'
 
 const props = defineProps({
   rules: { type: Array, default: () => [] },
@@ -9,6 +10,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['edit-group'])
+const backendLabel = clashBackendLabel
 
 const showHidden = ref(false)
 const open = reactive({})
@@ -91,7 +93,7 @@ function onBucketEdit() {
     </div>
 
     <div v-else class="semantic-empty">
-      等待 Mihomo API 返回规则…
+      等待 {{ backendLabel }} API 返回规则…
     </div>
   </div>
 </template>

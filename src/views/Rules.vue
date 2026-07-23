@@ -4,8 +4,10 @@ import RuleBlockSection from '../components/RuleBlockSection.vue'
 import RuleGroupEditor from '../components/RuleGroupEditor.vue'
 import { useRulesPageView } from '../composables/useRulesPageView'
 import { useAppStore } from '../stores/app'
+import { clashBackendLabel } from '../stores/clashBackend'
 
 const { showToast } = useAppStore()
+const backendLabel = clashBackendLabel
 const {
   blocks,
   overflow,
@@ -72,7 +74,7 @@ async function onSaveEditor(yamlText) {
     return
   }
 
-  showToast(`「${group.name}」规则已保存并应用到 Mihomo`, 'success')
+  showToast(`「${group.name}」规则已保存并应用到 ${backendLabel.value}`, 'success')
   closeEditor()
 }
 
@@ -87,7 +89,7 @@ async function onSync() {
 
   showToast(
     syncStatus.value === 'ok'
-      ? '规则已写入 Storage 并应用到 Mihomo'
+      ? `规则已写入并应用到 ${backendLabel.value}`
       : (syncHint.value || '同步完成，但仍有差异'),
     syncStatus.value === 'ok' ? 'success' : 'warning',
   )
