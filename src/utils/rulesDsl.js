@@ -181,6 +181,7 @@ export function parseRulesDsl(text) {
         id: `${currentBlock.id}-group-${currentBlock.groups.length}`,
         name,
         slotCount: 0,
+        expectedRaws: [],
       }
       currentBlock.groups.push(currentGroup)
     }
@@ -208,6 +209,7 @@ export function parseRulesDsl(text) {
         id: `${currentBlock.id}-group-${currentBlock.groups.length}`,
         name: marker.name,
         slotCount: 0,
+        expectedRaws: [],
       }
       currentBlock.groups.push(currentGroup)
       continue
@@ -215,6 +217,8 @@ export function parseRulesDsl(text) {
 
     if (line.startsWith('-')) {
       ensureGroup()
+      const body = line.replace(/^-\s*/, '').trim()
+      currentGroup.expectedRaws.push(body)
       currentGroup.slotCount += 1
       slotCount += 1
     }
@@ -357,19 +361,85 @@ export function parseYamlRulesText(text) {
 
 export function mergeDslWithApiRules(dsl, apiRules) {
   const rules = apiRules || []
-  let cursor = 0
+  const used = new Set()
+
+  /** @type {Map<string, number[]>} */
+  const byKey = new Map()
+  for (let i = 0; i < rules.length; i += 1) {
+    const key = canonicalRuleKey(rules[i])
+    if (!key) continue
+    if (!byKey.has(key)) byKey.set(key, [])
+    byKey.get(key).push(i)
+  }
+
+  function takeByKey(key) {
+    const list = byKey.get(key)
+    if (!list?.length) return null
+    while (list.length) {
+      const idx = list.shift()
+      if (used.has(idx)) continue
+      used.add(idx)
+      return { rule: rules[idx], index: idx }
+    }
+    return null
+  }
+
+  function takeByLoose(expectedRaw) {
+    const expected = parseRawClashLine(expectedRaw)
+    if (!expected) return null
+    const wantType = toClashRuleType(expected.type)
+    const wantPayload = normalizeRulePayload(expected.type, expected.payload).toLowerCase()
+    const wantProxy = normalizeProxyName(expected.proxy).toLowerCase()
+
+    const logicType = wantType === 'AND' || wantType === 'OR' || wantType === 'NOT'
+    const normLogic = (payload) =>
+      String(payload || '')
+        .toLowerCase()
+        .replace(/&&/g, ',')
+        .replace(/[^a-z0-9,]/g, '')
+
+    for (let i = 0; i < rules.length; i += 1) {
+      if (used.has(i)) continue
+      const api = normalizeApiRule(rules[i], i)
+      if (!api) continue
+      if (toClashRuleType(api.type) !== wantType) continue
+      const apiProxy = normalizeProxyName(api.proxy).toLowerCase()
+      if (apiProxy !== wantProxy) continue
+
+      if (logicType) {
+        const a = normLogic(api.payload)
+        const b = normLogic(wantPayload)
+        if (a && b && (a === b || a.includes(b) || b.includes(a))) {
+          used.add(i)
+          return { rule: rules[i], index: i }
+        }
+        continue
+      }
+
+      const apiPayload = normalizeRulePayload(api.type, api.payload).toLowerCase()
+      if (apiPayload !== wantPayload) continue
+      used.add(i)
+      return { rule: rules[i], index: i }
+    }
+    return null
+  }
 
   const blocks = (dsl?.blocks || []).map((block) => {
     const groups = block.groups.map((group) => {
+      const expectedRaws = group.expectedRaws || []
       const groupRules = []
-      for (let i = 0; i < group.slotCount; i += 1) {
-        const apiRule = rules[cursor]
-        const normalized = normalizeApiRule(apiRule, cursor)
-        if (normalized) groupRules.push(toRuleDisplayModel(normalized, cursor))
-        cursor += 1
+
+      for (const raw of expectedRaws) {
+        const key = canonicalRuleKey(raw)
+        const hit = (key && takeByKey(key)) || takeByLoose(raw)
+        if (hit) {
+          groupRules.push(toRuleDisplayModel(normalizeApiRule(hit.rule, hit.index), hit.index))
+        }
       }
+
       return {
         ...group,
+        slotCount: expectedRaws.length || group.slotCount || groupRules.length,
         rules: groupRules,
       }
     })
@@ -381,16 +451,20 @@ export function mergeDslWithApiRules(dsl, apiRules) {
     }
   })
 
-  const overflow = rules.slice(cursor)
-    .map((rule, i) => toRuleDisplayModel(normalizeApiRule(rule, cursor + i), cursor + i))
+  const overflow = rules
+    .map((rule, i) => ({ rule, i }))
+    .filter(({ i }) => !used.has(i))
+    .map(({ rule, i }) => toRuleDisplayModel(normalizeApiRule(rule, i), i))
     .filter(Boolean)
+
+  const mappedCount = used.size
 
   return {
     blocks,
     overflow,
     stats: {
       totalApi: rules.length,
-      mappedCount: cursor,
+      mappedCount,
       slotCount: dsl?.slotCount || 0,
     },
   }
