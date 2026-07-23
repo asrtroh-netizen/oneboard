@@ -484,7 +484,7 @@ async function handleChangeVoHivePassword() {
           <div class="backend-fields">
             <label class="backend-field">
               <span>主机</span>
-              <input v-model="draftHost" type="text" placeholder="填写 Mihomo API 主机" />
+              <input v-model="draftHost" type="text" placeholder="例如 192.168.1.88（external-controller，不是网关）" />
             </label>
             <label class="backend-field backend-field--short">
               <span>端口</span>
@@ -492,9 +492,12 @@ async function handleChangeVoHivePassword() {
             </label>
             <label class="backend-field">
               <span>Secret</span>
-              <input v-model="draftSecret" type="password" placeholder="Bearer Token（可选）" autocomplete="off" />
+              <input v-model="draftSecret" type="password" placeholder="Bearer Token（与内核 secret 一致）" autocomplete="off" />
             </label>
           </div>
+          <p class="backend-fields-hint">
+            规则同步走 Clash API。请填内核 external-controller（常见 <code>:9090</code>），不要填 OneBoard 网关 <code>:8866</code>。
+          </p>
           </div>
 
           <div class="version-card__footer">
@@ -803,7 +806,21 @@ async function handleChangeVoHivePassword() {
   display: grid;
   grid-template-columns: 1fr 92px;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.backend-fields-hint {
+  margin: 0 0 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.backend-fields-hint code {
+  font-size: 10px;
+  padding: 0 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--bg-input) 80%, transparent);
 }
 
 .backend-field {

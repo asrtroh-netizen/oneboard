@@ -168,6 +168,38 @@ export function applyClashProxyHeaders(headers = {}) {
   return next
 }
 
+/**
+ * 把网关/代理层的晦涩错误转成可行动文案。
+ * 典型踩坑：把 OneBoard 网关 :8866 当成 Clash external-controller（通常 :9090）。
+ */
+export function clarifyClashHttpError(status, rawMessage, path = '') {
+  const message = String(rawMessage || '').trim()
+  const label = clashBackendProfile.value?.label || 'Clash'
+  const configured = resolveClashUpstreamBase()
+  const missingUpstream = !configured
+
+  if (/invalid upstream/i.test(message) || (status === 502 && /invalid upstream/i.test(message))) {
+    if (missingUpstream) {
+      return `${label} 上游未配置：请到设置页「透明代理后端」填写 external-controller 主机与端口（通常 :9090），不要填 OneBoard 网关 :8866；保存并连接后再同步规则`
+    }
+    return `${label} 上游无效（${configured}）：请确认设置页地址指向 external-controller（通常 :9090），而不是 OneBoard 网关 :8866`
+  }
+
+  if (status === 401) {
+    return `${label} 后端鉴权失败（HTTP 401）：请检查设置页 Secret 是否与 external-controller secret 一致（已自动尝试免鉴权与带 Secret 两种方式）`
+  }
+
+  if (status === 502) {
+    const hint = missingUpstream
+      ? '设置页尚未填写 Clash 主机/端口'
+      : `当前上游 ${configured}`
+    return `无法连接 ${label} 上游（HTTP 502${message ? `：${message}` : ''}）。${hint}。规则同步目标是 external-controller（通常 :9090），不是网关 :8866`
+  }
+
+  if (message) return message
+  return `${label} ${path || ''} → ${status}（检查设置页中的 Clash 后端地址与 Secret）`.trim()
+}
+
 export function getKernelDisplayName(meta = false) {
   const profile = clashBackendProfile.value
   if (profile.id === 'mihomo' && meta) return 'Mihomo Meta'

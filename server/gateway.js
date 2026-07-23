@@ -86,6 +86,14 @@ function resolveVoHiveUpstream(req) {
 }
 
 function proxyHttp(req, res, { upstream, prefix, rewritePrefix, authHeader }) {
+  if (!String(upstream || '').trim()) {
+    sendJson(res, 502, {
+      error:
+        'Invalid upstream: empty. Configure Settings → Clash external-controller (usually :9090) or ONEBORD_MIHOMO_UPSTREAM; do not use OneBoard gateway :8866',
+    })
+    return
+  }
+
   let target
   try {
     target = new URL(upstream)

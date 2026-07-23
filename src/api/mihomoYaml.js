@@ -1,4 +1,5 @@
 import { getMihomoApiBase, fetchClashAPI } from '../config/mihomo'
+import { clarifyClashHttpError } from '../stores/clashBackend'
 import {
   clashBackendState,
   resolveClashUpstreamBase,
@@ -83,10 +84,7 @@ async function mihomoApiRequest(path, options = {}) {
       } catch {
         /* plain text */
       }
-      if (res.status === 401) {
-        throw new Error('Clash 后端鉴权失败（HTTP 401）：请检查设置页中的 Secret（已自动尝试免鉴权与带 Secret 两种方式）')
-      }
-      throw new Error(message || `后端 ${path} → ${res.status}`)
+      throw new Error(clarifyClashHttpError(res.status, message, path))
     }
     return text
   } catch (err) {

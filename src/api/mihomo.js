@@ -5,6 +5,7 @@ import {
   clashBackendProfile,
   getClashProxyUpstreamHeader,
   shouldUseClashProxy,
+  clarifyClashHttpError,
 } from '../stores/clashBackend'
 import { apiFetchJson } from './http'
 import { startLoading, stopLoading } from '../stores/globalLoading'
@@ -93,10 +94,7 @@ async function mihomoFetch(path, options = {}) {
       } catch {
         /* plain text error from mihomo */
       }
-      if (res.status === 401) {
-        throw new Error(`Clash 后端鉴权失败（HTTP 401）：请检查设置页中的 Secret 是否与 ${backendLabel()} 的 external-controller secret 一致（已自动尝试免鉴权与带 Secret 两种方式）`)
-      }
-      throw new Error(message || `${backendLabel()} ${path} → ${res.status}（检查设置页中的 Clash 后端地址与 Secret）`)
+      throw new Error(clarifyClashHttpError(res.status, message, path))
     }
     if (res.status === 204 || !text) return null
     return JSON.parse(text)

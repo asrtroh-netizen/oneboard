@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { clashBackendLabel } from '../stores/clashBackend'
+import { clashBackendLabel, isClashBackendConfigured } from '../stores/clashBackend'
 import { useMihomoEngine } from '../stores/mihomoEngine'
 import { useClashBackendReload } from './useClashBackendReload'
 import {
@@ -143,6 +143,12 @@ export function useRulesPageView() {
     configWarning.value = null
 
     try {
+      if (!isClashBackendConfigured()) {
+        throw new Error(
+          'Clash 上游未配置：请到设置页「透明代理后端」填写 external-controller 主机与端口（通常 :9090），不要填 OneBoard 网关 :8866；保存并连接后再同步规则',
+        )
+      }
+
       const baseYaml = await loadBaseYaml({ reloadYaml: false })
       if (!baseYaml) {
         throw new Error('远程后端中无 YAML，请先同步配置')
